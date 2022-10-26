@@ -19,5 +19,6 @@ MERN
 * Express
 * MongoDB
 
-## Designs
-[Desktop view]{#}
+[Mobile-app view](https://www.figma.com/proto/Himb2UJPwBlp0Q683ZpHhn/Ngangui-app?page-id=0%3A1&node-id=4%3A15&viewport=54%2C-93%2C0.18&scaling=scale-down&starting-point-node-id=1%3A2)
+
+[Desktop view](https://www.figma.com/proto/Himb2UJPwBlp0Q683ZpHhn/Ngangui-app?page-id=156%3A271&node-id=156%3A1800&viewport=-1630%2C-272%2C0.35&scaling=scale-down&starting-point-node-id=156%3A1645)

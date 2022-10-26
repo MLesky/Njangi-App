@@ -8,13 +8,55 @@
   color: #333;
 }
 
-.App-logo {
-  height: 15vmin;
-  display: block;
-  margin: 10px auto;
+.color-primary {
+  color: white;
 }
 
-.login-page {
+.bg-primary {
+  background-color: black;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Logo */
+
+p {
+  margin: 0;
+}
+
+.logo {
+  position: relative;
+  width: 410.39px;
+  height: 97.68px;
+  display: block;
+  margin: auto;
+}
+
+.logo-icon {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 78px;
+  height: 78px;
+}
+
+.app-name {
+  position: absolute;
+  bottom: 10%;
+  left: 22.91%;
+  right: -0.15%;
+  font-size: 52.25px;
+  font-family: Myanmar Khyay, sans-serif;
+  font-weight: 900;
+  letter-spacing: -4px;
+  color: rgba(0, 0, 0, 1);
+  width: 350px;
+  word-wrap: break-word;
+}
+
+.login-page, .create-account-form {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -22,9 +64,9 @@
   align-items: center;
 }
 
-.login {
+.login, .create-account {
   background-color: rgb(252, 252, 252);
-  max-width: 600px;
+  max-width: 800px;
   width: 100%;
   min-height: 50vh;
   margin: 0 5vw;
@@ -33,36 +75,39 @@
   box-shadow: 0px 3px 2px 0px rgb(199, 199, 199);
 }
 
-.login input{
+input{
   display: block;
   width: 100%;
+  border-radius: 12px;
+  padding: 1.5em;
 }
 
-.login-page h1 {
-  font-size: 1.6rem;
-  text-align: center;
-} 
-
-.login input, .btn {
+.btn, input {
   width: 100%;
-  padding: 0.8rem;
   font-size: 1rem;
-  margin: 15px 0;
+  margin: 1.5em 0;
 }
 
-.login .btn {
+.btn {
   width: fit-content;
   padding: 1.2rem;
   margin: 15px auto;
   display: block;
   text-align: center;
-  background-color: black;
-  color: white;
   text-decoration: none;
   border-radius: 7px;
 }
 
-p {
-  text-align: center;
+p, .btn, input {
   font-weight: bolder;
+  font-size: 1.5em;
+}
+
+.email {
+  text-align: center;
+}
+
+.create-acc {
+  margin: 3em;
+  text-align: center;
 }

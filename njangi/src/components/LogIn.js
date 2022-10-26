@@ -1,29 +1,26 @@
-import logo from './assets/images/logo.svg'
 import { useState } from 'react';
+import Logo from './Logo';
 
 const LoginPage = () => {
-    const [accountnumber, setAccountNumber] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [password, setPassword] = useState(null);
+    const [accountnumber, setAccountNumber] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const changeAccountNumber = (event) => {
-        setAccountNumber(event.target.value)
-        alert(event.target.value)
-    }
-    
     return ( 
         <div className="login-page">
             <div className="login">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <h1>NJANGUI-APP</h1>
+                <Logo />
                 <form>
                     <input type="text" value={accountnumber} name="accountnumber" placeholder='Enter Account Number'/>
                     <input type="password" value={password}name="password" placeholder='Enter Password'/>
-                    <button type="submit" className="btn">Login</button>
+                    <p className='email'><a href="#">Login with Email instead</a></p>
+                    <button type="submit" className="btn color-white bg-primary color-primary">LOGIN</button>
                 </form>
-                <hr color='#eee'/>
-                <p>OR</p>
-                <a href="#" className="btn">Create Account</a>
+                <hr color='#ddd'/>
+                <div className="create-acc">
+                    <p>Don't have an account</p>
+                    <a href="#" className="btn color-primary bg-primary">CREATE ACCOUNT</a>
+                </div>
             </div>
         </div>
      );

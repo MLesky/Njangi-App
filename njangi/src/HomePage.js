@@ -1,10 +1,10 @@
 import Header from "./components/Headers";
-import SimpleBar from './components/Bars';
+import SimpleToolBar from './components/ToolBars';
 
 const HomePage = () => {
     return (
         <div><Header />
-        <SimpleBar /></div>
+        <SimpleToolBar /></div>
         
     )
 }

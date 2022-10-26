@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display-swap');
 
+@import url("https://fonts.googleapis.com/css2?family=Averia Sans Libre:wght@700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -164,8 +166,10 @@ p, .btn, input {
   height: 127px;
 }
 
-/* Bar */
-.simple-bar {
+/* Toolbar */
+.toolbar {
+  padding: 2em;
+  box-sizing: border-box;
   width: 100%;
   height: 6vh;
   align-items: center;
@@ -174,13 +178,23 @@ p, .btn, input {
   display: flex;
 }
 
-.simple-bar p {
+.title {
+  font-size: 37.04px;
+  font-family: Averia Sans Libre, display;
+  font-weight: 700;
+  letter-spacing: -2.22px;
   text-align: center;
 }
 
-.simple-bar .btn {
+.toolbar .btn {
   background-color: transparent;
   border: none;
   position: absolute;
   right: 0;
+  height: inherit;
+}
+
+.search {
+  width: 49px;
+  height: 49px;
 }

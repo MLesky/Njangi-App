@@ -1,8 +1,11 @@
-import Header from "./components/Header";
+import Header from "./components/Headers";
+import SimpleBar from './components/Bars';
 
 const HomePage = () => {
-    return ( 
-        <Header />
+    return (
+        <div><Header />
+        <SimpleBar /></div>
+        
     )
 }
  

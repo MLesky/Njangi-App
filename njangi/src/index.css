@@ -163,3 +163,24 @@ p, .btn, input {
   width: 127px;
   height: 127px;
 }
+
+/* Bar */
+.simple-bar {
+  width: 100%;
+  height: 6vh;
+  align-items: center;
+  font-size: 2vh;
+  padding: 1.2vw;
+  display: flex;
+}
+
+.simple-bar p {
+  text-align: center;
+}
+
+.simple-bar .btn {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 0;
+}

@@ -14,12 +14,12 @@ const LoginPage = () => {
                     <input type="text" value={accountnumber} name="accountnumber" placeholder='Enter Account Number'/>
                     <input type="password" value={password}name="password" placeholder='Enter Password'/>
                     <p className='email'><a href="#">Login with Email instead</a></p>
-                    <button type="submit" className="btn color-white bg-primary color-primary">LOGIN</button>
+                    <button type="submit" className="btn color-white ">LOGIN</button>
                 </form>
                 <hr color='#ddd'/>
                 <div className="create-acc">
                     <p>Don't have an account</p>
-                    <a href="#" className="btn color-primary bg-primary">CREATE ACCOUNT</a>
+                    <a href="#" className="btn">CREATE ACCOUNT</a>
                 </div>
             </div>
         </div>

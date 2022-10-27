@@ -6,6 +6,7 @@
   --primary: #000000;
   --secondary: #ffffff;
   --main: blue;
+  --tertairy: #212121;
 }
 
 * {
@@ -171,6 +172,10 @@ a {
   font-size: 1rem;
 }
 
+.user-info img {
+  width: 5em;
+}
+
 .vector {
   width: 127px;
   height: 127px;
@@ -192,32 +197,16 @@ a {
 
 .title {
   font-size: 1.2rem;
-  position: absolute;
   font-family: Averia Sans Libre, display;
   font-weight: 700;
-  text-align: center;
   color: var(--secondary);
-}
-
-.toolbar .btn {
-  background-color: transparent;
-  border: none;
-  position: absolute;
-  right: 0;
-  height: inherit;
-}
-
-.search {
-  width: 49px;
-  height: 49px;
 }
 
 /* Sidebar */
 .sidebar {
   padding: 0 ;
   box-sizing: border-box;
-  width: 15em;
-  height: calc(100% - 11em);
+  width: 10em;
   max-width: 350px;
   background-color: var(--primary);
 }
@@ -230,8 +219,8 @@ a {
 }
 
 .icon {
-  width: 48.62px;
-  margin-right: 36px;
+  width: 30px;
+  margin-right: 10px;
 }
 
 .menus p {
@@ -240,7 +229,7 @@ a {
   color: var(--secondary);
 }
 
-.groups, .chats, .schedules, .transactions{
+.listitem{
   padding: 1.3vw;
   box-sizing: border-box;
   background-color: var(--primary);
@@ -259,9 +248,62 @@ a {
 }
 
 .buttons {
-  width: 15em;
+  width: 10em;
   position: absolute;
   bottom: 0;
   display: flex;
   justify-content: space-between;
 }
+
+.buttons img {
+  width: 30px;
+  margin: 0.5em;
+}
+
+.side-bars {
+  display: flex;
+  height: calc(100% - 11em);
+}
+
+/* GroupSideBar */
+.group-side-bar {
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--tertairy);
+  border-right: 10px solid var(--primary);
+  border-left: 1px solid var(--secondary);
+  width: 12em;
+  height: 100%;
+  max-width: 300px;
+  overflow: auto;
+}
+
+.groups{
+  padding: 1.3vw;
+  box-sizing: border-box;
+  background-color: var(--secondary);
+  border-top: 1px solid var(--tertairy);
+  border-bottom: 1px solid var(--tertairy);
+  width: 100%;
+}
+
+.grouplistitem {
+  width: 100%;
+}
+
+.groups p {
+  color: var(--primary);
+}
+
+.unread {
+  background-color: var(--primary);
+  padding: 3px;
+  margin-left: 10px;
+  border-radius: 20px;
+}
+
+.unread p {  
+  color: var(--secondary);
+  font-size: 0.7em;
+}
+

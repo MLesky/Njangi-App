@@ -1,5 +1,5 @@
 import Header from "./Headers";
-import Sidebar from "./SideBar";
+import {Sidebar, GroupSidebar} from "./SideBars";
 import SimpleToolBar from './ToolBars';
 
 const HomePage = () => {
@@ -7,7 +7,10 @@ const HomePage = () => {
         <div className="page">
             <Header />
             <SimpleToolBar />
+            <div className="side-bars">
             <Sidebar />
+            <GroupSidebar />
+            </div>
             </div>
     )
 }

@@ -5,6 +5,7 @@
 :root {
   --primary: #000000;
   --secondary: #ffffff;
+  --main: blue;
 }
 
 * {
@@ -41,43 +42,34 @@
   text-align: center;
 }
 
-/* Logo */
 p {
   margin: 0;
 }
 
+/* Logo */
 .logo {
-  position: relative;
-  width: 410.39px;
-  height: 97.68px;
+  display: block;
+  margin: 10px auto;
+}
+
+.logo-icon {
+  width: 78px;
+  height: 78px;
   display: block;
   margin: auto;
 }
 
-.logo-icon {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 78px;
-  height: 78px;
-}
-
 .app-name {
-  position: absolute;
-  bottom: 10%;
-  left: 22.91%;
-  right: -0.15%;
-  font-size: 52.25px;
+  text-align: center;
+  font-size: 1.5em;
   font-family: Myanmar Khyay, sans-serif;
   font-weight: 900;
-  letter-spacing: -4px;
   color: var(--primary);
-  width: 350px;
   word-wrap: break-word;
 }
 
 .login-page, .create-account-form {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -87,7 +79,7 @@ p {
 .login, .create-account {
   background-color: rgb(252, 252, 252);
   max-width: 800px;
-  width: 100%;
+  width: 100vw;
   min-height: 50vh;
   margin: 0 5vw;
   padding: 1rem 2rem;
@@ -95,22 +87,18 @@ p {
   box-shadow: 0px 3px 2px 0px rgb(199, 199, 199);
 }
 
-input{
+.login input{
   display: block;
   width: 100%;
+  max-width: 500px;
   border-radius: 12px;
-  padding: 1.5em;
-}
-
-.btn, input {
-  width: 100%;
-  font-size: 1rem;
-  margin: 1.5em 0;
+  padding: 1em;
+  margin: 1em auto;
 }
 
 .btn {
   width: fit-content;
-  padding: 1.2rem;
+  padding: 1rem;
   margin: 15px auto;
   display: block;
   text-align: center;
@@ -122,7 +110,7 @@ input{
 
 p, .btn, input {
   font-weight: bolder;
-  font-size: 1.5em;
+  font-size: 0.8em;
 }
 
 .email {
@@ -136,8 +124,13 @@ a {
 }
 
 .create-acc {
-  margin: 3em;
+  margin: 1em;
   text-align: center;
+}
+
+.page {
+  height: 100vh;
+  width: 100%;
 }
 
 /* Header */
@@ -145,46 +138,37 @@ a {
   padding: 2vw;
   box-sizing: border-box;
   width: 100%;
-  height: 15vh;
-  background-color: var(--secondary);
-}
-
-.logo-box {
-  position: absolute;
-  left: 0;
-  top: 7vh;
-  margin: 0 1vw;
+  height: 8em;
+  display: flex;
+  align-items: center;
+  background-color: var(--main);
 }
 
 .user-info {
   display: flex;
-  position: fixed;
+  position: absolute;
   right: 0;
-  top: 0;
   align-items: center;
-  margin: 1vw;
 }
 
 .user-info p span {
   display: block;
-  margin: 0 2vw;
+  margin: 0 2vh;
   text-align: right;
 }
 
 .user-name {
-  font-size: 51.05px;
+  font-size: 1.3rem;
   font-weight: 900;
 }
 
 .account-number {
-  font-size: 2.5rem;
+  font-size: 1.1rem;
   font-weight: 500;
-  letter-spacing: -3.04px;
 }
 
 .useremail {
-  font-size: 2rem;
-  letter-spacing: -2.28px;
+  font-size: 1rem;
 }
 
 .vector {
@@ -197,19 +181,20 @@ a {
   padding: 2em;
   box-sizing: border-box;
   width: 100%;
-  height: 6vh;
+  height: 3em;
   align-items: center;
-  font-size: 2vh;
   padding: 1.2vw;
   display: flex;
   background-color: var(--primary);
+  position: sticky;
+  top: 0;
 }
 
 .title {
-  font-size: 37.04px;
+  font-size: 1.2rem;
+  position: absolute;
   font-family: Averia Sans Libre, display;
   font-weight: 700;
-  letter-spacing: -2.22px;
   text-align: center;
   color: var(--secondary);
 }
@@ -231,9 +216,9 @@ a {
 .sidebar {
   padding: 0 ;
   box-sizing: border-box;
+  width: 15em;
+  height: calc(100% - 11em);
   max-width: 350px;
-  width: 30%;
-  height: 79vh;
   background-color: var(--primary);
 }
 
@@ -250,7 +235,7 @@ a {
 }
 
 .menus p {
-  font-size: 26.57px;
+  font-size: 1em;
   font-weight: 700;
   color: var(--secondary);
 }
@@ -264,23 +249,9 @@ a {
   width: 100%;
 }
 
-.settings {
-  width: 63.33px;
-  height: 61.82px;
-  margin:  0 132px 50px 20px;
-}
-
-.logout {
-  width: 59.01px;
-  height: 60.35px;
-}
-
 .active-menu {
-  padding: 1.3vw;
-  box-sizing: border-box;
   background-color: var(--secondary);
   border: none;
-  width: 100%;
 }
 
 .active-menu p {
@@ -288,5 +259,9 @@ a {
 }
 
 .buttons {
+  width: 15em;
+  position: absolute;
+  bottom: 0;
   display: flex;
+  justify-content: space-between;
 }

@@ -1,15 +1,14 @@
-import Header from "./components/Headers";
-import Sidebar from "./components/SideBar";
-import SimpleToolBar from './components/ToolBars';
+import Header from "./Headers";
+import Sidebar from "./SideBar";
+import SimpleToolBar from './ToolBars';
 
 const HomePage = () => {
     return (
-        <div>
+        <div className="page">
             <Header />
             <SimpleToolBar />
             <Sidebar />
             </div>
-        
     )
 }
  

@@ -28,7 +28,7 @@ export default function Header() {
             <img
             src={user.profile_pic}
             alt="Not Found"
-            className="vector"
+            className="profile_pic"
             />
         </div>
     </div>

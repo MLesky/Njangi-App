@@ -36,8 +36,7 @@ export default function Sidebar() {
             />
             <p>Transactions</p>
           </div>
-        </div>
-        <div className="buttons">
+          <div className="buttons">
           <img
             src="https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/4qtl03lzyc5-I156%3A2289%3B156%3A2250?alt=media&token=a9d54af8-bd96-413f-a8b1-1fb7f06b0287"
             alt="Not Found"
@@ -45,10 +44,12 @@ export default function Sidebar() {
           />
           <img
             src="https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/4qtl03lzyc5-I156%3A2289%3B156%3A2247?alt=media&token=a7df6e55-4e8a-428f-9769-7e69e02f3821"
-            alt="Not Found"
+            alt="Not F
+            ound"
             className="logout"
           />
         </div>
+      </div>
     </div>
   )
 }

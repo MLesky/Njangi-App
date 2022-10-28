@@ -1,5 +1,6 @@
 import React from "react"
 import Grouplistitem from "./ListItems"
+import Groups from "./assets/images/Groups.svg"
 
 export function Sidebar() {
   return (
@@ -7,7 +8,7 @@ export function Sidebar() {
         <div className="menus flex-col-hstart-vstart">
           <button className="listitem flex-row">
             <img
-              src="https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/4qtl03lzyc5-I156%3A2289%3B156%3A2262?alt=media&token=f1decd0b-991a-4e9c-bb01-77ef268e8e34"
+              src={Groups}
               alt="Not Found"
               className="icon"
             />

@@ -43,10 +43,6 @@
   text-align: center;
 }
 
-p {
-  margin: 0;
-}
-
 /* Logo */
 .logo {
   display: block;
@@ -229,7 +225,7 @@ a {
   color: var(--secondary);
 }
 
-.listitem{
+.listitem {
   padding: 1.3vw;
   box-sizing: border-box;
   background-color: var(--primary);
@@ -237,6 +233,8 @@ a {
   border-bottom: 1px solid var(--secondary);
   width: 100%;
 }
+
+.listitem 
 
 .active-menu {
   background-color: var(--secondary);
@@ -307,3 +305,16 @@ a {
   font-size: 0.7em;
 }
 
+.action-btn {
+  height: fit-content;
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  border-radius: 5em;
+  background-color: transparent;
+  border: none;
+}
+
+.action-btn img {
+  width: 50px;
+}

@@ -253,6 +253,10 @@ a {
   justify-content: space-between;
 }
 
+.buttons button {
+  background-color: transparent;
+}
+
 .buttons img {
   width: 30px;
   margin: 0.5em;
@@ -317,4 +321,46 @@ a {
 
 .action-btn img {
   width: 50px;
+}
+
+/* Mini-SideBar */
+.mini-sidebar {
+  width: 3.5em;
+}
+
+.mini-sidebar .buttons{
+  display: block;
+  width: 3.5em;
+}
+
+.mini-sidebar .listitem {
+  border: home;
+}
+
+.mini-sidebar .buttons img{
+  margin: 0;
+}
+
+/* message box */
+.message-box {
+  background-color: var(--primary);
+  height: 7em;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: calc(100% - 15.5em);
+}
+
+.message-box img {
+  width: 50px;
+  margin: 5px;
+}
+
+.message {
+  background-color: var(--tertairy);
+  padding: 15px;
+  color: var(--secondary);
+  width: 70%;
+  max-width: 600px;
+  border-radius: 15px;
 }

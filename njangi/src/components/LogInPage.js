@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import Logo from './Logo';
 import Notification from './Notification';
+import { useEffect } from 'react';
 
 const LoginPage = () => {
+    const [userData, setUserData] = useState(null);
     const [accNo, setAccNo] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
 
-const validate = (accNo, password) => {
+const validate = (accNo, password, userData) => {
     const errors = {};
 
-    if(!accNo) errors.email = "Account number cannot be blanck";
-    if(!password) errors.password = "Password cannot be blanck";
+    if(!accNo) errors.accNo = "Account number cannot be blank";
+    if(!password) errors.password = "Password cannot be blank";
     return errors;
 }
 
@@ -24,6 +26,15 @@ const handleSubmit = event => {
         setPassword('');
     }
 }
+
+useEffect(() => {
+    fetch('http://localhost:8000/users').then(res => {
+        return res.json();
+    }).then(data => {
+        setUserData(data)
+        console.log(userData)
+    })
+}, []);
 
     return ( 
         <div className="login-page">

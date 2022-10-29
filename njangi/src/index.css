@@ -53,6 +53,11 @@
   text-align: center;
 }
 
+#success {
+  background-color: rgb(130, 255, 130, 0.7);
+  color: green;
+}
+
 /* Logo */
 .logo {
   display: block;

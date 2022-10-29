@@ -1,44 +1,52 @@
 import { useState } from 'react';
 import Logo from './Logo';
 import Notification from './Notification';
-import { useEffect } from 'react';
+import useFetch from './useFetch';
 
 const LoginPage = () => {
-    const [userData, setUserData] = useState(null);
+    const {data: userData} = useFetch('http://localhost:8000/users');
     const [accNo, setAccNo] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
+    const [style, setStyle] = useState('')
+    
+    const validate = (accNo, password, style) => {
+        const errors = {};
+        let isFound = false;
+        setStyle('danger');
 
-const validate = (accNo, password, userData) => {
-    const errors = {};
+        userData.forEach(user => {
+            if(accNo === user.accNo){
+                if(password === user.password){
+                    isFound = true;
+                    errors.accNo = "Welcome " + user.name;
+                    setStyle('success');
+                }
+                else {
+                    errors.password = "Wrong password";
+                }
+            }
+            else errors.accNo = "Account not found"
+        });
 
-    if(!accNo) errors.accNo = "Account number cannot be blank";
-    if(!password) errors.password = "Password cannot be blank";
-    return errors;
-}
-
-const handleSubmit = event => {
-    event.preventDefault();
-    const errors = validate(accNo, password);
-    setErrors(errors);
-    if(Object.keys(errors).length == 0){
-        setAccNo('');
-        setPassword('');
+        if(!accNo) errors.accNo = "Account number cannot be blank";
+        if(!password) errors.password = "Password cannot be blank";
+        return errors;
     }
-}
 
-useEffect(() => {
-    fetch('http://localhost:8000/users').then(res => {
-        return res.json();
-    }).then(data => {
-        setUserData(data)
-        console.log(userData)
-    })
-}, []);
+    const handleSubmit = event => {
+        event.preventDefault();
+        const errors = validate(accNo, password);
+        setErrors(errors);
+        if(Object.keys(errors).length == 0){
+            setAccNo('');
+            setPassword('');
+        }
+    }
 
     return ( 
         <div className="login-page">
-            <Notification notif={Object.values(errors)}/>
+            <Notification notif={Object.values(errors)} style={style}/>
             <div className="login">
                 <Logo />
                 <form onSubmit={handleSubmit}>
@@ -49,7 +57,6 @@ useEffect(() => {
                         placeholder='Enter Account Number' 
                         onChange={(event) => setAccNo(event.target.value)}
                     />
-
                     <input 
                         type="password" 
                         value={password}

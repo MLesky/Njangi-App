@@ -3,10 +3,10 @@ import {Sidebar, GroupSidebar} from "./SideBars";
 import SimpleToolBar from './ToolBars';
 import floating_action from './assets/images/floating_action.svg'
 
-const HomePage = () => {
+const HomePage = ({data}) => {
     return (
         <div className="page">
-            <Header />
+            <Header data={data}/>
             <SimpleToolBar />
             <div className="side-bars">
             <Sidebar />

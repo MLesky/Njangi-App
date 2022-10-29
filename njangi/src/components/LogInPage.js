@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Logo from './Logo';
+import Homepage from './HomePage';
 import Notification from './Notification';
 import useFetch from './useFetch';
 
@@ -8,17 +9,18 @@ const LoginPage = () => {
     const [accNo, setAccNo] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
-    const [style, setStyle] = useState('')
+    const [style, setStyle] = useState('');
+    const [isFound, setIsFound] = useState();
     
     const validate = (accNo, password, style) => {
         const errors = {};
-        let isFound = false;
+        setIsFound(false);
         setStyle('danger');
 
         userData.forEach(user => {
-            if(accNo === user.accNo){
+            if(accNo === user.accNo || accNo === user.zip_code + user.accNo){
                 if(password === user.password){
-                    isFound = true;
+                    setIsFound(true);
                     errors.accNo = "Welcome " + user.name;
                     setStyle('success');
                 }
@@ -44,8 +46,15 @@ const LoginPage = () => {
         }
     }
 
+    const logIn = (accNo, password) => {
+        if(isFound){
+
+        }
+    }
+    
     return ( 
         <div className="login-page">
+            
             <Notification notif={Object.values(errors)} style={style}/>
             <div className="login">
                 <Logo />
@@ -69,7 +78,7 @@ const LoginPage = () => {
                         <a href="#">Login with Email instead</a>
                     </p>
 
-                    <button type="submit" className="btn color-white ">LOGIN</button>
+                    <button type="submit" className="btn color-white">LOGIN</button>
                 </form>
                 <hr color='#ddd'/>
                 <div className="create-acc">

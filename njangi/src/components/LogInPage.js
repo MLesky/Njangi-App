@@ -1,25 +1,13 @@
 import { useState } from 'react';
 import Logo from './Logo';
+import Notification from './Notification';
 
 const LoginPage = () => {
-    const [userData, setUserData] = useState(
-        {
-            "accNo": '',
-            'email': '',
-            'password': '',
-        }
-    );  
-    const [errors, setErrors] = useState({})
+    const [accNo, setAccNo] = useState('');
+    const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState({});
 
-const handleChange = event => {
-    setUserData({
-        ...userData,
-        [event.target.name]: event.target.value
-    });
-}
-
-const validate = userData => {
-    const {accNo, password} = userData;
+const validate = (accNo, password) => {
     const errors = {};
 
     if(!accNo) errors.email = "Account number cannot be blanck";
@@ -29,41 +17,34 @@ const validate = userData => {
 
 const handleSubmit = event => {
     event.preventDefault();
-    const errors = validate(userData);
+    const errors = validate(accNo, password);
     setErrors(errors);
     if(Object.keys(errors).length == 0){
-
-        setUserData({
-            accNo: '',
-            password: '',
-        })
+        setAccNo('');
+        setPassword('');
     }
 }
 
     return ( 
         <div className="login-page">
-            <div className="notif">
-                {Object.values(errors).map(error => (
-                <h4 key={errors}>{error}</h4>))}
-            </div>
-            
+            <Notification notif={Object.values(errors)}/>
             <div className="login">
                 <Logo />
                 <form onSubmit={handleSubmit}>
                     <input 
                         type="text" 
-                        value={userData.accNo} 
+                        value={accNo}
                         name="accNo" 
                         placeholder='Enter Account Number' 
-                        onChange={handleChange}
+                        onChange={(event) => setAccNo(event.target.value)}
                     />
 
                     <input 
                         type="password" 
-                        value={userData.password} 
+                        value={password}
                         name="password" 
                         placeholder='Enter Password' 
-                        onChange={handleChange}
+                        onChange={(event) => setPassword(event.target.value)}
                     />
 
                     <p className='email'>

@@ -1,0 +1,10 @@
+{
+    "users": [
+        {
+            "name": "Njangi User",
+            "accNo": "677665544",
+            "email": "njangiuser@gmail.com",
+            "password": "abc123"
+        }
+    ]
+}

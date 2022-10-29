@@ -8,7 +8,8 @@ const LoginPage = () => {
             'email': '',
             'password': '',
         }
-    )   
+    );  
+    const [errors, setErrors] = useState({})
 
 const handleChange = event => {
     setUserData({
@@ -17,11 +18,38 @@ const handleChange = event => {
     });
 }
 
+const validate = userData => {
+    const {accNo, password} = userData;
+    const errors = {};
+
+    if(!accNo) errors.email = "Account number cannot be blanck";
+    if(!password) errors.password = "Password cannot be blanck";
+    return errors;
+}
+
+const handleSubmit = event => {
+    event.preventDefault();
+    const errors = validate(userData);
+    setErrors(errors);
+    if(Object.keys(errors).length == 0){
+
+        setUserData({
+            accNo: '',
+            password: '',
+        })
+    }
+}
+
     return ( 
         <div className="login-page">
+            <div className="notif">
+                {Object.values(errors).map(error => (
+                <h4 key={errors}>{error}</h4>))}
+            </div>
+            
             <div className="login">
                 <Logo />
-                <form>
+                <form onSubmit={handleSubmit}>
                     <input 
                         type="text" 
                         value={userData.accNo} 

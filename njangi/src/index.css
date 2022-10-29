@@ -43,6 +43,16 @@
   text-align: center;
 }
 
+.notif {
+  position: absolute;
+  display: block;
+  top: 0;
+  background-color: rgb(255, 130, 130, 0.7);
+  color: red;
+  width: 100%;
+  text-align: center;
+}
+
 /* Logo */
 .logo {
   display: block;
@@ -75,7 +85,7 @@
 
 .login, .create-account {
   background-color: rgb(252, 252, 252);
-  max-width: 800px;
+  max-width: 600px;
   width: 100vw;
   min-height: 50vh;
   margin: 0 5vw;
@@ -87,7 +97,7 @@
 .login input{
   display: block;
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
   border-radius: 12px;
   padding: 1em;
   margin: 1em auto;
@@ -103,6 +113,7 @@
   border-radius: 7px;
   background-color: var(--primary);
   color: var(--secondary);
+  cursor: pointer;
 }
 
 p, .btn, input {
@@ -353,7 +364,7 @@ a {
 
 .message-box img {
   width: 50px;
-  margin: 5px;
+
 }
 
 .message {

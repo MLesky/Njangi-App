@@ -10,9 +10,9 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
     const [style, setStyle] = useState('');
-    const [isFound, setIsFound] = useState();
+    const [isFound, setIsFound] = useState(false);
     
-    const validate = (accNo, password, style) => {
+    const validate = (accNo, password) => {
         const errors = {};
         setIsFound(false);
         setStyle('danger');
@@ -46,15 +46,18 @@ const LoginPage = () => {
         }
     }
 
-    const logIn = (accNo, password) => {
-        if(isFound){
-
-        }
+    if(isFound){
+        return (
+            <>
+                <Notification notif={Object.values(errors)} style={style}/>
+                <Homepage data={userData} />
+            </>
+        );
     }
-    
-    return ( 
+
+    else {
+        return ( 
         <div className="login-page">
-            
             <Notification notif={Object.values(errors)} style={style}/>
             <div className="login">
                 <Logo />
@@ -88,6 +91,7 @@ const LoginPage = () => {
             </div>
         </div>
      );
+    }
 }
  
 export default LoginPage;

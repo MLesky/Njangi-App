@@ -4,7 +4,7 @@ import Homepage from './HomePage';
 import Notification from './Notification';
 import useFetch from './useFetch';
 
-const LoginPage = () => {
+const LogInPage = () => {
     const {data: userData} = useFetch('http://localhost:8000/users');
     const [accNo, setAccNo] = useState('');
     const [password, setPassword] = useState('');
@@ -94,4 +94,4 @@ const LoginPage = () => {
     }
 }
  
-export default LoginPage;
+export default LogInPage;

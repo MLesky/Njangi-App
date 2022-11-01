@@ -21,26 +21,23 @@ MERN
 
 ---
 ### Use the following cmd commands to run the app
-Go to app directory
+Navigate to app directory
 
 ```
 cd njangi
 ```
 Run app on a new terminal
 
-```
-npm start
-```
+    npm start
 
 watch json server on a new terminal
-```
-npx json-server --watch data/data.json --port 8000
-```
+
+    npx json-server --watch data/data.json --port 8000
+
 Login credentials
-```
-accNo:  677665544 or +237677665544
-password: abc123
-```
+
+    email: njangi@user.com
+    password: abc123
 
 ### Prototypes
 

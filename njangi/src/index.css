@@ -126,12 +126,6 @@ p, .btn, input {
   font-size: 0.8em;
 }
 
-.email {
-  text-align: center;
-  text-decoration: none;
-  color: var(--primary);
-}
-
 a {
   color: var(--primary);
 }

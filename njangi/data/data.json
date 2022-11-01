@@ -1,10 +1,8 @@
 {
     "users": [
         {
-            "name": "Njangi User",
-            "accNo": "677665544",
-            "zip_code": "+237",
-            "email": "njangiuser@gmail.com",
+            "name": "Jone Jones",
+            "email": "njangi@user.com",
             "password": "abc123",
             "profile_pic": "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/rmz1cix3ff-156%3A1855?alt=media&token=7280be61-e5ab-453f-ab0c-19c66f54b0fb",
             "groups": []

@@ -6,42 +6,43 @@ import useFetch from './useFetch';
 
 const LogInPage = () => {
     const {data: userData} = useFetch('http://localhost:8000/users');
-    const [accNo, setAccNo] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
     const [style, setStyle] = useState('');
     const [isFound, setIsFound] = useState(false);
     
-    const validate = (accNo, password) => {
+    const validate = (email, password) => {
         const errors = {};
         setIsFound(false);
         setStyle('danger');
 
         userData.forEach(user => {
-            if(accNo === user.accNo || accNo === user.zip_code + user.accNo){
+            if(email === user.email){
                 if(password === user.password){
                     setIsFound(true);
-                    errors.accNo = "Welcome " + user.name;
+                    errors.email = "Welcome " + user.name;
                     setStyle('success');
                 }
                 else {
                     errors.password = "Wrong password";
                 }
             }
-            else errors.accNo = "Account not found"
+            else errors.email = "Account not found"
         });
 
-        if(!accNo) errors.accNo = "Account number cannot be blank";
+        if(!email) errors.email= "Email cannot be blank";
         if(!password) errors.password = "Password cannot be blank";
+
         return errors;
     }
 
     const handleSubmit = event => {
         event.preventDefault();
-        const errors = validate(accNo, password);
+        const errors = validate(email, password);
         setErrors(errors);
         if(Object.keys(errors).length == 0){
-            setAccNo('');
+            setEmail('');
             setPassword('');
         }
     }
@@ -64,10 +65,10 @@ const LogInPage = () => {
                 <form onSubmit={handleSubmit}>
                     <input 
                         type="text" 
-                        value={accNo}
-                        name="accNo" 
-                        placeholder='Enter Account Number' 
-                        onChange={(event) => setAccNo(event.target.value)}
+                        value={email}
+                        name="email" 
+                        placeholder='Enter Email' 
+                        onChange={(event) => setEmail(event.target.value)}
                     />
                     <input 
                         type="password" 
@@ -76,10 +77,6 @@ const LogInPage = () => {
                         placeholder='Enter Password' 
                         onChange={(event) => setPassword(event.target.value)}
                     />
-
-                    <p className='email'>
-                        <a href="#">Login with Email instead</a>
-                    </p>
 
                     <button type="submit" className="btn color-white">LOGIN</button>
                 </form>

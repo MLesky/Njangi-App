@@ -2,10 +2,12 @@ import Header from "./Headers";
 import {Sidebar, GroupSidebar} from "./SideBars";
 import SimpleToolBar from './ToolBars';
 import floating_action from './assets/images/floating_action.svg'
+import Notification from "./Notification";
 
-const HomePage = ({data}) => {
+const HomePage = ({data, notif, style}) => {
     return (
         <div className="page">
+            <Notification notif={notif} style={style}/>
             <Header data={data}/>
             <SimpleToolBar />
             <div className="side-bars">

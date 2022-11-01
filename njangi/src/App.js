@@ -1,6 +1,6 @@
 import React from "react"
-import LogInPage from "./components/LogInPage";
+import Authenticate from "./components/Authenticate";
 
 export default function App() {
-  return <LogInPage />
+  return <Authenticate />
 }

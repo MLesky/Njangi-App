@@ -4,62 +4,17 @@ import Homepage from './HomePage';
 import Notification from './Notification';
 import useFetch from './useFetch';
 
-const LogInPage = () => {
-    const {data: userData} = useFetch('http://localhost:8000/users');
+const LogInPage = ({notif, style, handler}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState({});
-    const [style, setStyle] = useState('');
-    const [isFound, setIsFound] = useState(false);
-    
-    const validate = (email, password) => {
-        const errors = {};
-        setIsFound(false);
-        setStyle('danger');
-
-        userData.forEach(user => {
-            if(email === user.email){
-                if(password === user.password){
-                    setIsFound(true);
-                    errors.email = "Welcome " + user.name;
-                    setStyle('success');
-                }
-                else {
-                    errors.password = "Wrong password";
-                }
-            }
-            else errors.email = "Account not found"
-        });
-
-        if(!email) errors.email= "Email cannot be blank";
-        if(!password) errors.password = "Password cannot be blank";
-
-        return errors;
-    }
-
+  
     const handleSubmit = event => {
         event.preventDefault();
-        const errors = validate(email, password);
-        setErrors(errors);
-        if(Object.keys(errors).length == 0){
-            setEmail('');
-            setPassword('');
-        }
+        const errors = handler(email, password);
     }
-
-    if(isFound){
-        return (
-            <>
-                <Notification notif={Object.values(errors)} style={style}/>
-                <Homepage data={userData} />
-            </>
-        );
-    }
-
-    else {
         return ( 
         <div className="login-page">
-            <Notification notif={Object.values(errors)} style={style}/>
+            <Notification notif={notif} style={style}/>
             <div className="login">
                 <Logo />
                 <form onSubmit={handleSubmit}>
@@ -88,7 +43,6 @@ const LogInPage = () => {
             </div>
         </div>
      );
-    }
 }
  
 export default LogInPage;

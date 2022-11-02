@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import Logo from './Logo';
-import Homepage from './HomePage';
 import Notification from './Notification';
-import useFetch from './useFetch';
 
-const LogInPage = ({notif, style, handler}) => {
+const LogInPage = ({notif, style, validate, switchHandle}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
   
     const handleSubmit = event => {
         event.preventDefault();
-        const errors = handler(email, password);
+        validate(email, password);
+    }
+
+    const gotoCreate = event => {
+        event.preventDefault();
+        switchHandle();
     }
         return ( 
         <div className="login-page">
@@ -19,6 +22,7 @@ const LogInPage = ({notif, style, handler}) => {
                 <Logo />
                 <form onSubmit={handleSubmit}>
                     <input 
+                        required
                         type="text" 
                         value={email}
                         name="email" 
@@ -26,6 +30,7 @@ const LogInPage = ({notif, style, handler}) => {
                         onChange={(event) => setEmail(event.target.value)}
                     />
                     <input 
+                        required
                         type="password" 
                         value={password}
                         name="password" 
@@ -38,7 +43,7 @@ const LogInPage = ({notif, style, handler}) => {
                 <hr color='#ddd'/>
                 <div className="create-acc">
                     <p>Don't have an account</p>
-                    <a href="#" className="btn">CREATE ACCOUNT</a>
+                    <a href="#" className="btn" onClick={gotoCreate}>CREATE ACCOUNT</a>
                 </div>
             </div>
         </div>

@@ -118,7 +118,10 @@
   border-radius: 7px;
   background-color: var(--primary);
   color: var(--secondary);
-  cursor: pointer;
+}
+
+a, button, .btn {
+   cursor: pointer;
 }
 
 p, .btn, input {

@@ -1,22 +1,22 @@
 import { useState } from 'react';
-import Logo from './Logo';
+import CreateAccount from './CreateAccount';
 import Homepage from './HomePage';
 import LogInPage from './LogInPage';
-import Notification from './Notification';
 import useFetch from './useFetch';
 
 const Authenticate = () => {
-    const {data: userData} = useFetch('http://localhost:8000/users');
+    const {data: usersData} = useFetch('http://localhost:8000/users');
     const [style, setStyle] = useState('');
     const [isFound, setIsFound] = useState(false);
+    const [isOK, setIsOk] = useState(false);
     const [errors, setErrors] = useState({});
+    const [isCreateNew, setIsCreateNew] = useState(false);
 
-    const validate = (email, password) => {
+    const validateForLogin = (email, password) => {
         const errors = {};
-        setIsFound(false);
         setStyle('danger');
 
-        userData.forEach(user => {
+        usersData.forEach(user => {
             if(email === user.email){
                 if(password === user.password){
                     setIsFound(true);
@@ -30,23 +30,70 @@ const Authenticate = () => {
             else errors.email = "Account not found"
         });
 
-        if(!email) errors.email= "Email cannot be blank";
-        if(!password) errors.password = "Password cannot be blank";
-
         setErrors(errors);
-        return errors;
+        setTimeout(() => {
+            setErrors({});
+        }, 4000);
     }
 
+    const validateForCreateAccount = (userData, confirmPassword) => {
+        const errors = {};
+        setStyle('danger');
 
-    if(isFound){
+        if (userData.password !== confirmPassword)
+        errors.password = "Confirmation password doesn't match"
+
+        if(userData.password.length <= 3 || userData.password.length > 15)
+            errors.password = "Password should be between 3 to 15 characters in length"
+
+        usersData.forEach(data => {
+            if(userData.email === data.email && userData.name && userData.password && userData.password === confirmPassword){
+                errors.email = "User with email already exist"
+            }
+        });
+        setErrors(errors)
+
+        if (Object.values(errors).length == 0){
+            setIsOk(true);
+            setStyle('success');
+            console.log(userData);
+            fetch('http://localhost:8000/users', {
+                method: 'POST',
+                body: JSON.stringify(userData),
+                headers: {'Content-Type': 'application/json'}
+            });
+            errors.email = 'Account created'
+            setErrors(errors)
+        }
+
+        setTimeout(() => {
+            setErrors({});
+        }, 4000);
+    }
+
+    const switchToCreate = () => {
+        setIsCreateNew(true);
+    }
+
+    const switchToLogin = () => {
+        setIsCreateNew(false);
+    }
+
+    if(isFound  || isOK){
         return (
-            <Homepage data={userData} notif={Object.values(errors)} style={style}/>
+            <Homepage data={usersData} notif={Object.values(errors)} style={style}/>
         );
+    }
+
+    else if(isCreateNew){
+        return (
+            <CreateAccount notif={Object.values(errors)} style={style} validate={validateForCreateAccount} switchHandle={switchToLogin}/>
+        )
     }
 
     else {
         return ( 
-            <LogInPage data={userData} notif={Object.values(errors)} style={style} handler={validate}/>
+            <LogInPage data={usersData} notif={Object.values(errors)} style={style} validate={validateForLogin} switchHandle={switchToCreate}/>
      );
     }
 }

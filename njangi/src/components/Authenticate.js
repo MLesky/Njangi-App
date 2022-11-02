@@ -15,20 +15,21 @@ const Authenticate = () => {
     const validateForLogin = (email, password) => {
         const errors = {};
         setStyle('danger');
-
-        usersData.forEach(user => {
-            if(email === user.email){
-                if(password === user.password){
-                    setIsFound(true);
-                    errors.email = "Welcome " + user.name;
-                    setStyle('success');
-                }
-                else {
-                    errors.password = "Wrong password";
-                }
+        let i = 0;
+        for (; i < usersData.length; i++) {
+            if(email === usersData[i].email && password === usersData[i].password){
+                setIsFound(true);
+                errors.err = "Welcome " + usersData[i].name;
+                setStyle('success');
+                break;
             }
-            else errors.email = "Account not found"
-        });
+            else if (email === usersData[i].email && password !== usersData[i].password){
+                errors.err = "Wrong password";
+                break;
+            }
+            
+            else errors.err = "Account not found";
+        }
 
         setErrors(errors);
         setTimeout(() => {
@@ -41,14 +42,14 @@ const Authenticate = () => {
         setStyle('danger');
 
         if (userData.password !== confirmPassword)
-        errors.password = "Confirmation password doesn't match"
+        errors.err = "Confirmation password doesn't match"
 
         if(userData.password.length <= 3 || userData.password.length > 15)
-            errors.password = "Password should be between 3 to 15 characters in length"
+            errors.err = "Password should be between 3 to 15 characters in length"
 
         usersData.forEach(data => {
             if(userData.email === data.email && userData.name && userData.password && userData.password === confirmPassword){
-                errors.email = "User with email already exist"
+                errors.err = "User with email already exist"
             }
         });
         setErrors(errors)

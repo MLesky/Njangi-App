@@ -39,6 +39,12 @@ Login credentials
     email: njangi@user.com
     password: abc123
 
+### Launching live authentication
+
+On terminal
+
+    yarn add firebase
+
 ### Prototypes
 
 - [Mobile-app view](https://www.figma.com/proto/Himb2UJPwBlp0Q683ZpHhn/Ngangui-app?page-id=0%3A1&node-id=4%3A15&viewport=54%2C-93%2C0.18&scaling=scale-down&starting-point-node-id=1%3A2)

@@ -12,13 +12,13 @@ export default function Login() {
 
     const navigate = useNavigate()
     const [loading, setLoading] = useState("")
-    const { currentUser, login } = useAuth();
+    const { currentUser, login, setError } = useAuth();
 
-    useEffect(() => {
-        if (currentUser) {
-          navigate("/");
-        }
-    }, [currentUser, navigate]);
+    // useEffect(() => {
+    //     if (currentUser) {
+    //       navigate("/");
+    //     }
+    // }, [currentUser, navigate]);
 
     async function handleFormSubmit(e) {
         e.preventDefault();
@@ -28,7 +28,7 @@ export default function Login() {
             await login(email, password)
             navigate('/profile')
         }catch(e){
-            alert("Failed to login")
+            setError("Failed to login")
         }
 
         setLoading(false)

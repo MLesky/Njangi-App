@@ -11,20 +11,20 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = useState("")
 
     const navigate = useNavigate();
-    const { currentUser, register } = useAuth();
+    const { currentUser, register, setError } = useAuth();
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        if (currentUser) {
-          navigate("/");
-        }
-    }, [currentUser, navigate]);
+    // useEffect(() => {
+    //     if (currentUser) {
+    //       navigate("/");
+    //     }
+    // }, [currentUser, navigate]);
 
     async function handleFormSubmit(e) {
         e.preventDefault();
     
         if (password !== confirmPassword) {
-            return alert("Passwords do not match");
+            return setError("Passwords do not match");
         }
       
         try {
@@ -32,7 +32,7 @@ export default function Register() {
             await register(email, password);
             navigate("/profile");
           } catch (e) {
-            alert("Failed to register");
+            setError("Failed to register");
         }
       
         setLoading(false);

@@ -7,7 +7,7 @@ import floating_action from './assets/images/floating_action.svg'
 const HomePage = ({data, notif, style}) => {
     return (
         <div className="page">
-            <Header data={""}/>
+            {/* <Header data={""}/> */}
             <SimpleToolBar />
             <div className="side-bars">
             <Sidebar />

@@ -1,0 +1,29 @@
+{
+  "name": "njangi-aide",
+  "version": "1.0.0",
+  "description": "___\r * A user must have an account for transactions\r * A user can create a Njangi group and invite/add other users to it. He/She becomes the admin of the group\r * The admin can make schedules for withdrawals from and transfer to a group member account. That member must confirm the schedule\r * User can schedule transfers and withdrawals",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MLesky/Njangi-Aide.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MLesky/Njangi-Aide/issues"
+  },
+  "homepage": "https://github.com/MLesky/Njangi-Aide#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.2.0",
+    "nodemon": "^2.0.20"
+  }
+}

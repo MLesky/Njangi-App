@@ -30,10 +30,6 @@ Run app on a new terminal
 
     npm start
 
-watch json server on a new terminal
-
-    npx json-server --watch data/data.json --port 8000
-
 Login credentials
 
     email: njangi@user.com

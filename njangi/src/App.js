@@ -28,19 +28,17 @@ export default function App() {
               exact 
               path="/" 
               element={
-                <WithPrivateRoute>
+              //  <WithPrivateRoute>
                   <HomePage />
-                </WithPrivateRoute>
-              // <HomePage />
+              //  </WithPrivateRoute>
               } />
             <Route 
               exact 
               path="/profile" 
               element={
-                // <WithPrivateRoute>
-                //   <Profile />
-                // </WithPrivateRoute>
-                <Profile />
+              //  <WithPrivateRoute>
+                   <Profile />
+              //  </WithPrivateRoute>
               } />
             <Route exact path="/login" element={<Login />} />
           </Routes>

@@ -1,12 +1,13 @@
 import { createTheme } from "@mui/material";
+import { indigo } from "@mui/material/colors";
 
 const lightTheme = createTheme({
     palette: {
         mode: "light",
         primary: {
-            light: '#9177e1',
-            main: '#5837d0',
-            dark: '#2a157d'
+            light: indigo[400],
+            main: indigo[500],
+            dark: indigo[900]
         },
         secondary: {
             light: '#b2faff',
@@ -18,12 +19,15 @@ const lightTheme = createTheme({
             main: '#f44336',
             dark: '#b71c1c'
         },
+        white: {
+            main: '#ffffff'
+        }
     },
     breakpoints: {
         values: {
             mobile: 0,
             tablet: 480,
-            laptops: 720,
+            laptop: 720,
             desktop: 1024
         }
     },

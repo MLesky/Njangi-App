@@ -1,4 +1,3 @@
-import Header from "./Headers";
 import {Sidebar, GroupSidebar} from "./SideBars";
 import SimpleToolBar from './ToolBars';
 import floating_action from './assets/images/floating_action.svg'

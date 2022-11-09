@@ -5,7 +5,7 @@ import { ExclamationIcon } from "@heroicons/react/outline";
 
 import { useAuth } from "../../contexts/AuthContext";
 
-export default function Logout({ modal, setModal }) {
+export default function LogOut({ modal, setModal }) {
   const cancelButtonRef = useRef(null);
   const navigate = useNavigate();
 

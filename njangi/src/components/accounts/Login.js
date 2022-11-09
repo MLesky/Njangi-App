@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Container, Typography } from '@mui/material';
+import { FormTextField, FormBox, FormButton, Logo } from "../materials";
 
-import Logo from "../Logo";
 import { useAuth } from "../../contexts/AuthContext";
 import auth from "../../config/firebase";
+import { ClassNames } from "@emotion/react";
+
 
 export default function Login() {
     
@@ -35,33 +38,28 @@ export default function Login() {
     }
 
     return ( 
-        <div className="login-page">
-            <div className="login">
-                <Logo />
-                <form onSubmit={handleFormSubmit}>
-                    <input 
-                        required
-                        type="text" 
-                        name="email" 
-                        placeholder='Enter Email' 
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                    <input 
-                        required
-                        type="password" 
-                        name="password" 
-                        placeholder='Enter Password' 
-                        onChange={e => setPassword(e.target.value)}
-                    />
+        <Container sx={{
+            display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'
+        }}>
+             <FormBox>
+                <Logo choice='secondary' halignCenter/>
 
-                    <button type="submit" className="btn color-white">LOGIN</button>
+                <Typography variant='h4' mb={3} textAlign='center' color='primary.main'>Login into Njangi - Aide</Typography>
+
+                <form onSubmit={handleFormSubmit}>
+                    <FormTextField label="Enter Email" type="email" name="email" required onChange={e => setEmail(e.target.value)}/>
+
+                    <FormTextField label="Enter Password" type="password" name="password" required onChange={e => setPassword(e.target.value)}/>
+
+                    <FormButton variant="contained" type='submit' fullWidth bgcolor='primary.main'>SIGN IN</FormButton>
                 </form>
-                <hr color='#ddd'/>
-                <Link to={'/register'} className="create-acc">
-                    <p>Don't have an account</p>
-                    <a href="#" className="btn">CREATE ACCOUNT</a>
+
+                <Typography color='primary.main' variant='button' textAlign='center' display='block' mt={4}>DON'T HAVE AN ACCOUNT</Typography>
+
+                <Link to={'/register'}>
+                    <FormButton variant='text' display><Typography fontWeight='bold'><u>REGISTER HERE</u></Typography></FormButton>
                 </Link>
-            </div>
-        </div>
+             </FormBox>
+        </Container>
      );
 }

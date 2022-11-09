@@ -13,6 +13,11 @@ const lightTheme = createTheme({
             main: '#7de5ed',
             dark: '#42bec7'
         },
+        error: {
+            light: '#ffebee',
+            main: '#f44336',
+            dark: '#b71c1c'
+        },
     },
     breakpoints: {
         values: {

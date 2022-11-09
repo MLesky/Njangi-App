@@ -1,30 +1,22 @@
-import { XCircleIcon } from "@heroicons/react/solid";
-
+import { Box, Stack, Typography } from "@mui/material";
 import { useAuth } from "../../contexts/AuthContext";
+import { Cancel } from "@mui/icons-material";
 
 export default function ErrorMessage() {
   const { error, setError } = useAuth();
 
   return (
     error && (
-      <div className="flex justify-center">
-        <div className="rounded-md max-w-md w-full bg-red-50 p-4 mt-4">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <XCircleIcon
-                onClick={() => setError("")}
-                className="h-5 w-5 text-red-400"
-                aria-hidden="true"
-              />
-            </div>
-            <div className="ml-3">
-              <h3 className="text-sm font-medium text-red-800">
-                Error: {error}
-              </h3>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Box sx={{display: 'flex', justifyContent: 'center', position: 'fixed', my: 2,  width: '100%'}}>
+        <Box sx={{width: 400, bgcolor: 'error.light', borderRadius: 2}}>
+          <Stack direction='row' alignItems='center' justifyContent='center' spacing={2} py='12px'>
+            <button onClick={() => setError('')}>
+              <Cancel color='error'/>
+            </button>
+            <Typography color='error' fontWeight={600}>Error: {error}</Typography>
+          </Stack>
+        </Box>
+      </Box>
     )
   );
 }

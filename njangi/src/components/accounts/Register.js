@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom'
-import { FormBox, FormTextField, Logo, FormButton } from "../materials";
+import { FormBox, FormTextField, Logo, FormButton } from "../layouts/materials";
 import { Container, Typography } from "@mui/material";
 
 import { useAuth } from "../../contexts/AuthContext";

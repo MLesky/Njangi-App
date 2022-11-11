@@ -1,9 +1,9 @@
 import React from "react";
 import { TextField, Stack, Box, Button, IconButton } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
-import lightTheme from "./theme";
-import logo from './assets/images/logo.svg';
-import logo2 from './assets/images/logo2.svg';
+import lightTheme from "../theme";
+import logo from '../assets/images/logo.svg';
+import logo2 from '../assets/images/logo2.svg';
 import { Search } from "@mui/icons-material";
 
 export function Logo({choice, halignCenter}){
@@ -80,14 +80,6 @@ export function FormBox({children}){
 
 export function SearchBox({placeholder, bgcolor, onClick}){
     return (
-        <>
-            <IconButton onClick={onClick} sx={{
-                display: {
-                    laptop: 'none'
-                },
-            }}>
-                    <Search color='white'/>
-                </IconButton>
             <Box 
                 sx={{
                     bgcolor: bgcolor, 
@@ -108,6 +100,5 @@ export function SearchBox({placeholder, bgcolor, onClick}){
                 </IconButton>
                 <input type='search' placeholder={placeholder}/>
             </Box>
-        </>
     )
 }

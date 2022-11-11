@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Container, Typography } from '@mui/material';
-import { FormTextField, FormBox, FormButton, Logo } from "../materials";
+import { FormTextField, FormBox, FormButton, Logo } from "../layouts/materials";
 
 import { useAuth } from "../../contexts/AuthContext";
 import auth from "../../config/firebase";

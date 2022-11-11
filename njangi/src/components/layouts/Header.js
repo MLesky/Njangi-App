@@ -2,7 +2,7 @@ import { AppBar, Stack, Toolbar, Typography, Box } from "@mui/material";
 import { Logout } from '@mui/icons-material'
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Logo } from "../materials";
+import { Logo } from "./materials";
 
 
 import { useAuth } from "../../contexts/AuthContext";

@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Register from "./components/accounts/Register";
 import Login from "./components/accounts/Login";
 import { AuthProvider } from "./contexts/AuthContext";
-import HomePage from "./components/HomePage";
+import HomePage from "./components/pages/HomePage";
 import ErrorMessage from "./components/layouts/ErrorMessage";
 import Profile from "./components/accounts/Profile";
 import Header from "./components/layouts/Header";

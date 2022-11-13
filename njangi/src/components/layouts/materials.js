@@ -6,7 +6,7 @@ import logo from '../assets/images/logo.svg';
 import logo2 from '../assets/images/logo2.svg';
 import { Search } from "@mui/icons-material";
 
-export function Logo({choice, halignCenter}){
+export function Logo({choice, halignCenter, size}){
     let icon = logo
     const halignment = {
         display: 'block'
@@ -17,7 +17,7 @@ export function Logo({choice, halignCenter}){
     if (choice === 'secondary'){
         icon = logo2
     }
-    return <img src={icon} alt='Logo' style={halignment}/>
+    return <img src={icon} alt='Logo' style={halignment} width={size}/>
 }
 
 export function FormTextField({label, type, name, onChange, required}){

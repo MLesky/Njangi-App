@@ -1,8 +1,11 @@
-import { PagesOutlined } from "@mui/icons-material";
 import { Box, ListItemAvatar, Stack, Typography, Toolbar, Avatar } from "@mui/material";
 
-export default function ChatScreen({allChats, chatItemStyles, screenInfo}){
-
+export default function ChatScreen({allChats, chatItemStyles, title}){
+    const radius = {
+            mobile: 0,
+            tablet: '10px',
+            laptop: '30px',
+        }
     return (
         <Box id='all-chats'
             sx={{
@@ -18,25 +21,18 @@ export default function ChatScreen({allChats, chatItemStyles, screenInfo}){
                     laptop: '85%'
                 },
                 minHeight: 500,
-                borderRadius: {
-                    mobile: 0,
-                    tablet: '10px',
-                    laptop: '30px',
-                }
+                borderRadius: radius,
             }}
         >
             <Stack direction='column' sx={{
                     width: {
                         mobile: '100%',
-                        laptop: '45%'
+                        laptop: '60%'
                     },
                     boxShadow: 5,
                     height: '100%',
-                    borderTopLeftRadius: {
-                        mobile: 0,
-                        tablet: '10px',
-                        laptop: '30px',
-                    },
+                    borderTopLeftRadius: radius,
+                    borderBottomLeftRadius: radius,
                 }}>
                 <Box sx={{
                     width: '100%',
@@ -46,11 +42,7 @@ export default function ChatScreen({allChats, chatItemStyles, screenInfo}){
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    borderTopLeftRadius: {
-                        mobile: 0,
-                        tablet: '10px',
-                        laptop: '30px',
-                    },
+                    borderTopLeftRadius: radius,
                     borderTopRightRadius: {
                         mobile: 0,
                         tablet: '10px',
@@ -61,7 +53,7 @@ export default function ChatScreen({allChats, chatItemStyles, screenInfo}){
                         fontWeight: 'bold',
                         color: 'white.main',
                         
-                    }}>{screenInfo.title}</Typography>
+                    }}>{title}</Typography>
                 </Box>
                 <ListItemAvatar>
                     {/* all chats here */}
@@ -77,11 +69,7 @@ export default function ChatScreen({allChats, chatItemStyles, screenInfo}){
                 <Box sx={{
                     height: 40, 
                     bgcolor:'primary.main',
-                    borderTopRightRadius: {
-                        mobile: 0,
-                        tablet: '10px',
-                        laptop: '30px',
-                    }
+                    borderTopRightRadius: radius,
                     }}>
                     {/* <ChatBox chat={chat}/> */}
                 </Box>

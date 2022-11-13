@@ -16,10 +16,10 @@ export default function Header() {
   const { currentUser } = useAuth();
 
   return (
-    <AppBar sx={{height: '60px', position: 'static'}}>
+    <AppBar sx={{height: '60px', position: 'relative'}}>
       <Toolbar sx={{justifyContent: 'space-between'}}>
         <Link to='/'>
-          <Logo />
+          <Logo size='100em'/>
         </Link>
         {currentUser && (
         <Stack direction='row' spacing={5} alignItems='center'>

@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useState } from "react";
 
 import { AppBar, Toolbar, Stack, Typography, Button, IconButton, Box, SwipeableDrawer } from "@mui/material";
@@ -7,6 +6,7 @@ import { AddCircleOutline, MoreVert, VisibilityOff, Menu, Close } from "@mui/ico
 
 import SideBar from "../layouts/SideBar";
 import { SearchBox } from "../layouts/materials";
+import image from './image.jpg'
 import ChatScreen from "./ChatPage";
 
 // import Notification from "./Notification";
@@ -15,9 +15,9 @@ const HomePage = ({data, notif, style}) => {
     const [chats, setChats] = useState({}); // edit this to fetch all chats
     const [groups, setGroups] = useState([
         {
-            name: 'Money Masters jkdfkd',
+            name: 'Money Masters',
             id: 1,
-            profile_pic: './image.jpg',
+            profile_pic: image,
             no_unread: 5,
             no_members: 22,
             last_message: {sender: 'Goerge', message: 'I already sent the money bro', time: '9:45 AM'}
@@ -69,7 +69,7 @@ const HomePage = ({data, notif, style}) => {
                 width: '100%',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-               
+               overflow: 'auto'
             }}>
                 <SwipeableDrawer bgcolor='primary.light'
                     anchor='left'

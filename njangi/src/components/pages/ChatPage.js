@@ -1,6 +1,8 @@
 import { Box, ListItemAvatar, Stack, Typography, Toolbar, Avatar, List, ListItem, ListItemText, Divider, Badge, SmallAvatar, ListSubheader } from "@mui/material";
 import { Link } from 'react-router-dom'
 
+import ChatBox from "../layouts/ChatBox";
+
 export default function ChatScreen({chats, chatItemStyles, title}){
     const radius = {
             mobile: 0,
@@ -41,7 +43,11 @@ export default function ChatScreen({chats, chatItemStyles, title}){
                 }}>
                     <ListSubheader  sx={{
                             borderTopLeftRadius: radius,
-                            height: 40,
+                            borderTopRightRadius: {
+                                tablet: '10px',
+                                laptop: 0,
+                            },
+                            height: 50,
                             display: 'flex',
                             bgcolor: 'primary.main',
                             alignItems: 'end',
@@ -62,16 +68,16 @@ export default function ChatScreen({chats, chatItemStyles, title}){
                         <>
                         <ListItem button>
                             <ListItemAvatar>
-                                <Avatar src='/image.jpg' alt={chat.name} />
+                                <Avatar src={chat.profile_pic} alt={chat.name} />
                             </ListItemAvatar>
                             <ListItemText 
                                 primary={
-                                    <Typography fontWeight='bold' noWrap>
+                                    <Typography variant='h6' fontWeight='bold' noWrap>
                                         {chat.name}
                                     </Typography>
                                 }
                                 secondary={
-                                    <Typography variant='subtitle2' lineHeight='15px' noWrap>
+                                    <Typography variant='subtitle2' lineHeight='20px' fontSize='0.8em' noWrap>
                                         {chat.last_message.sender}: {chat.last_message.message}
                                     </Typography>
                                 }  />
@@ -89,28 +95,14 @@ export default function ChatScreen({chats, chatItemStyles, title}){
                                         fontSize: '0.8em',
                                     }}>{chat.no_unread}</Avatar>
                                 </Badge>
-                                <Typography variant='caption' color='primary.main' fontWeight='bold' fontSize='0.8em' noWrap>{chat.last_message.time}</Typography>
+                                <Typography variant='caption' color='primary.main' fontWeight='bold' fontSize='0.7em' noWrap>{chat.last_message.time}</Typography>
                             </Stack>
                         </ListItem>
                         <Divider />
                         </>
                     ))}
                 </List>
-            <Stack direction='column' sx={{
-                width: '100%',
-                display: {
-                    mobile: 'none',
-                    laptop: 'flex'
-                }
-                }}>
-                <Box sx={{
-                    height: 40, 
-                    bgcolor:'primary.main',
-                    borderTopRightRadius: radius,
-                    }}>
-                    {/* <ChatBox chat={chat}/> */}
-                </Box>
-            </Stack>
+                <ChatBox chat={chats[0]} boxRadius={radius}/>
         </Box>
     )
 }

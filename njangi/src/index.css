@@ -22,3 +22,7 @@ input[type=search]:focus {
 ::placeholder {
   color: white;
 }
+
+#messagebox:focus {
+  outline-color: #9fa8da;
+}

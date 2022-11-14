@@ -1,8 +1,40 @@
 import { Groups, Chat, ScheduleSend, Settings, Logout, Send, Call, AccountBalance } from "@mui/icons-material"
 
-import { Box, Stack, Typography, Button, IconButton } from "@mui/material"
+import { Box, Stack, Typography, Button, IconButton, List, ListItem, ListItemIcon, ListItemText } from "@mui/material"
 
 export default function SideBar({sx}){
+    const menuItems = [
+        {
+            text: 'Groups',
+            icon: <Groups color='white'/>,
+            path: ''
+        },
+        {
+            text: 'Chats',
+            icon: <Chat color='white'/>,
+            path: ''
+        },
+        {
+            text: 'Accounts',
+            icon: <AccountBalance color='white'/>,
+            path: ''
+        },
+        {
+            text: 'Schedules',
+            icon: <ScheduleSend color='white'/>,
+            path: ''
+        },
+        {
+            text: 'Transfers',
+            icon: <Send color='white'/>,
+            path: ''
+        },
+        {
+            text: 'Calls',
+            icon: <Call color='white'/>,
+            path: ''
+        }
+    ]
     return (
         <Box id='sidebar'
             bgcolor='primary.main'
@@ -15,112 +47,31 @@ export default function SideBar({sx}){
             sx={sx}
         >
             <Stack spacing={3}>
-                <Stack direction = 'column'>
-                    <Button color='white' 
-                    sx={{
-                        px: {
-                            mobile: 5,
-                            tablet: 3
-                        },
-                        py: {
-                            mobile: 2,
-                            tablet: 1,
-                        },
-                        width: '100%', 
-                    justifyContent:'start'}} 
-                    startIcon={<Groups />}>
-                        <Typography variant="caption" fontWeight='bold' sx={{display: {mobile: 'flex', tablet: 'none', laptop: 'flex'}}}>groups</Typography>
-                    </Button>
-                    <Button color='white' 
-                    sx={{
-                        px: {
-                            mobile: 5,
-                            tablet: 3
-                        },
-                        py: {
-                            mobile: 2,
-                            tablet: 1,
-                        },
-                        width: '100%', 
-                    justifyContent:'start'}} 
-                    startIcon={<Chat />}>
-                        <Typography variant="caption" fontWeight='bold' sx={{display: {mobile: 'flex', tablet: 'none', laptop: 'flex'}}}>chats</Typography>
-                    </Button>
-                    <Button color='white' 
-                    sx={{
-                        px: {
-                            mobile: 5,
-                            tablet: 3
-                        },
-                        py: {
-                            mobile: 2,
-                            tablet: 1,
-                        },
-                        width: '100%', 
-                    justifyContent:'start'}} 
-                    startIcon={<AccountBalance />}>
-                        <Typography variant="caption" fontWeight='bold' sx={{display: {mobile: 'flex', tablet: 'none', laptop: 'flex'}}}>accounts</Typography>
-                    </Button>
-                    <Button color='white' 
-                    sx={{
-                        px: {
-                            mobile: 5,
-                            tablet: 3
-                        },
-                        py: {
-                            mobile: 2,
-                            tablet: 1,
-                        },
-                        width: '100%', 
-                    justifyContent:'start'}} 
-                    startIcon={<ScheduleSend />}>
-                        <Typography variant="caption" fontWeight='bold' sx={{display: {mobile: 'flex', tablet: 'none', laptop: 'flex'}}}>schedules</Typography>
-                    </Button>
-                    <Button color='white' 
-                    sx={{
-                        px: {
-                            mobile: 5,
-                            tablet: 3
-                        },
-                        py: {
-                            mobile: 2,
-                            tablet: 1,
-                        },
-                        width: '100%', 
-                    justifyContent:'start'}} 
-                    startIcon={<Send />}>
-                        <Typography variant="caption" fontWeight='bold' sx={{display: {mobile: 'flex', tablet: 'none', laptop: 'flex'}}}>transfers</Typography>
-                    </Button>
-                    <Button color='white' 
-                    sx={{
-                        px: {
-                            mobile: 5,
-                            tablet: 3
-                        },
-                        py: {
-                            mobile: 2,
-                            tablet: 1,
-                        },
-                        width: '100%', 
-                    justifyContent:'start'}} 
-                    startIcon={<Call />}>
-                        <Typography variant="caption" fontWeight='bold' sx={{display: {mobile: 'flex', tablet: 'none', laptop: 'flex'}}}>calls</Typography>
-                    </Button>
-                </Stack>
+               <List>
+                {menuItems.map(item => (
+                    <ListItem button>
+                        <ListItemIcon>{item.icon}</ListItemIcon>
+                        <ListItemText sx={{
+                            color: 'white.main',
+                            display: {
+                                mobile: 'flex',
+                                tablet: 'none',
+                                laptop: 'flex'
+                            }
+                        }}>{item.text}</ListItemText>
+                    </ListItem>
+                ))}
+               </List>
 
-                <Stack direction='column' alignItems='center' width='100%'>
+                <Stack direction='column' alignItems='start' pl={1}width='100%'>
                     <IconButton>
                         <Settings color='white' sx={{
-                            fontSize: {
-                                mobile: '35px',
-                                tablet: '25px',}
-                            }}/>
+                            fontSize: 35
+                        }}/>
                     </IconButton>
                     <IconButton>
                         <Logout color='white' sx={{
-                            fontSize: {
-                                mobile: '35px',
-                                tablet: '25px',}
+                            fontSize: 35
                             }}/>
                     </IconButton>
                 </Stack>

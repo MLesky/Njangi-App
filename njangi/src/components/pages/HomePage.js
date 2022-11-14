@@ -13,7 +13,16 @@ import ChatScreen from "./ChatPage";
 
 const HomePage = ({data, notif, style}) => {
     const [chats, setChats] = useState({}); // edit this to fetch all chats
-    const [groups, setGroups] = useState({}); // edit this to fetch all groups
+    const [groups, setGroups] = useState([
+        {
+            name: 'Money Masters jkdfkd',
+            id: 1,
+            profile_pic: './image.jpg',
+            no_unread: 5,
+            no_members: 22,
+            last_message: {sender: 'Goerge', message: 'I already sent the money bro', time: '9:45 AM'}
+        },
+    ]); // edit this to fetch all groups
     
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
@@ -55,12 +64,12 @@ const HomePage = ({data, notif, style}) => {
             </AppBar>
             <Box id="homepage"  sx={{
                 display: 'flex',
-                height: '95vh',
-                minHeight: 'calc(100vh - 110px)',
-                maxHeight: 1700,
+                height: 'calc(100vh - 110px)',
+                maxHeight: 1000,
                 width: '100%',
                 alignItems: 'center',
                 justifyContent: 'space-between',
+               
             }}>
                 <SwipeableDrawer bgcolor='primary.light'
                     anchor='left'
@@ -83,10 +92,10 @@ const HomePage = ({data, notif, style}) => {
                     width: '100%',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    justifyContent: 'center'
                 }}
                     >
-                       <ChatScreen allChats={groups} chatItemStyles={chatItemStyles} title={'All Groups'}/> 
+                       <ChatScreen chats={groups} chatItemStyles={chatItemStyles} title={'All Groups'}/> 
                 </Box>
             </Box>
         </>

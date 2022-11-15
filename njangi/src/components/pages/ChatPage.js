@@ -10,28 +10,12 @@ export default function ChatScreen({chats, chatItemStyles, title}){
             laptop: '30px',
         }
     return (
-        <Box id='all-chats'
-            sx={{
-                display: 'flex',
-                boxShadow: 4,
-                height: {
-                    mobile: '100%',
-                    laptop: '90%'
-                },
-                width: {
-                    mobile: '100%',
-                    tablet: '85%',
-                    laptop: '85%'
-                },
-                minHeight: 500,
-                borderRadius: radius,
-            }}
-        >
+            <>
                 <List sx={{
                     width: '100%',
                     height: '100%',
                     width: {
-                        mobile: '100%',
+                        mobile: 0,
                         laptop: '60%'
                     },
                     boxShadow: 5,
@@ -103,6 +87,6 @@ export default function ChatScreen({chats, chatItemStyles, title}){
                     ))}
                 </List>
                 <ChatBox chat={chats[0]} boxRadius={radius}/>
-        </Box>
+            </>
     )
 }

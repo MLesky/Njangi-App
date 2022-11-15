@@ -7,7 +7,6 @@ export default function ChatBox({chat, boxRadius}) {
         <Stack direction='column' sx={{
             width: '100%',
             display: {
-                mobile: 'none',
                 laptop: 'flex'
             }
             }}>
@@ -16,15 +15,18 @@ export default function ChatBox({chat, boxRadius}) {
                 width: '100%',
                 bgcolor:'primary.main',
                 borderTopRightRadius: boxRadius,
+                borderTopLeftRadius: {
+                    mobile: 0,
+                    tablet: 10,
+                    laptop: 0,
+                },
                 display: 'flex',
                 justifyContent: 'space-between',
                 }}>
-                {/* <ChatBox chat={chat}/> */}
                 <Stack direction='row' width='fit-content'>
                     <IconButton><ArrowBack sx={{
                         color: 'white.main',
-                        display: {laptop: 'none'},
-                        width: 'calc(100% - 170px)'
+                        display: {mobile: 'flex', laptop: 'none'},
                     }}/></IconButton>
                     <List sx={{
                         height: 50,

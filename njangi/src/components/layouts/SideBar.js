@@ -46,7 +46,12 @@ export default function SideBar({sx}){
             borderRadius='0 50px 50px 0'
             sx={sx}
         >
-            <Stack spacing={3}>
+            <Stack 
+            spacing={3}
+            direction='column'
+            sx={{
+                justifyContent: 'space-between'
+            }}>
                <List>
                 {menuItems.map(item => (
                     <ListItem button>

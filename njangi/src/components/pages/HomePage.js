@@ -2,12 +2,17 @@ import React from "react";
 import { useState } from "react";
 
 import { AppBar, Toolbar, Stack, Typography, Button, IconButton, Box, SwipeableDrawer } from "@mui/material";
-import { AddCircleOutline, MoreVert, VisibilityOff, Menu, Close } from "@mui/icons-material";
+import { AddCircleOutline, MoreVert, VisibilityOff, Menu, Close, Search } from "@mui/icons-material";
 
 import SideBar from "../layouts/SideBar";
 import { SearchBox } from "../layouts/materials";
 import image from './image.jpg'
 import ChatScreen from "./ChatPage";
+import AccountsScreen from "./AccountsPage";
+import ScheduleScreen from "./SchedulePage";
+import TransfersScreen from "./TransfersPage";
+import CallsScreen from "./CallsPage";
+import SettingsScreen from "./Settings";
 
 // import Notification from "./Notification";
 
@@ -56,13 +61,16 @@ const HomePage = ({data, notif, style}) => {
                     <Typography fontWeight='bold' fontSize={15}>NG-Groups</Typography>
                     <Stack direction='row' spacing={2} alignItems='center'>
                         <SearchBox placeholder='Search...' bgcolor='primary.light'/>
+                        <IconButton sx={{display: {mobile: 'none', tablet: 'flex', laptop: 'none'}}}><Search color='white'/></IconButton>
                         <IconButton sx={displayResponsive}><AddCircleOutline color='white'/></IconButton>
                         <IconButton sx={displayResponsive}><VisibilityOff color='white'/></IconButton>
-                        <IconButton><MoreVert color='white'/></IconButton>
+                        <IconButton sx={{display: {
+                                    mobile: 'flex', tablet: 'none'}}}
+                        ><MoreVert color='white'/></IconButton>
                     </Stack>
                 </Toolbar>
             </AppBar>
-            <Box id="homepage"  sx={{
+            <Box id="pages"  sx={{
                 display: 'flex',
                 height: 'calc(100vh - 110px)',
                 maxHeight: 1000,
@@ -95,7 +103,41 @@ const HomePage = ({data, notif, style}) => {
                     justifyContent: 'center'
                 }}
                     >
-                       <ChatScreen chats={groups} chatItemStyles={chatItemStyles} title={'All Groups'}/> 
+                    <Box id='all-pages'
+                        sx={{
+                            display: 'flex',
+                            boxShadow: 4,
+                            height: {
+                                mobile: '100%',
+                                laptop: '90%'
+                            },
+                            width: {
+                                mobile: '100%',
+                                tablet: '85%',
+                                laptop: '85%'
+                            },
+                            minHeight: 550,
+                            borderRadius: {
+                                mobile: 0,
+                                tablet: '10px',
+                                laptop: '30px',
+                            },
+                        }}>
+
+                        <ChatScreen chats={groups} chatItemStyles={chatItemStyles} title={'All Groups'}/>
+
+                        {/* <ChatScreen chats={chats} chatItemStyles={chatItemStyles} title={'All Groups'}/>  */}
+                        
+                        {/* <AccountsScreen /> */}
+
+                        {/* <ScheduleScreen /> */}
+
+                        {/* <TransfersScreen /> */}
+
+                        {/* <CallsScreen /> */}
+
+                        {/* <SettingsScreen /> */}
+                    </Box> 
                 </Box>
             </Box>
         </>

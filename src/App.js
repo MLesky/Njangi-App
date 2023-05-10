@@ -5,7 +5,7 @@ import NavBar from './layouts/navBar';
 import { lightTheme } from './theme/theme';
 import { ChatsPage, GroupsPage } from './app/chat/index';
 import { HistoryPage, AccountsPage, SchedulePage } from './app/transact/index'
-import { LoginPage } from './app/authentication';
+import { LoginPage, SignUpPage } from './app/authentication';
 import { HomePage } from './pages/pages'
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
         {/* <NavBar /> */}
         <Routes>
             <Route path="login" element={<LoginPage />}></Route>
+            <Route path='signup' element={<SignUpPage />}></Route>
             <Route path="/" element={<HomePage />}></Route>
             <Route path="groups" element={<GroupsPage />}></Route>
             <Route path="chats" element={<ChatsPage />}></Route>

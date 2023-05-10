@@ -22,6 +22,8 @@ import { Link } from "react-router-dom";
 import { backgroundImageWoman, logo } from "../../../assets/index";
 import { appName } from "../../../utils/constants";
 
+// TODO: change styles for input fields
+
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
 

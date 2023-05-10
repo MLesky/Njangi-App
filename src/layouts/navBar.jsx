@@ -1,7 +1,7 @@
 import { Box, Button, Stack, Typography, Paper, IconButton, InputBase } from "@mui/material";
 import { appName } from "../utils/constants";
 import { logo } from "../assets";
-import { Call, CallMissed, Chat, Group, History, Person, Schedule, Search, Wallet } from "@mui/icons-material";
+import { Call, Chat, Group, History, Home, Person, Schedule, Search, Wallet } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
@@ -15,12 +15,15 @@ const NavBar = () => {
         }}
       >
         <img src={logo} alt="Logo" className="logo-s3" />
-        <Typography variant="h5" className="title-text">
+        <Typography variant="h5" className="title-text" noWrap={true}>
           {appName}
         </Typography>
       </Box>
 
       <Stack direction="row" spacing='5px' alignItems='center'>
+        <Link to="/">
+        <Button size="small" startIcon={<Home />}>Home</Button>
+        </Link>
         <Link to="/groups">
         <Button size="small" startIcon={<Group />}>Groups</Button>
         </Link>
@@ -34,7 +37,7 @@ const NavBar = () => {
         <Button size="small" startIcon={<Schedule />}>Schedules</Button>
         </Link>
         <Link to="/accounts">
-        <Button startIcon={<Wallet />}>Accounts</Button>
+        <Button size="small" startIcon={<Wallet />}>Accounts</Button>
         </Link>
       
 

@@ -2,11 +2,12 @@ import { Box, Button, Stack, Typography, Paper, IconButton, InputBase } from "@m
 import { appName } from "../utils/constants";
 import { logo } from "../assets";
 import { Call, Chat, Group, History, Home, Person, Schedule, Search, Wallet } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <Paper square={true}>
+    <>
+      <Paper square={true}>
       <Stack height='50px' direction="row" justifyContent="space-between">
       <Box
         sx={{
@@ -21,26 +22,24 @@ const NavBar = () => {
       </Box>
 
       <Stack direction="row" spacing='5px' alignItems='center'>
-        <Link to="/">
-        <Button size="small" startIcon={<Home />}>Home</Button>
-        </Link>
-        <Link to="/groups">
-        <Button size="small" startIcon={<Group />}>Groups</Button>
-        </Link>
-        <Link to="/chats">
-        <Button size="small" startIcon={<Chat />}>Chats</Button>
-        </Link>
-        <Link to="/history">
-        <Button size="small" startIcon={<History />}>History</Button>
-        </Link>
-        <Link to="/schedules">
-        <Button size="small" startIcon={<Schedule />}>Schedules</Button>
-        </Link>
-        <Link to="/accounts">
-        <Button size="small" startIcon={<Wallet />}>Accounts</Button>
-        </Link>
-      
-
+        <NavLink to="/">
+        <Button size="small" startIcon={<Home className="nav-btn-icon"/>}>Home</Button>
+        </NavLink>
+        <NavLink to="/groups">
+        <Button size="small" startIcon={<Group className="nav-btn-icon"/>}>Groups</Button>
+        </NavLink>
+        <NavLink to="/chats">
+        <Button size="small" startIcon={<Chat className="nav-btn-icon"/>}>Chats</Button>
+        </NavLink>
+        <NavLink to="/history">
+        <Button size="small" startIcon={<History className="nav-btn-icon"/>}>History</Button>
+        </NavLink>
+        <NavLink to="/schedules">
+        <Button size="small" startIcon={<Schedule className="nav-btn-icon"/>}>Schedules</Button>
+        </NavLink>
+        <NavLink to="/accounts">
+        <Button size="small" startIcon={<Wallet className="nav-btn-icon"/>}>Accounts</Button>
+        </NavLink>
       </Stack>
 
       <Stack direction='row' spacing={1} alignItems='center'>
@@ -75,6 +74,15 @@ const NavBar = () => {
       </Stack>
     </Stack>
     </Paper>
+    
+    <Paper sx={{
+      maxWidth: '1080px',
+      margin: '10px auto',
+      height: 'calc(100vh - (50px + 20px))'
+    }}>
+      <Outlet />
+    </Paper>
+    </>
   );
 };
 

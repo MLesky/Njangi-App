@@ -86,3 +86,18 @@ button, a, td {
   width: 350px;
   min-width: '';
 }
+
+/* nav links */
+
+a.active button{
+  border-bottom: 3px solid var(--color-primary);
+  border-radius: 0;
+}
+
+a.active .nav-btn-icon {
+  display: block;
+}
+
+a button .nav-btn-icon {
+  display: none;
+}

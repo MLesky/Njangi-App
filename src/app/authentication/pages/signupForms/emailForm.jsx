@@ -2,8 +2,6 @@ import { useState } from "react";
 import {
     FacebookOutlined,
     Google,
-    Visibility,
-    VisibilityOff,
 } from "@mui/icons-material";
 import {
     Box,
@@ -12,41 +10,32 @@ import {
     TextField,
     Paper,
     Button,
-    FormControl,
-    InputAdornment,
-    FilledInput,
-    IconButton,
-    InputLabel,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { backgroundImageEngineers, logo } from "../../../assets/index";
-import { appName } from "../../../utils/constants";
+import { logo } from "../../../../assets/index";
+import { appName } from "../../../../utils/constants";
+import { useNavigate } from "react-router-dom";
 
-// TODO: change styles for input fields
+const SignUpWithEmailForm = () => {
+    const [email, setEmail] = useState('');
+    const navigate = useNavigate();
 
-const SignUpPage = () => {
-    const [showPassword, setShowPassword] = useState(false);
-
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    // TODO: handle email submittion
+    // TODO: fix navigate to verify-email
+    const handleSubmit = e => handleSubmit(
+        // Email validation and verification
+        navigate('signup/verify-email'),
+    );
 
     return (
-        <Box
-            className="dark-bg-image"
-            sx={{
-                height: "100vh",
-                width: "100vw",
-                backgroundImage: `url(${backgroundImageEngineers})`,
-                display: "flex",
-                justifyContent: "space-between",
-            }}
-        >
+        <>
             <Box width="50%"
                 sx={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    padding: '25px',                
-                    }}>
+                    padding: '25px',
+                }}>
                 <Stack alignItems="center" width={400}>
                     <img src={logo} alt="logo" className="logo-s1" width={100} />
                     <Typography variant="h6" align="center" color="white">
@@ -93,28 +82,23 @@ const SignUpPage = () => {
                                 Create New Account
                             </Typography>
                             <Typography color="white" variant="h6">
-                                Already have an account? <Link to="">Log In</Link>
+                                Already have an account? <Link to="../signin">Log In</Link>
                             </Typography>
                             <Typography variant='body1'
-                            color='white'
+                                color='white'
                             >Please enter the following information</Typography>
                             <TextField
                                 id="userEmail"
+                                type="email"
                                 label="Enter Email Address"
                                 variant="filled"
+                                value={email}
+                                onChange={(event) => setEmail(event.target.value)}
                                 sx={{
                                     backgroundColor: "rgb(255, 255, 255, 0.7)",
                                 }}
                             />
-                           <TextField
-                                id="userPhoneNumber"
-                                label="Enter Phone Number"
-                                variant="filled"
-                                sx={{
-                                    backgroundColor: "rgb(255, 255, 255, 0.7)",
-                                }}
-                            />
-                            <Button variant="contained" size="large" sx={{ padding: "10px" }}>
+                            <Button variant="contained" size="large" sx={{ padding: "10px" }} onClick={handleSubmit}>
                                 continue
                             </Button>
 
@@ -151,8 +135,8 @@ const SignUpPage = () => {
                     </form>
                 </Paper>
             </Box>
-        </Box>
+        </>
     );
-};
+}
 
-export default SignUpPage;
+export default SignUpWithEmailForm;

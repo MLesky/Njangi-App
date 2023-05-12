@@ -17,12 +17,13 @@ const ErrorPage = () => {
                 <Typography variant='h3' sx={{color: '#535353'}}>
                     Page Not Found
                 </Typography>
-                <Link to='/login' sx={{
+                <a href='/' style={{
                     padding: '10px',
                     cursor: 'pointer',
+                    color: 'primary'
                 }}>
                  Go To HomePage   
-                </Link>
+                </a>
             </Stack>
         </Box>
      );

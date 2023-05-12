@@ -5,8 +5,9 @@ import NavBar from './layouts/navBar';
 import { lightTheme } from './theme/theme';
 import { ChatsPage, GroupsPage } from './app/chat/index';
 import { HistoryPage, AccountsPage, SchedulePage } from './app/transact/index'
-import { LoginPage, SignUpPage } from './app/authentication';
+import { FillInInfoForm, LoginPage, SignUpPage, SignUpWithEmailForm } from './app/authentication';
 import { HomePage, ErrorPage } from './pages/pages'
+import VerifyPinForm from './app/authentication/pages/signupForms/verifyEmail';
 
 function App() {
   return (
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
+        element: <HomePage />
+      },
+
+      {
+        path: 'home',
         element: <HomePage />
       },
 
@@ -58,15 +64,32 @@ const router = createBrowserRouter([
   },
   
   {
-    path: '/login',
-    element: <LoginPage></LoginPage>
+    path: '/signin',
+    element: <LoginPage />
   },
   {
     path: '/signup',
-    element: <SignUpPage></SignUpPage>
+    element: <SignUpPage />,
+    children: [
+      {
+        path: '',
+        element: <SignUpWithEmailForm />
+      },
+
+       {
+        path: 'verify-email',
+        element: <VerifyPinForm />
+       },
+
+       {
+        path: 'fill-info',
+        element: <FillInInfoForm />
+       }
+
+    ]
   },
   {
     path: '/*',
-    element: <ErrorPage></ErrorPage>
+    element: <ErrorPage />
   }
 ])

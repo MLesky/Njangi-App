@@ -25,9 +25,20 @@ import { appName } from "../../../utils/constants";
 // TODO: change styles for input fields
 
 const LoginPage = () => {
+    const [loginEmail, setLoginEmail] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    // TODO: handle for submittion
+    const handleFormSubmit = event => {
+        event.preventDefault();
+        console.log('Form Submitted');
+        alert(`Email: ${loginEmail} \n Password: ${loginPassword}`);
+
+        // Email and password validation and verification
+    };
 
     return (
         <Box
@@ -49,7 +60,7 @@ const LoginPage = () => {
                 }}
             >
                 <Paper className="form-card">
-                    <form>
+                    <form onSubmit={handleFormSubmit} className='form-light'>
                         <Stack spacing={2} className="form-card-content">
                             <Stack
                                 direction="row"
@@ -76,12 +87,17 @@ const LoginPage = () => {
                                 Log Into {appName}
                             </Typography>
                             <Typography color="white" variant="h6">
-                                New here? <Link to="">Create New Account</Link>
+                                New here? <Link to="..\signup">Create New Account</Link>
                             </Typography>
                             <TextField
                                 id="loginEmail"
                                 label="Enter email"
                                 variant="filled"
+                                className="light-input-field"
+                                value={loginEmail}
+                                onChange={e => {
+                                    setLoginEmail(e.target.value);
+                                }}
                                 sx={{
                                     backgroundColor: "rgb(255, 255, 255, 0.7)",
                                 }}
@@ -95,6 +111,10 @@ const LoginPage = () => {
                                 </InputLabel>
                                 <FilledInput
                                     id="loginPassword"
+                                    value={loginPassword}
+                                    onChange={e => {
+                                        setLoginPassword(e.target.value);
+                                    }}
                                     type={showPassword ? "text" : "password"}
                                     endAdornment={
                                         <InputAdornment position="end">
@@ -111,7 +131,7 @@ const LoginPage = () => {
                             </FormControl>
                             <Link to="">Forgot password?</Link>
 
-                            <Button variant="contained" size="large" sx={{ padding: "10px" }}>
+                            <Button type='submit' variant="contained" size="large" sx={{ padding: "10px" }}>
                                 sign in
                             </Button>
 

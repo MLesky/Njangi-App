@@ -1,9 +1,9 @@
 import { ThemeProvider } from '@emotion/react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
-import NavBar from './layouts/navBar';
+import { NavBar } from './layouts/layouts';
 import { lightTheme } from './theme/theme';
-import { ChatsPage, GroupsPage } from './app/chat/index';
+import { ChatsPage, GroupsPage, ChatScreenForChat, ChatScreenForGroup } from './app/chat/index';
 import { HistoryPage, AccountsPage, SchedulePage } from './app/transact/index'
 import { FillInInfoForm, LoginPage, SignUpPage, SignUpWithEmailForm } from './app/authentication';
 import { HomePage, ErrorPage } from './pages/pages'
@@ -32,18 +32,25 @@ const router = createBrowserRouter([
       },
 
       {
-        path: 'home',
-        element: <HomePage />
-      },
-
-      {
         path: 'groups',
-        element: <GroupsPage />
+        element: <GroupsPage />,
+        children: [
+          {
+            path: ':ID',
+            element: <ChatScreenForGroup />
+          }
+        ]
       },
 
       {
         path: 'chats',
-        element: <ChatsPage />
+        element: <ChatsPage />,
+        children: [
+          {
+            path: ':ID',
+            element: <ChatScreenForChat />
+          }
+        ]
       },
 
       {

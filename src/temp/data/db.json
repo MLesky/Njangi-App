@@ -1,0 +1,128 @@
+{
+  "groups": [
+    {
+      "id": "group1",
+      "name": "Money Crusaders",
+      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora adipisci a similique quia saepe, laudantium laboriosam? Error illum id pariatur!",
+      "profilePic": "",
+      "dateCreated": "12-12-2003",
+      "numberOfMembers": 23,
+      "members": ["Alvin", "Marcel", "Dora", "Lespa"],
+      "admin": "Alvin",
+      "co-admin": "Dora",
+      "isPublic": false,
+      "messages": [],
+      "schedules": []
+    },
+
+    {
+      "id": "group2",
+      "name": "Coin Crashers",
+      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora adipisci a similique quia saepe, laudantium laboriosam? Error illum id pariatur!",
+      "dateCreated": "12-12-2003",
+      "numberOfMembers": 1,
+      "members": ["Alvin", "Marcel", "Dora", "Lespa"],
+      "admin": "Lespa",
+      "co-admin": "Marcel",
+      "isPublic": false,
+      "messages": [],
+      "schedules": []
+    },
+
+    {
+      "id": "group3",
+      "name": "Njangi Legends",
+      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora adipisci a similique quia saepe, laudantium laboriosam? Error illum id pariatur!",
+      "dateCreated": "12-12-2003",
+      "numberOfMembers": 13,
+      "members": ["Alvin", "Marcel", "Dora", "Lespa"],
+      "admin": "Lespa",
+      "co-admin": "Marcel",
+      "isPublic": false,
+      "messages": [],
+      "schedules": []
+    }
+  ],
+
+  "chats": [
+    {
+      "name": "Fien Dora",
+      "id": "chat1",
+      "messages": [
+        {
+          "body": {
+            "message": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora adipisci a similique quia saepe, laudantium laboriosam? Error illum id pariatur!"
+          },
+          "sender": "Fien Dora",
+          "timeSent": "12:45 am"
+        },
+        {
+          "body": {
+            "message": "Lorem ipsum dolor sit amet consectetur adipisicing elit.!"
+          },
+          "timeSent": "12:45 am",
+          "sender": "Mbah Lesky"
+        },
+        {
+          "body": {
+            "message": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora adipisci a similique quia saepe, laudantium laboriosam? Error illum id pariatur!"
+          },
+          "sender": "Fien Dora",
+          "timeSent": "1:00 am"
+        },
+        {
+          "body": {
+            "message": "laudantium laboriosam? Error illum id pariatur!"
+          },
+          "sender": "Mbah Lesky",
+          "timeSent": "1:25 am"
+        },
+        {
+          "body": {
+            "message": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora adipisci a similique quia saepe, laudantium laboriosam? Error illum id pariatur!"
+          },
+          "sender": "Mbah Lesky",
+          "timeSent": "1:29 am"
+        },
+        {
+          "body": {
+            "message": "Tempora adipisci a similique quia saepe, laudantium laboriosam? " },
+          "sender": "Fien Dora",
+          "timeSent": "1:30 am"
+        },
+        {
+          "body": {
+            "message": "Error illum id pariatur!"
+          },
+          "sender": "Fien Dora",
+          "timeSent": "1:40 am"
+        },
+        {
+          "body": {
+            "message": "How are you?"
+          },
+          "sender": "Fien Dora",
+          "timeSent": "1:45 am"
+        }
+      ]
+    },
+    {
+      "name": "Marco Marc Marcel",
+      "id": "chat2",
+      "messages": [
+        {
+          "body": {
+            "message": "Yo send ma money"
+          },
+          "sender": "Mbah Lesky",
+          "timeSent": "12:00 am"
+        }
+      ]
+    },
+    {
+      "name": "First Jedi",
+      "id": "chat3",
+      "messages": []
+    }
+  ]
+}

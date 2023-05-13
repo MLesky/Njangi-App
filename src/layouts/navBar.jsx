@@ -78,7 +78,8 @@ const NavBar = () => {
     <Paper sx={{
       maxWidth: '1080px',
       margin: '10px auto',
-      height: 'calc(100vh - (50px + 20px))'
+      height: 'calc(100vh - (50px + 20px))',
+      maxHeight: '700px'
     }}>
       <Outlet />
     </Paper>

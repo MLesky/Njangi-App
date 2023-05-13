@@ -14,7 +14,7 @@ const ErrorPage = () => {
                 <Typography variant='h4' className='title-text'>
                     Oops!
                 </Typography>
-                <Typography variant='h3' sx={{color: '#535353'}}>
+                <Typography variant='h1' class="dark-grey-text">
                     Page Not Found
                 </Typography>
                 <a href='/' style={{

@@ -18,6 +18,9 @@
   color: var(--color-primary) !important;
 }
 
+.dark-grey-text {
+  color: #535353;
+}
 /* Text */ 
 .title-text {
   font-weight: bold !important;
@@ -100,4 +103,36 @@ a.active .nav-btn-icon {
 
 a button .nav-btn-icon {
   display: none;
+}
+
+.side-nav a.active li {
+  background-color: var(--color-secondary);
+}
+
+/* message-cards */
+.messages {
+
+}
+
+.messages .sent-message {
+  background-color: var(--color-light);
+  right: 0;
+  border-radius: 20px;
+  border-top-right-radius: 0 !important;
+  align-self: flex-end;
+}
+
+.messages .received-message {
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: 20px;
+  border-top-left-radius: 0 !important;
+}
+
+.messages .recieved-message .time-sent {
+  color: var(--color-light);
+}
+
+.messages .sent-message .time-sent {
+  color: var(--color-dark);
 }

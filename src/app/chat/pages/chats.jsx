@@ -11,7 +11,7 @@ const ChatsPage = () => {
         data: chats,
         isPending,
         error,
-      } = useFetch("http://localhost:8000/chats");
+      } = useFetch("http://localhost:3000/chats");
 
     return ( 
         <Box

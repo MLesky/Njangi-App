@@ -22,10 +22,10 @@ const SignUpWithEmailForm = () => {
 
     // TODO: handle email submittion
     // TODO: fix navigate to verify-email
-    const handleSubmit = e => handleSubmit(
+    const handleSubmit = e => {
         // Email validation and verification
-        navigate('signup/verify-email'),
-    );
+        navigate('verify-email');
+    }
 
     return (
         <>

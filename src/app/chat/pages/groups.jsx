@@ -9,7 +9,7 @@ const GroupsPage = () => {
     data: groups,
     isPending,
     error,
-  } = useFetch("http://localhost:8000/groups");
+  } = useFetch("http://localhost:3000/groups");
 
   return (
     <Box

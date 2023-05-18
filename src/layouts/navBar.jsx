@@ -1,8 +1,8 @@
-import { Box, Button, Stack, Typography, Paper, IconButton, InputBase } from "@mui/material";
+import { Box, Button, Stack, Typography, Paper, IconButton, InputBase, Badge, Avatar } from "@mui/material";
 import { appName } from "../utils/constants";
 import { logo } from "../assets";
-import { Call, Chat, Group, History, Home, Person, Schedule, Search, Wallet } from "@mui/icons-material";
-import { NavLink, Outlet } from "react-router-dom";
+import { Call, Notifications, Chat, Group, History, Home, Person, Schedule, Search, Wallet } from "@mui/icons-material";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -48,12 +48,12 @@ const NavBar = () => {
         variant='outlined'
           component="form"
           sx={{
-            mr: 5,
+            mr: 1,
             p: "0 4px",
             display: "flex",
             alignItems: "center",
             width: 200,
-            height: 'fit-content'
+            height: '35px'
           }}
         >
           <InputBase
@@ -65,12 +65,21 @@ const NavBar = () => {
             <Search />
           </IconButton>
         </Paper>
-        <IconButton type='button' color="primary">
-          <Call />
+        <IconButton>
+          <Badge badgeContent={1} color='error'>
+            <Call />
+          </Badge>
         </IconButton>
+        <IconButton>
+          <Badge badgeContent={3} color='error'>
+            <Notifications />
+          </Badge>
+        </IconButton>
+        <Link to="..\profile">
         <IconButton type="button" color="primary">
-          <Person/>
+          <Avatar sx={{height: 30, width: 30}}/>
         </IconButton>
+        </Link>
       </Stack>
     </Stack>
     </Paper>

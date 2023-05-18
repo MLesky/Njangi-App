@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from "react";
 import {
     FacebookOutlined,
@@ -10,21 +11,60 @@ import {
     TextField,
     Paper,
     Button,
+    MenuItem,
+    Select,
+    InputLabel,
+    FormControl,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { logo } from "../../../../assets/index";
 import { appName } from "../../../../utils/constants";
 import { useNavigate } from "react-router-dom";
 
+const zipCodes = [
+    {
+      country: "Cameroon",
+      code: "237",
+    },
+    {
+      country: "USA",
+      code: "1",
+    },
+  ];
+
 const SignUpWithEmailForm = () => {
-    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [zipCode, setZipCode] = useState("");
+    const [numberError, setNumberError] = useState("");
+    const [zipCodeError, setZipCodeError] = useState("");
     const navigate = useNavigate();
 
-    // TODO: handle email submittion
-    // TODO: fix navigate to verify-email
+    const handleZipCodeChange = (event) => {
+        setZipCode(event.target.value);
+        if (zipCode !== "") {
+          setZipCodeError("");
+        }
+      };
+    
+      const handleNumberChange = (event) => {
+        setPhoneNumber(event.target.value);
+        if (phoneNumber !== "") {
+          setNumberError("");
+        }
+      };
+    
     const handleSubmit = e => {
-        // Email validation and verification
-        navigate('verify-email');
+
+        if (zipCode === "") {
+            setZipCodeError("Select code");
+          }
+          if (phoneNumber === "") {
+            setNumberError("Please enter Phone Number");
+          }
+    
+          if (zipCode !== "" && phoneNumber !== "") {
+            navigate("verify-email");
+          }
     }
 
     return (
@@ -55,7 +95,6 @@ const SignUpWithEmailForm = () => {
                 }}
             >
                 <Paper className="form-card">
-                    <form>
                         <Stack spacing={2} className="form-card-content">
                             <Stack
                                 direction="row"
@@ -87,17 +126,45 @@ const SignUpWithEmailForm = () => {
                             <Typography variant='body1'
                                 color='white'
                             >Please enter the following information</Typography>
-                            <TextField
-                                id="userEmail"
-                                type="email"
-                                label="Enter Email Address"
-                                variant="filled"
-                                value={email}
-                                onChange={(event) => setEmail(event.target.value)}
-                                sx={{
-                                    backgroundColor: "rgb(255, 255, 255, 0.7)",
-                                }}
-                            />
+                            <Stack direction="row" width="100%">
+                  <FormControl
+                    helperText={zipCodeError}
+                    error={zipCodeError !== ""}
+                    required
+                    sx={{
+                      minWidth: 50,
+                      width: 90,
+                    }}
+                    className="light-input-field"
+                    variant="filled"
+                  >
+                    <InputLabel>Zip</InputLabel>
+                    <Select
+                      label="Country"
+                      value={zipCode}
+                      onChange={handleZipCodeChange}
+                    >
+                      {zipCodes.map((zipCode) => (
+                        <MenuItem value={zipCode.code}>
+                          +{zipCode.code} - {zipCode.country}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  <TextField
+                    sx={{ flexGrow: 1 }}
+                    id="phoneNumber"
+                    type="number"
+                    label="Enter Phone Number"
+                    variant="filled"
+                    className="light-input-field"
+                    value={phoneNumber}
+                    helperText={numberError}
+                    error={numberError !== ""}
+                    required
+                    onChange={handleNumberChange}
+                  />
+                </Stack>
                             <Button variant="contained" size="large" sx={{ padding: "10px" }} onClick={handleSubmit}>
                                 continue
                             </Button>
@@ -132,7 +199,6 @@ const SignUpWithEmailForm = () => {
                                 </Typography>
                             </Button>
                         </Stack>
-                    </form>
                 </Paper>
             </Box>
         </>

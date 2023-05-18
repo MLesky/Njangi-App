@@ -1,86 +1,103 @@
+import React from "react";
 import { useState } from "react";
-import {
-    Box,
-    Stack,
-    Typography,
-    Paper,
-    Button,
-    Checkbox,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, Stack, Typography, Paper, Button, Checkbox } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { MuiOtpInput } from "mui-one-time-password-input";
 
 const VerifyPinForm = () => {
-    const [isTermsAccepted, setIsTermsAccepted] = useState(false);
+  const navigate = useNavigate();
+  const [otp, setOtp] = useState("");
+  const [otpError, setOtpError] = useState("");
+  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
 
-    return (
-        <Box
-            width="50%"
-            sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+  const handleOtpChange = (newValue) => {
+    setOtp(newValue);
+    setOtpError('');
+    if (newValue == "123456") {
+        navigate("../fill-info");
+      }
+  };
+
+  const handleSubmit = (event) => {
+    if(otp === ''){
+        setOtpError("Please enter the Code Sent")
+    } else if (otp !== "123456") {
+        setOtpError("Wrong OTP (123456)");
+    } 
+  };
+
+  const validateChar = (value, index) => {
+    let isNumber = typeof value === "number";
+    let isString = typeof value === "string";
+    return (isNumber || isString) && !isNaN(Number(value));
+  };
+
+  return (
+    <Box
+      width="50%"
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Paper
+        className="form-card"
+        justifyContent="start"
+        sx={{ padding: "40px 20px" }}
+      >
+        <Stack spacing={2}>
+          <Typography variant="h5" color="secondary">
+            Verify Your Email
+          </Typography>
+          <Typography color="secondary">
+            Please type in the code we just sent to +237679682626
+          </Typography>
+          <MuiOtpInput
+            sx={{maxWidth: 400}}
+            value={otp}
+            length={6}
+            onChange={handleOtpChange}
+            validateChar={validateChar}
+            TextFieldsProps={{
+              placeholder: "-",
+              className: "light-otp-field",
+              error: otpError === "",
             }}
-        >
-            <Paper className="form-card" justifyContent='start' sx={{ padding: '40px 20px' }}>
-                <Stack spacing={2}>
-                    <Typography variant="h5" color='secondary'>Verify Your Email</Typography>
-                    <Typography color='secondary'>Please type in the code we just sent to mbahlesky2@gmail.com</Typography>
-                    <Stack direction='row' spacing={2}>
-                        <Box sx={{
-                            border: '2px solid white',
-                            width: '40px',
-                            height: '50px',
-                            borderRadius: '5px'
-                        }}></Box>
-                        <Box sx={{
-                            border: '2px solid white',
-                            width: '40px',
-                            height: '50px',
-                            borderRadius: '5px'
-                        }}></Box>
-                        <Box sx={{
-                            border: '2px solid white',
-                            width: '40px',
-                            height: '50px',
-                            borderRadius: '5px'
-                        }}></Box>
-                        <Box sx={{
-                            border: '2px solid white',
-                            width: '40px',
-                            height: '50px',
-                            borderRadius: '5px'
-                        }}></Box>
-                        <Box sx={{
-                            border: '2px solid white',
-                            width: '40px',
-                            height: '50px',
-                            borderRadius: '5px'
-                        }}></Box>
-                        <Box sx={{
-                            border: '2px solid white',
-                            width: '40px',
-                            height: '50px',
-                            borderRadius: '5px'
-                        }}></Box>
-                    </Stack>
-                    <Box><Button variant='text'>Resend Code</Button></Box>
-                    <Stack direction='row' spacing={1} alignItems='start'>
-                        <Checkbox checked={isTermsAccepted} sx={{
-                            color: 'white',
-                            '&.Mui-checked': {
-                                color: 'white',
-                            },
-                        }} onChange={(e) => setIsTermsAccepted(!isTermsAccepted)} />
-                        <Typography variant='body1' sx={{ color: 'white' }}>By continuing, you agree that we create an account for you (unless already created), and accept our Terms and Conditions and Privacy Policy.</Typography>
-                    </Stack>
-                    <Stack direction='row' justifyContent='space-between'>
-                        <Button variant='contained'>Back</Button>
-                        <Button variant='contained'>Continue</Button>
-                    </Stack>
-                </Stack>
-            </Paper>
-        </Box>
-    );
-}
+          />
+            <Typography color='error' variant='caption'>{otpError}</Typography>
+          <Box>
+            <Button variant="text">Resend Code</Button>
+          </Box>
+          <Stack direction="row" spacing={1} alignItems="start">
+            <Checkbox
+              checked={isTermsAccepted}
+              sx={{
+                color: "white",
+                "&.Mui-checked": {
+                  color: "white",
+                },
+              }}
+              onChange={(e) => setIsTermsAccepted(!isTermsAccepted)}
+            />
+            <Typography variant="body1" sx={{ color: "white" }}>
+              By continuing, you agree that we create an account for you (unless
+              already created), and accept our Terms and Conditions and Privacy
+              Policy.
+            </Typography>
+          </Stack>
+          <Stack direction="row" justifyContent="space-between">
+            <Link to="../">
+              <Button variant="contained">Back</Button>
+            </Link>
+            <Button variant="contained" onClick={handleSubmit}>
+              Continue
+            </Button>
+          </Stack>
+        </Stack>
+      </Paper>
+    </Box>
+  );
+};
 
 export default VerifyPinForm;

@@ -110,9 +110,6 @@ a button .nav-btn-icon {
 }
 
 /* message-cards */
-.messages {
-
-}
 
 .messages .sent-message {
   background-color: var(--color-light);
@@ -135,4 +132,43 @@ a button .nav-btn-icon {
 
 .messages .sent-message .time-sent {
   color: var(--color-dark);
+}
+
+/* Input Fields */
+
+.light-input-field .MuiInputLabel-root {
+  color: var(--color-primary);
+}
+
+.light-input-field .MuiInputLabel-root.Mui-focused {
+  color: white;
+}
+
+.light-input-field .MuiInputBase-root {
+  color: white;
+  color-scheme: dark;
+}
+
+.light-input-field .MuiInputBase-root::before {
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.light-input-field .MuiInputBase-root::after {
+  border-bottom: 2px solid white;
+}
+
+.primary-focused-color .MuiInputLabel-root.Mui-focused {
+  color: var(--color-primary) !important;
+}
+
+.primary-focused-color .MuiInputBase-root::after {
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+  color: white !important;
+}
+
+.css-obd46d-MuiInputBase-root-MuiOutlinedInput-root {
+  outline: 1px solid white;
 }

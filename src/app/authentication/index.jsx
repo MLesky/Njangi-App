@@ -1,7 +1,7 @@
-import LoginPage from "./pages/signin";
-import SignUpPage from "./pages/signupRoot";
-import SignUpWithPhoneNumberForm from "./pages/signupForms/phoneNumber";
-import VerifyPinForm from "./pages/signupForms/verifyEmail";
+import LoginPage from "./pages/logIn";
+import SignUpWrapper from "./pages/signUpWrapper";
+import SignUpWithPhoneNumber from "./pages/signupForms/phoneNumber";
+import VerifyPinForm from "./pages/signupForms/verificationPin";
 import FillInInfoForm from "./pages/signupForms/infoForm";
 
-export { LoginPage, SignUpPage, SignUpWithPhoneNumberForm, VerifyPinForm, FillInInfoForm };
+export { LoginPage, SignUpWrapper, SignUpWithPhoneNumber, VerifyPinForm, FillInInfoForm };

@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom"
 import { ChatsPage, GroupsPage, ChatScreenForChat, ChatScreenForGroup } from './app/chat/index';
 import { HistoryPage, AccountsPage, SchedulePage } from './app/transact/index'
-import { FillInInfoForm, LoginPage, SignUpPage, SignUpWithPhoneNumberForm } from './app/authentication';
-import { HomePage, ErrorPage, UserProfile } from './pages/pages'
-import VerifyPinForm from './app/authentication/pages/signupForms/verifyEmail';
+import { FillInInfoForm, LoginPage, SignUpWrapper, SignUpWithPhoneNumber } from './app/authentication';
+import { HomePage, ErrorPage, UserProfile } from './pages/pages';
+import VerifyPinForm from './app/authentication/pages/signupForms/verificationPin';
 import { NavBar } from './layouts/layouts';
 
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: < NavBar />,
@@ -66,11 +66,11 @@ export const router = createBrowserRouter([
   },
   {
     path: '/signup',
-    element: <SignUpPage />,
+    element: <SignUpWrapper />,
     children: [
       {
         path: '',
-        element: <SignUpWithPhoneNumberForm />
+        element: <SignUpWithPhoneNumber />
       },
 
       {
@@ -91,4 +91,4 @@ export const router = createBrowserRouter([
   }
 ])
 
-export default { router }
+export default router;

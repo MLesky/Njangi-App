@@ -1,168 +1,208 @@
+import React from 'react';
 import { useState } from "react";
 import {
-  FacebookOutlined,
-  Google,
+    FacebookOutlined,
+    Google,
 } from "@mui/icons-material";
 import {
-  Box,
-  Stack,
-  Typography,
-  TextField,
-  Paper,
-  Button,
-  FormControl,
-  Select,
-  MenuItem,
+    Box,
+    Stack,
+    Typography,
+    TextField,
+    Paper,
+    Button,
+    MenuItem,
+    Select,
+    InputLabel,
+    FormControl,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { logo } from "../../../../assets/index";
 import { appName } from "../../../../utils/constants";
 import { useNavigate } from "react-router-dom";
 
-const SignUpWithPhoneNumberForm = () => {
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [countryCode, setCountryCode] = useState('');
-  const navigate = useNavigate();
+const zipCodes = [
+    {
+      country: "Cameroon",
+      code: "237",
+    },
+    {
+      country: "USA",
+      code: "1",
+    },
+  ];
 
-  // TODO: handle email submission
-  // TODO: fix navigate to verify-email
-  const handleSubmit = (e) => {
-    // Email validation and verification
-    navigate('verify-email');
-  };
+const SignUpWithPhoneNumber = () => {
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [zipCode, setZipCode] = useState("");
+    const [numberError, setNumberError] = useState("");
+    const [zipCodeError, setZipCodeError] = useState("");
+    const navigate = useNavigate();
 
-  return (
-    <>
-      <Box
-        width="50%"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "25px",
-        }}
-      >
-        <Stack alignItems="center" width={400}>
-          <img src={logo} alt="logo" className="logo-s1" width={100} />
-          <Typography variant="h6" align="center" color="white">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis
-            quidem temporibus magnam est voluptate obcaecati iure nihil earum
-            qui enim.
-          </Typography>
-        </Stack>
-      </Box>
+    const handleZipCodeChange = (event) => {
+        setZipCode(event.target.value);
+        if (zipCode !== "") {
+          setZipCodeError("");
+        }
+      };
+    
+      const handleNumberChange = (event) => {
+        setPhoneNumber(event.target.value);
+        if (phoneNumber !== "") {
+          setNumberError("");
+        }
+      };
+    
+    const handleSubmit = e => {
 
-      <Box
-        width="50%"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Paper className="form-card">
-          <form>
-            <Stack spacing={2} className="form-card-content">
-              <Stack
-                direction="row"
-                spacing={2}
-                alignItems="center"
-                justifyContent="center"
-              >
-                <img src={logo} className="logo-s3" />
-                <Typography
-                  className="title-text"
-                  variant="h5"
-                  color="primary"
-                  textTransform="uppercase"
-                >
-                  {appName}
-                </Typography>
-              </Stack>
-              <Typography
-                variant="h4"
-                color="white"
-                className="title-text"
-                align="center"
-              >
-                Create New Account
-              </Typography>
-              <Typography variant="body1" color="white">
-                Already have an account? <Link to="../signin">Log In</Link>
-              </Typography>
-              <Typography variant="body1" color="white">
-                Please enter the following information
-              </Typography>
-              <Stack direction='row'>
-              <FormControl variant="filled" sx={{ backgroundColor: "rgb(255, 255, 255, 0.7)" }}>
-                <Select
-                  value={countryCode}
-                  onChange={(event) => setCountryCode(event.target.value)}
-                  displayEmpty
-                  sx={{ minWidth: 100 }}
-                >
-                  <MenuItem value="" disabled>
-                    Country Code
-                  </MenuItem>
-                  <MenuItem value="1">+1</MenuItem>
-                  <MenuItem value="91">+91</MenuItem>
-                  {/* Add more country codes as needed */}
-                </Select>
-              </FormControl>
-              <TextField
-                id="userPhoneNumber"
-                type="tel"
-                label="Enter Phone Number"
-                variant="filled"
-                value={phoneNumber}
-                onChange={(event) => setPhoneNumber(event.target.value)}
+        if (zipCode === "") {
+            setZipCodeError("Select code");
+          }
+          if (phoneNumber === "") {
+            setNumberError("Please enter Phone Number");
+          }
+    
+          if (zipCode !== "" && phoneNumber !== "") {
+            navigate("verify-email");
+          }
+    }
+
+    return (
+        <>
+            <Box width="50%"
                 sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                  flexGrow: 1,
-                }}
-              />
-              </Stack>
-              <Button variant="contained" size="large" sx={{ padding: "10px" }} onClick={handleSubmit}>
-                Continue
-              </Button>
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: '25px',
+                }}>
+                <Stack alignItems="center" width={400}>
+                    <img src={logo} alt="logo" className="logo-s1" width={100} />
+                    <Typography variant="h6" align="center" color="white">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis
+                        quidem temporibus magnam est voluptate obcaecati iure nihil earum
+                        qui enim.
+                    </Typography>
+                </Stack>
+            </Box>
 
-              <Button
-                variant="outlined"
+            <Box
+                width="50%"
                 sx={{
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "10px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                 }}
-                size="large"
-              >
-                <Google sx={{ color: "red" }} />
-                <Typography sx={{ marginLeft: 1 }}>
-                  Continue with Google
-                </Typography>
-              </Button>
+            >
+                <Paper className="form-card">
+                        <Stack spacing={2} className="form-card-content">
+                            <Stack
+                                direction="row"
+                                spacing={2}
+                                alignItems="center"
+                                justifyContent="center"
+                            >
+                                <img src={logo} className="logo-s3" alt='Fund Savy logo' />
+                                <Typography
+                                    className="title-text"
+                                    variant="h5"
+                                    color="primary"
+                                    textTransform="uppercase"
+                                >
+                                    {appName}
+                                </Typography>
+                            </Stack>
+                            <Typography
+                                variant="h4"
+                                color="white"
+                                className="title-text"
+                                align="center"
+                            >
+                                Create New Account
+                            </Typography>
+                            <Typography color="white" variant="h6">
+                                Already have an account? <Link to="../login">Log In</Link>
+                            </Typography>
+                            <Typography variant='body1'
+                                color='white'
+                            >Please enter the following information</Typography>
+                            <Stack direction="row" width="100%">
+                  <FormControl
+                    helperText={zipCodeError}
+                    error={zipCodeError !== ""}
+                    required
+                    sx={{
+                      minWidth: 90,
+                      width: 130,
+                    }}
+                    className="light-input-field"
+                    variant="filled"
+                  >
+                    <InputLabel>Zip</InputLabel>
+                    <Select
+                      label="Country"
+                      value={zipCode}
+                      onChange={handleZipCodeChange}
+                    >
+                      {zipCodes.map((zipCode) => (
+                        <MenuItem value={zipCode.code}>
+                          +{zipCode.code} - {zipCode.country}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  <TextField
+                    sx={{ flexGrow: 1 }}
+                    id="phoneNumber"
+                    type="number"
+                    label="Enter Phone Number"
+                    variant="filled"
+                    className="light-input-field"
+                    value={phoneNumber}
+                    helperText={numberError}
+                    error={numberError !== ""}
+                    required
+                    onChange={handleNumberChange}
+                  />
+                </Stack>
+                            <Button variant="contained" size="large" sx={{ padding: "10px" }} onClick={handleSubmit}>
+                                continue
+                            </Button>
 
-              <Button
-                variant="outlined"
-                sx={{
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "10px",
-                }}
-                size="large"
-              >
-                <FacebookOutlined sx={{ color: "blue" }} />
-                <Typography sx={{ marginLeft: 1 }}>
-                  Continue with Facebook
-                </Typography>
-              </Button>
-            </Stack>
-          </form>
-        </Paper>
-      </Box>
-    </>
-  );
-};
+                            <Button
+                                variant="outlined"
+                                sx={{
+                                    color: "white",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    padding: "10px",
+                                }}
+                                size="large"
+                            >
+                                <Google sx={{ color: "red" }} />
+                                <Typography sx={{ marginLeft: 1 }}>Continue with Google</Typography>
+                            </Button>
 
-export default SignUpWithPhoneNumberForm;
+                            <Button
+                                variant="outlined"
+                                sx={{
+                                    color: "white",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    padding: "10px",
+                                }}
+                                size="large"
+                            >
+                                <FacebookOutlined sx={{ color: "blue" }} />
+                                <Typography sx={{ marginLeft: 1 }}>
+                                    Continue with Facebook
+                                </Typography>
+                            </Button>
+                        </Stack>
+                </Paper>
+            </Box>
+        </>
+    );
+}
+
+export default SignUpWithPhoneNumber;

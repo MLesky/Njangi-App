@@ -39,15 +39,15 @@ const zipCodes = [
 const LoginPage = () => {
   const navigate = useNavigate();
   const [loginNumber, setLoginNumber] = useState("");
-  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [zipCodeError, setZipCodeError] = useState("");
-  const [userNameError, setUserNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [numberError, setNumberError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loginWithUserName, setLoginWithUserName] = useState(false);
+  const [loginWithEmail, setLoginWithEmail] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -65,10 +65,10 @@ const LoginPage = () => {
     }
   };
 
-  const handleUserNameChange = (event) => {
-    setUserName(event.target.value);
-    if (userName !== "") {
-      setUserNameError("");
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+    if (email !== "") {
+      setEmailError("");
     }
   };
 
@@ -87,7 +87,7 @@ const LoginPage = () => {
       setPasswordError("Please enter password");
     }
 
-    if (!loginWithUserName) {
+    if (!loginWithEmail) {
       if (zipCode === "") {
         setZipCodeError("Select code");
       }
@@ -100,11 +100,13 @@ const LoginPage = () => {
         navigate("/");
       }
     } else {
-        if (userName === "") {
-            setUserNameError("Please enter username");
+        if (email === "") {
+            setEmailError("Please enter email");
+          } else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+            setEmailError("Please enter valid email");
           }
     
-          if (userName !== "" && loginPassword != "") {
+          if (email !== "" && loginPassword != "") {
             //signin with username
             navigate("/");
           }
@@ -160,22 +162,22 @@ const LoginPage = () => {
               <Typography color="white" variant="h6">
                 New here? <Link to="..\signup">Create New Account</Link>
               </Typography>
-              <Typography color='secondary' sx={{textDecoration: 'underline', cursor: 'pointer'}} onClick={() => setLoginWithUserName(!loginWithUserName)}>
-                Signup with {loginWithUserName ? 'Phone Number' : 'User Name'} instead
+              <Typography color='secondary' sx={{textDecoration: 'underline', cursor: 'pointer'}} onClick={() => setLoginWithEmail(!loginWithEmail)}>
+                Signup with {loginWithEmail ? 'Phone Number' : 'Email'} instead
               </Typography>
-              {loginWithUserName ? (
+              {loginWithEmail ? (
                 <TextField
                   sx={{ flexGrow: 1 }}
-                  id="userName"
+                  id="email"
                   type="text"
-                  label="Enter Username"
+                  label="Enter Email"
                   variant="filled"
                   className="light-input-field"
-                  value={userName}
-                  helperText={userNameError}
-                  error={userNameError !== ""}
+                  value={email}
+                  helperText={emailError}
+                  error={emailError !== ""}
                   required
-                  onChange={handleUserNameChange}
+                  onChange={handleEmailChange}
                 />
               ) : (
                 <Stack direction="row" width="100%">
@@ -184,13 +186,13 @@ const LoginPage = () => {
                     error={zipCodeError !== ""}
                     required
                     sx={{
-                      minWidth: 50,
-                      width: 90,
+                      minWidth: 90,
+                      width: 130,
                     }}
                     className="light-input-field"
                     variant="filled"
                   >
-                    <InputLabel>Zip</InputLabel>
+                    <InputLabel>Country Code</InputLabel>
                     <Select
                       label="Country"
                       value={zipCode}
@@ -206,7 +208,7 @@ const LoginPage = () => {
                   <TextField
                     sx={{ flexGrow: 1 }}
                     id="loginNumber"
-                    type="number"
+                    type="tel"
                     label="Enter Phone Number"
                     variant="filled"
                     className="light-input-field"

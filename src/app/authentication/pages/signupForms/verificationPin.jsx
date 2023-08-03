@@ -4,16 +4,19 @@ import { Box, Stack, Typography, Paper, Button, Checkbox } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { MuiOtpInput } from "mui-one-time-password-input";
 
+// TODO : remove otp code hint
 const VerifyPinForm = () => {
+  const otpCode = '123456';
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] = useState("");
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
+  const [termsMessage, setTermsMessage] = useState('');
 
   const handleOtpChange = (newValue) => {
     setOtp(newValue);
     setOtpError('');
-    if (newValue == "123456") {
+    if (newValue === otpCode && isTermsAccepted) {
         navigate("../fill-info");
       }
   };
@@ -21,9 +24,13 @@ const VerifyPinForm = () => {
   const handleSubmit = (event) => {
     if(otp === ''){
         setOtpError("Please enter the Code Sent")
-    } else if (otp !== "123456") {
+    } else if (otp !== otpCode) {
         setOtpError("Wrong OTP (123456)");
-    } 
+    } else if (otp === otpCode && !isTermsAccepted) {
+        setTermsMessage('Please Accept The Terms');
+    } else if (otp === otpCode && isTermsAccepted) {
+        navigate("../fill-info");
+    }
   };
 
   const validateChar = (value, index) => {
@@ -78,7 +85,7 @@ const VerifyPinForm = () => {
                   color: "white",
                 },
               }}
-              onChange={(e) => setIsTermsAccepted(!isTermsAccepted)}
+              onChange={(e) => {setIsTermsAccepted(!isTermsAccepted);}}
             />
             <Typography variant="body1" sx={{ color: "white" }}>
               By continuing, you agree that we create an account for you (unless
@@ -86,6 +93,7 @@ const VerifyPinForm = () => {
               Policy.
             </Typography>
           </Stack>
+          <Typography color='error' variant='caption'>{termsMessage}</Typography>
           <Stack direction="row" justifyContent="space-between">
             <Link to="../">
               <Button variant="contained">Back</Button>

@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { logo } from "../../../../assets/index";
-import { appName } from "../../../../utils/constants";
+import { appName, routeNames } from "../../../../utils";
 import { useNavigate } from "react-router-dom";
 
 const zipCodes = [
@@ -41,6 +41,7 @@ const SignUpWithPhoneNumber = () => {
 
     const handleZipCodeChange = (event) => {
         setZipCode(event.target.value);
+        console.log(zipCode)
         if (zipCode !== "") {
           setZipCodeError("");
         }
@@ -63,7 +64,7 @@ const SignUpWithPhoneNumber = () => {
           }
     
           if (zipCode !== "" && phoneNumber !== "") {
-            navigate("verify-email");
+            navigate(routeNames.verifyCode);
           }
     }
 
@@ -121,7 +122,7 @@ const SignUpWithPhoneNumber = () => {
                                 Create New Account
                             </Typography>
                             <Typography color="white" variant="h6">
-                                Already have an account? <Link to="../login">Log In</Link>
+                                Already have an account? <Link to={routeNames.login}>Log In</Link>
                             </Typography>
                             <Typography variant='body1'
                                 color='white'
@@ -146,7 +147,7 @@ const SignUpWithPhoneNumber = () => {
                     >
                       {zipCodes.map((zipCode) => (
                         <MenuItem value={zipCode.code}>
-                          +{zipCode.code} - {zipCode.country}
+                          +{zipCode.code}
                         </MenuItem>
                       ))}
                     </Select>

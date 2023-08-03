@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Box, Stack, Typography, Paper, Button, Checkbox } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { MuiOtpInput } from "mui-one-time-password-input";
+import { routeNames } from "../../../../utils";
 
 // TODO : remove otp code hint
 const VerifyPinForm = () => {
@@ -17,7 +18,7 @@ const VerifyPinForm = () => {
     setOtp(newValue);
     setOtpError('');
     if (newValue === otpCode && isTermsAccepted) {
-        navigate("../fill-info");
+        navigate('../' + routeNames.fillInfo);
       }
   };
 
@@ -29,7 +30,7 @@ const VerifyPinForm = () => {
     } else if (otp === otpCode && !isTermsAccepted) {
         setTermsMessage('Please Accept The Terms');
     } else if (otp === otpCode && isTermsAccepted) {
-        navigate("../fill-info");
+        navigate('../' + routeNames.fillInfo);
     }
   };
 

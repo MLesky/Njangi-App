@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { logo } from "../../../../assets";
-import { appName } from "../../../../utils/constants";
+import { appName, routeNames } from "../../../../utils";
 
 // TODO: Stylize Input fields
 const FillInInfoForm = () => {
@@ -32,7 +32,7 @@ const FillInInfoForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      navigate("/");
+      navigate(routeNames.home);
     }
   };
 

@@ -23,7 +23,7 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { backgroundImageWoman, logo } from "../../../assets/index";
-import { appName } from "../../../utils/constants";
+import { appName, routeNames } from "../../../utils";
 
 const zipCodes = [
   {
@@ -95,20 +95,19 @@ const LoginPage = () => {
         setNumberError("Please enter Phone Number");
       }
 
-      if (zipCode !== "" && loginNumber !== "" && loginPassword != "") {
+      if (zipCode !== "" && loginNumber !== "" && loginPassword !== "") {
         //signin with phone number
-        navigate("/");
+        console.log('click')
+        navigate(`../${routeNames.home}`);
       }
     } else {
         if (email === "") {
             setEmailError("Please enter email");
           } else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
             setEmailError("Please enter valid email");
-          }
-    
-          if (email !== "" && loginPassword != "") {
+          } else if (email !== "" && loginPassword !== "") {
             //signin with username
-            navigate("/");
+            navigate(routeNames.home);
           }
     }
   };
@@ -141,7 +140,7 @@ const LoginPage = () => {
                 alignItems="center"
                 justifyContent="center"
               >
-                <img src={logo} className="logo-s3" />
+                <img src={logo} className="logo-s3" alt="Fund Savy logo"/>
                 <Typography
                   className="title-text"
                   variant="h5"
@@ -160,7 +159,7 @@ const LoginPage = () => {
                 Log Into {appName}
               </Typography>
               <Typography color="white" variant="h6">
-                New here? <Link to="..\signup">Create New Account</Link>
+                New here? <Link to={routeNames.signUp}>Create New Account</Link>
               </Typography>
               <Typography color='secondary' sx={{textDecoration: 'underline', cursor: 'pointer'}} onClick={() => setLoginWithEmail(!loginWithEmail)}>
                 Signup with {loginWithEmail ? 'Phone Number' : 'Email'} instead
@@ -200,7 +199,7 @@ const LoginPage = () => {
                     >
                       {zipCodes.map((zipCode) => (
                         <MenuItem value={zipCode.code}>
-                          +{zipCode.code} - {zipCode.country}
+                          +{zipCode.code}
                         </MenuItem>
                       ))}
                     </Select>

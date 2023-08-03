@@ -1,5 +1,5 @@
 import { Box, Button, Stack, Typography, Paper, IconButton, InputBase, Badge, Avatar } from "@mui/material";
-import { appName } from "../utils/constants";
+import { appName, routeNames } from "../utils";
 import { logo } from "../assets";
 import { Call, Notifications, Chat, Group, History, Home, Person, Schedule, Search, Wallet } from "@mui/icons-material";
 import { Link, NavLink, Outlet } from "react-router-dom";
@@ -22,22 +22,22 @@ const NavBar = () => {
       </Box>
 
       <Stack direction="row" spacing='5px' alignItems='center'>
-        <NavLink to="/">
+        <NavLink to={routeNames.home}>
         <Button size="small" startIcon={<Home className="nav-btn-icon"/>}>Home</Button>
         </NavLink>
-        <NavLink to="/groups">
+        <NavLink to={'/' + routeNames.groups}>
         <Button size="small" startIcon={<Group className="nav-btn-icon"/>}>Groups</Button>
         </NavLink>
-        <NavLink to="/chats">
+        <NavLink to={'/' + routeNames.chats}>
         <Button size="small" startIcon={<Chat className="nav-btn-icon"/>}>Chats</Button>
         </NavLink>
-        <NavLink to="/history">
+        <NavLink to={'/' + routeNames.history}>
         <Button size="small" startIcon={<History className="nav-btn-icon"/>}>History</Button>
         </NavLink>
-        <NavLink to="/schedules">
+        <NavLink to={'/' + routeNames.schedules}>
         <Button size="small" startIcon={<Schedule className="nav-btn-icon"/>}>Schedules</Button>
         </NavLink>
-        <NavLink to="/accounts">
+        <NavLink to={'/' + routeNames.accounts}>
         <Button size="small" startIcon={<Wallet className="nav-btn-icon"/>}>Accounts</Button>
         </NavLink>
       </Stack>
@@ -75,7 +75,7 @@ const NavBar = () => {
             <Notifications />
           </Badge>
         </IconButton>
-        <Link to="..\profile">
+        <Link to={'/' + routeNames.profile}>
         <IconButton type="button" color="primary">
           <Avatar sx={{height: 30, width: 30}}/>
         </IconButton>

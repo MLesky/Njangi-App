@@ -5,6 +5,7 @@ import { FillInInfoForm, LoginPage, SignUpWrapper, SignUpWithPhoneNumber } from 
 import { HomePage, ErrorPage, UserProfile } from './pages/pages';
 import VerifyPinForm from './app/authentication/pages/signupForms/verificationPin';
 import { NavBar } from './layouts/layouts';
+import { routeNames } from "./utils";
 
 const router = createBrowserRouter([
   {
@@ -12,12 +13,12 @@ const router = createBrowserRouter([
     element: < NavBar />,
     children: [
       {
-        path: '',
+        path: routeNames.home,
         element: <HomePage />
       },
 
       {
-        path: 'groups',
+        path: routeNames.groups,
         element: <GroupsPage />,
         children: [
           {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: 'chats',
+        path: routeNames.chats,
         element: <ChatsPage />,
         children: [
           {
@@ -39,33 +40,33 @@ const router = createBrowserRouter([
       },
 
       {
-        path: 'history',
+        path: routeNames.history,
         element: <HistoryPage />
       },
 
       {
-        path: 'accounts',
+        path: routeNames.accounts,
         element: <AccountsPage />
       },
 
       {
-        path: 'schedules',
+        path: routeNames.schedules,
         element: <SchedulePage />
         },
 
         {
-          path: 'profile',
+          path: routeNames.profile,
           elements: <UserProfile />
       }
     ]
   },
 
   {
-    path: '/login',
+    path: routeNames.login,
     element: <LoginPage />
   },
   {
-    path: '/signup',
+    path: routeNames.signUp,
     element: <SignUpWrapper />,
     children: [
       {
@@ -74,19 +75,19 @@ const router = createBrowserRouter([
       },
 
       {
-        path: 'verify-email',
+        path: routeNames.verifyCode,
         element: <VerifyPinForm />
       },
 
       {
-        path: 'fill-info',
+        path: routeNames.fillInfo,
         element: <FillInInfoForm />
       }
 
     ]
   },
   {
-    path: '/*',
+    path: routeNames.errorPage,
     element: <ErrorPage />
   }
 ])

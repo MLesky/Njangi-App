@@ -15,12 +15,18 @@ import {
   Avatar,
 } from "@mui/material";
 import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { logo } from "../../../../assets";
 import { appName } from "../../../../utils/constants";
 
 // TODO: Stylize Input fields
 const FillInInfoForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
+  const handleSubmit = e => {
+    navigate('/');
+  };
 
   return (
     <Box
@@ -37,7 +43,7 @@ const FillInInfoForm = () => {
         justifyContent="start"
         sx={{ padding: "20px 60px" }}
       >
-        <form>
+        <form onSubmit={handleSubmit}>
           <Stack spacing={1}>
             <Stack
               direction="row"
@@ -70,40 +76,36 @@ const FillInInfoForm = () => {
               <TextField
                 type="text"
                 id="first-name"
-                label="Filled"
+                label="First Name"
                 variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
+                className="light-input-field"
               />
 
               <TextField
                 type="text"
                 id="second-name"
-                label="Filled"
+                label="Second Name"
                 variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
+                className="light-input-field"
               />
             </Stack>
 
             <Stack direction="row" spacing={2} justifyContent="space-between">
-              <FormControl sx={{
-                width: '50%',
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}>
-                <InputLabel>Date Of Birth</InputLabel>
-              <Input
+              <TextField
                 type="date"
+                label="Date Of Birth"
+                variant="filled"
+                className="light-input-field primary-focused-color"
+                value=""
+                focused
               />
-              </FormControl>
 
               <FormControl
                 sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
                   width: "50%",
                 }}
+                className="light-input-field"
+                variant="filled"
               >
                 <InputLabel id="userGender">Gender</InputLabel>
                 <Select labelId="userGender" label="Gender">
@@ -116,11 +118,11 @@ const FillInInfoForm = () => {
 
             <Stack direction="row" spacing={2} justifyContent="space-between">
               <FormControl
-                variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
+                 sx={{
                   width: "50%",
                 }}
+                className="light-input-field"
+                variant="filled"
               >
                 <InputLabel>Country</InputLabel>
                 <Select label="Country">
@@ -134,9 +136,7 @@ const FillInInfoForm = () => {
                 id="phoneNumber"
                 label="Telephone Number"
                 variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
+                className="light-input-field"
               />
             </Stack>
 
@@ -145,18 +145,14 @@ const FillInInfoForm = () => {
                 id="city"
                 label="City"
                 variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
+                className="light-input-field"
               />
               <TextField
                 type="address"
                 id="Address"
                 label="Address"
                 variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
+                className="light-input-field"
               />
             </Stack>
 
@@ -171,18 +167,14 @@ const FillInInfoForm = () => {
                 id="password"
                 label="Password"
                 variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
+                className="light-input-field"
               />
               <TextField
                 type={showPassword ? "text" : "password"}
                 id="password"
                 label="Confirm Password"
                 variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
+                className="light-input-field"
               />
             </Stack>
 
@@ -208,10 +200,11 @@ const FillInInfoForm = () => {
             </Box>
 
             <Stack direction="row" justifyContent="space-between" marginTop={2}>
+              <Link to="../verify-email">
               <Button variant="contained">Back</Button>
-              <Button variant="contained">Sign Up</Button>
+              </Link>
+              <Button type="submit" variant="contained">Sign Up</Button>
             </Stack>
-
           </Stack>
         </form>
       </Paper>

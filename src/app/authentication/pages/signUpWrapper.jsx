@@ -15,6 +15,7 @@ const SignUpWrapper = () => {
                 backgroundImage: `url(${backgroundImageEngineers})`,
                 display: "flex",
                 justifyContent: "center",
+                overflowY: 'auto',
             }}
         >
             <Outlet />

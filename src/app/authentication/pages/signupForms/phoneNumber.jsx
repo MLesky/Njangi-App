@@ -15,6 +15,7 @@ import {
     Select,
     InputLabel,
     FormControl,
+    Grid,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { logo } from "../../../../assets/index";
@@ -69,8 +70,14 @@ const SignUpWithPhoneNumber = () => {
     }
 
     return (
-        <>
-            <Box width="50%"
+        <Grid 
+          container 
+          spacing={2}
+          justifyContent='center'
+          alignItems='center'
+          >
+          <Grid item xs={12} md={6}>
+          <Box
                 sx={{
                     display: "flex",
                     justifyContent: "center",
@@ -86,9 +93,10 @@ const SignUpWithPhoneNumber = () => {
                     </Typography>
                 </Stack>
             </Box>
+          </Grid>
 
+          <Grid item xs={12} md={6} sx={{ paddingBottom: {xs:5, md:0}}}>
             <Box
-                width="50%"
                 sx={{
                     display: "flex",
                     justifyContent: "center",
@@ -139,7 +147,7 @@ const SignUpWithPhoneNumber = () => {
                     className="light-input-field"
                     variant="filled"
                   >
-                    <InputLabel>Zip</InputLabel>
+                    <InputLabel>Country Code</InputLabel>
                     <Select
                       label="Country"
                       value={zipCode}
@@ -202,7 +210,9 @@ const SignUpWithPhoneNumber = () => {
                         </Stack>
                 </Paper>
             </Box>
-        </>
+          </Grid>
+
+        </Grid>
     );
 }
 

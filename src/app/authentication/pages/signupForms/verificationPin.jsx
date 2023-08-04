@@ -42,11 +42,11 @@ const VerifyPinForm = () => {
 
   return (
     <Box
-      width="50%"
       sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        width: {xs: '100%', md: '50%'}
       }}
     >
       <Paper
@@ -62,7 +62,14 @@ const VerifyPinForm = () => {
             Please type in the code we just sent to +237679682626
           </Typography>
           <MuiOtpInput
-            sx={{maxWidth: 400}}
+            sx={{
+              maxWidth: 400,
+              gap: {
+                xs: 1,
+                md: 2,
+              },
+              border: {xs: 'none'}
+            }}
             value={otp}
             length={6}
             onChange={handleOtpChange}

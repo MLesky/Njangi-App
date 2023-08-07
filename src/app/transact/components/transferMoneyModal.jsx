@@ -5,13 +5,8 @@ import {
   Stack,
   Avatar,
   Typography,
-  ListItemIcon,
-  InputLabel,
-  Select,
   Chip,
-  ListItemText,
   Button,
-  ListItem,
 } from "@mui/material";
 import { useState } from "react";
 import { AlertPopper, AutoCompleteInput } from "../../../components";
@@ -149,6 +144,7 @@ const TransferMoneyModal = ({ isOpen, handleClose, title }) => {
             onChange={setReasonForTransfer}
             value={reasonForTransfer}
             placeholder='Enter reason for transfer'
+            variant='filled'
           />
           <Stack direction="row" spacing={2} justifyContent="space-between">
             <Button

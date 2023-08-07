@@ -11,6 +11,8 @@ const AutoCompleteInput = ({
   error,
   helperText,
   placeholder,
+  variant,
+  type
 }) => {
   const handleInputChange = (event, newValue) => {
     onChange(newValue);
@@ -28,6 +30,8 @@ const AutoCompleteInput = ({
             label={placeholder}
             error={error}
             helperText={helperText}
+            variant={variant}
+            type={type}
             fullWidth
           />
         )}

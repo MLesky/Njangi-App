@@ -171,3 +171,47 @@ a button .nav-btn-icon {
 .css-obd46d-MuiInputBase-root-MuiOutlinedInput-root {
   outline: 1px solid white;
 }
+
+/* button Card */
+.button-card {
+  width: 150px;
+  height: 100px;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  background-blend-mode: darken;
+  transition: transform 0.5s;
+  cursor: pointer;
+}
+
+.button-card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 3px 2px rgb(168, 168, 168);
+}
+
+.button-card .button-card-text {
+  font-weight: 400;
+  color: white;
+  font-size: 16px;
+  padding: 0 5px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.button-card .button-card-icon {
+  color: white;
+  font-size: 26px;
+}
+
+/* modals */
+.fs-modal .modal-body {
+  background-color: white;
+  padding: 10px 17px;
+  width: 300px;
+  height: fit-content;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  outline: none;
+  border-radius: 10px;
+}

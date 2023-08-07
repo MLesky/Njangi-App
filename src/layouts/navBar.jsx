@@ -6,7 +6,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <>
+    <Stack direction='column' height='100vh'>
       <Paper square={true}>
         <Stack height='50px' direction="row" justifyContent="space-between">
           <Box
@@ -87,12 +87,14 @@ const NavBar = () => {
       <Paper sx={{
         maxWidth: '1080px',
         margin: '10px auto',
-        height: 'calc(100vh - (50px + 20px))',
-        maxHeight: '700px'
+        width: '100%',
+        maxHeight: '700px',
+        flexGrow: 1,
+        overflow: 'auto',
       }}>
         <Outlet />
       </Paper>
-    </>
+    </Stack>
   );
 };
 

@@ -4,7 +4,7 @@ import { HistoryPage, AccountsPage, SchedulePage } from './app/transact/index'
 import { FillInInfoForm, LoginPage, SignUpWrapper, SignUpWithPhoneNumber } from './app/authentication';
 import { HomePage, ErrorPage, UserProfile } from './pages/pages';
 import VerifyPinForm from './app/authentication/pages/signupForms/verificationPin';
-import { NavBar } from './layouts/layouts';
+import { NavBar } from './layouts';
 import { routeNames } from "./utils";
 
 const router = createBrowserRouter([

@@ -1,6 +1,6 @@
 import { Modal, TextField, Stack, Typography, Button, Box } from "@mui/material";
 import { useState } from "react";
-import AlertPopper from "./alert";
+import AlertPopper from "../../../components/alertPopper";
 
 const RequestToJoinModal = ({ isOpen, handleClose, title }) => {
 

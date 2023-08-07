@@ -1,6 +1,6 @@
 import { Modal, TextField, Box, Stack, List, Typography, FormControl, InputLabel, Select, MenuItem, ListItemText, Button } from "@mui/material";
 import { useState } from "react";
-import PicturePicker from "./picturePicker";
+import PicturePicker from "../../../components/picturePicker";
 
 const CreateGroupModal = ({isOpen, handleClose, title}) => {
     

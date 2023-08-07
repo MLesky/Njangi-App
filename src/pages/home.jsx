@@ -1,9 +1,10 @@
-import { AccountBalanceWallet, AccountCircle, Add, AddCard, Diversity2, ForwardToInbox, GroupAdd, Groups2, History, Mail,  ScheduleSend, ScheduleSharp, Send, Settings, SimCardDownload, TransitEnterexit, } from "@mui/icons-material";
+import { AccountBalanceWallet, AccountCircle, AddCard, Diversity2, ForwardToInbox, GroupAdd, Groups2, History, Mail,  ScheduleSend, ScheduleSharp, Send, Settings, SimCardDownload, TransitEnterexit, } from "@mui/icons-material";
 import { Badge, Typography, Stack, Grid, Card, Box, Divider } from "@mui/material";
 import { useState } from "react";
-import { CreateGroupModal, RequestToJoinModal } from "../components";
+import { CreateGroupModal, RequestToJoinModal } from "../app/chat";
 import { routeNames } from "../utils";
 import { Link } from "react-router-dom";
+import { TransferMoneyModal } from "../app/transact";
 
 const HomePage = () => {
     const [createNewNjangi, setCreateNewNjangi] = useState(false);
@@ -12,6 +13,12 @@ const HomePage = () => {
     const [requestToJoinNjangi, setRequestToJoinNjangi] = useState(false);
     const [requestToJoinFund, setRequestToJoinFund] = useState(false);
 
+    const [transferMoney, setTransferMoney] = useState(false);
+    const [requestScheduleTransfer, setRequestScheduleTransfer] = useState(false);
+    const [buyAirtime, setBuyAirtime] = useState(false);
+    
+    const [addAccount, setAddAccount] = useState(false);
+    
     return (
         <div style={{
             display: 'flex',
@@ -33,7 +40,7 @@ const HomePage = () => {
                                     <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                         <Badge badgeContent={4} color="primary">
                                             <Groups2 className='button-card-icon' /> </Badge>
-                                        <Typography className='button-card-text'>All Njangi Groups</Typography>
+                                        <Typography className='button-card-text'>All Groups</Typography>
                                     </Stack>
                                 </Card>
                             </Link>
@@ -68,18 +75,9 @@ const HomePage = () => {
                             <Divider variant='horizontal' sx={{ flexGrow: 1 }} />
                         </Stack>
                         <Stack direction='row' flexWrap='wrap' justifyContent='center' alignItems='center' width='100%' useFlexGap spacing={{ xs: 2, md: 3 }}>
-                            <Link to={routeNames.groups}>
-                                <Card className='button-card'>
-                                    <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
-                                        <Badge badgeContent={2} color="primary">
-                                            <Diversity2 className='button-card-icon' /> </Badge>
-                                        <Typography className='button-card-text'>Fund Groups</Typography>
-                                    </Stack>
-                                </Card>
-                            </Link>
                             <Card className='button-card' onClick={() => setCreateNewFund(true)}>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
-                                    <Add className='button-card-icon' />
+                                    <Diversity2 className='button-card-icon' />
                                     <Typography className='button-card-text'>Create New Fund Group</Typography>
                                 </Stack>
                             </Card>
@@ -108,7 +106,7 @@ const HomePage = () => {
                             <Divider variant='horizontal' sx={{ flexGrow: 1 }} />
                         </Stack>
                         <Stack direction='row' flexWrap='wrap' justifyContent='center' alignItems='center' width='100%' useFlexGap spacing={{ xs: 2, md: 3 }}>
-                            <Card className='button-card'>
+                            <Card className='button-card' onClick={() => setTransferMoney(true)}>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <Send className='button-card-icon' />
                                     <Typography className='button-card-text'>Transfer Money</Typography>
@@ -186,6 +184,8 @@ const HomePage = () => {
             
             <RequestToJoinModal isOpen={requestToJoinNjangi} handleClose={() => setRequestToJoinNjangi(false)} title='Join A Njangi Group'/>
             <RequestToJoinModal isOpen={requestToJoinFund} handleClose={() => setRequestToJoinFund(false)} title='Join A Fund'/>
+        
+            <TransferMoneyModal isOpen={transferMoney} handleClose={() => setTransferMoney(false)} title='Transfer Monery'/>
         </div>
     );
 }

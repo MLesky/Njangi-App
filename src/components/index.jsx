@@ -1,11 +1,9 @@
 import PicturePicker from "./picturePicker";
-import CreateGroupModal from "./createGroupModal";
-import RequestToJoinModal from "./requestToJoinModal";
-import AlertPopper from "./alert";
+import AlertPopper from "./alertPopper";
+import AutoCompleteInput from "./autoCompleteInput";
 
 export {
     PicturePicker,
-    CreateGroupModal,
-    RequestToJoinModal,
     AlertPopper,
+    AutoCompleteInput,
 }

@@ -18,7 +18,7 @@ const AlertPopper = ({showAlert, handleClose, children, alertType}) => {
                         <Close fontSize='inherit' />
                     </IconButton>
                 }
-                sx={{ mb: 2 }}
+                sx={{ mb: 2, minWidth: '250px' }}
             >
                 {children}
             </Alert>

@@ -2,7 +2,7 @@ import { Modal, TextField, Box, Stack, List, Typography, FormControl, InputLabel
 import { useState } from "react";
 import PicturePicker from "./picturePicker";
 
-const CreateGroupModal = ({isOpen, handleClose}) => {
+const CreateGroupModal = ({isOpen, handleClose, title}) => {
     
     const [groupPhoto, setGroupPhoto] = useState('');
     const [groupName, setGroupName] = useState('');
@@ -11,7 +11,6 @@ const CreateGroupModal = ({isOpen, handleClose}) => {
 
     const [groupPhotoError, setGroupPhotoError] = useState('');
     const [groupNameError, setGroupNameError] = useState('');
-    const [groupDescriptionError, setGroupDescriptionError] = useState('');
     const [groupAccountError, setGroupAccountError] = useState('');
 
     const handleSubmit = e => {
@@ -46,6 +45,7 @@ const CreateGroupModal = ({isOpen, handleClose}) => {
 >
   <Box variant='form' noValidate className='modal-body'>
   <Stack spacing={2}>
+    <Typography color='primary' variant='h6' fontWeight='bold' textAlign='center'>{title}</Typography>
     <Box>
     <PicturePicker photoError={groupPhotoError} selectedPhoto={groupPhoto} setPhotoError={setGroupPhotoError} setSelectedPhoto={setGroupPhoto}/>
     <Typography textAlign='center'>Select Group Photo</Typography>
@@ -69,8 +69,6 @@ const CreateGroupModal = ({isOpen, handleClose}) => {
         value={groupDescription}
         onChange={(e) => setGroupDescription(e.target.value)}
         placeholder='Group description...'
-        error={groupDescriptionError !== ''}
-        hintText={groupDescriptionError}
         multiline
         maxRows={4}
     />

@@ -12,7 +12,8 @@ const AutoCompleteInput = ({
   helperText,
   placeholder,
   variant,
-  type
+  type,
+  canInsert,
 }) => {
   const handleInputChange = (event, newValue) => {
     onChange(newValue);
@@ -21,6 +22,7 @@ const AutoCompleteInput = ({
   return (
     <Box>
       <Autocomplete
+        freeSolo={canInsert}
         options={options}
         value={value}
         onChange={handleInputChange}
@@ -47,6 +49,7 @@ AutoCompleteInput.propTypes = {
   error: PropTypes.bool,
   helperText: PropTypes.string,
   placeholder: PropTypes.string,
+  canInsert: PropTypes.bool,
 };
 
 export default AutoCompleteInput;

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CreateGroupModal, RequestToJoinModal } from "../app/chat";
 import { routeNames } from "../utils";
 import { Link } from "react-router-dom";
-import { TransferMoneyModal } from "../app/transact";
+import { AddAccountModal, BuyAirTimeModal, ScheduleModal, TransferMoneyModal } from "../app/transact";
 
 const HomePage = () => {
     const [createNewNjangi, setCreateNewNjangi] = useState(false);
@@ -112,18 +112,19 @@ const HomePage = () => {
                                     <Typography className='button-card-text'>Transfer Money</Typography>
                                 </Stack>
                             </Card>
-                            <Card className='button-card'>
+                            <Card className='button-card' onClick={() => setRequestScheduleTransfer(true)}>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <ScheduleSend className='button-card-icon' />
                                     <Typography className='button-card-text'>Schedule Transfer</Typography>
                                 </Stack>
                             </Card>
-                            <Card className='button-card'>
+                            <Card className='button-card'  onClick={() => setBuyAirtime(true)}>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <SimCardDownload className='button-card-icon' />
                                     <Typography className='button-card-text'>Buy Airtime</Typography>
                                 </Stack>
                             </Card>
+                            <Link to={routeNames.schedules}>
                             <Card className='button-card'>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <Badge badgeContent={9} color="success">
@@ -131,12 +132,15 @@ const HomePage = () => {
                                     <Typography className='button-card-text'>All Schedules</Typography>
                                 </Stack>
                             </Card>
+                            </Link>
+                            <Link to={routeNames.history}>
                             <Card className='button-card'>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <History className='button-card-icon' />
                                     <Typography className='button-card-text'>Transfer History</Typography>
                                 </Stack>
                             </Card>
+                            </Link>
                         </Stack>
                     </Box>
                 </Grid>
@@ -149,6 +153,7 @@ const HomePage = () => {
                             <Divider variant='horizontal' sx={{ flexGrow: 1 }} />
                         </Stack>
                         <Stack direction='row' flexWrap='wrap' justifyContent='center' alignItems='center' width='100%' useFlexGap spacing={{ xs: 2, md: 3 }}>
+                            <Link to={routeNames.accounts}>
                             <Card className='button-card'>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <Badge badgeContent={3} color="success">
@@ -156,24 +161,29 @@ const HomePage = () => {
                                     <Typography className='button-card-text'>Money Accounts</Typography>
                                 </Stack>
                             </Card>
-                            <Card className='button-card'>
+                            </Link>
+                            <Card className='button-card' onClick={() => setAddAccount(true)}>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <AddCard className='button-card-icon' />
                                     <Typography className='button-card-text'>Add Account</Typography>
                                 </Stack>
                             </Card>
-                            <Card className='button-card'>
+                           <Link to={routeNames.profile}>
+                           <Card className='button-card'>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <AccountCircle className='button-card-icon' />
                                     <Typography className='button-card-text'>My Profile</Typography>
                                 </Stack>
                             </Card>
+                           </Link>
+                            <Link to={routeNames.settings}>
                             <Card className='button-card'>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <Settings className='button-card-icon' />
                                     <Typography className='button-card-text'>Settings</Typography>
                                 </Stack>
                             </Card>
+                            </Link>
                         </Stack>
                     </Box>
                 </Grid>
@@ -185,7 +195,13 @@ const HomePage = () => {
             <RequestToJoinModal isOpen={requestToJoinNjangi} handleClose={() => setRequestToJoinNjangi(false)} title='Join A Njangi Group'/>
             <RequestToJoinModal isOpen={requestToJoinFund} handleClose={() => setRequestToJoinFund(false)} title='Join A Fund'/>
         
-            <TransferMoneyModal isOpen={transferMoney} handleClose={() => setTransferMoney(false)} title='Transfer Monery'/>
+            <TransferMoneyModal isOpen={transferMoney} handleClose={() => setTransferMoney(false)} title='Transfer Money'/>
+
+            <BuyAirTimeModal isOpen={buyAirtime} handleClose={() => setBuyAirtime(false)} title='Buy Airtime'/>
+
+            <ScheduleModal isOpen={requestScheduleTransfer} handleClose={() => setRequestScheduleTransfer(false)} title='Schedule a Transfer'/>
+
+            <AddAccountModal isOpen={addAccount} handleClose={() => setAddAccount(false)} title='Add a transaction account'/>
         </div>
     );
 }

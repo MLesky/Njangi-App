@@ -140,6 +140,7 @@ const TransferMoneyModal = ({ isOpen, handleClose, title }) => {
             helperText={amountError}
           />
           <AutoCompleteInput 
+            canInsert
             options={['Gift', 'Allowance', 'Debt', 'Njangi', 'Fund', 'Fuel', 'Other']}
             onChange={setReasonForTransfer}
             value={reasonForTransfer}

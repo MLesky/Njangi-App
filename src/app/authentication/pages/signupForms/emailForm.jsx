@@ -89,8 +89,8 @@ const SignUpWithEmailForm = () => {
                             >Please enter the following information</Typography>
                             <TextField
                                 id="userEmail"
-                                type="email"
-                                label="Enter Email Address"
+                                type="text"
+                                label="Enter Your Phone Number"
                                 variant="filled"
                                 value={email}
                                 onChange={(event) => setEmail(event.target.value)}

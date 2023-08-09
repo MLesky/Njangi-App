@@ -4,6 +4,7 @@ import { Box, Stack, Typography, Paper, Button, Checkbox } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { routeNames } from "../../../../utils";
+import { useUserAuth } from "../../../../context/UserAuthContext"
 
 // TODO : remove otp code hint
 const VerifyPinForm = () => {
@@ -13,6 +14,7 @@ const VerifyPinForm = () => {
   const [otpError, setOtpError] = useState("");
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
   const [termsMessage, setTermsMessage] = useState('');
+  const [error, setError] = useState("");
 
   const handleOtpChange = (newValue) => {
     setOtp(newValue);
@@ -22,16 +24,23 @@ const VerifyPinForm = () => {
       }
   };
 
-  const handleSubmit = (event) => {
-    if(otp === ''){
-        setOtpError("Please enter the Code Sent")
-    } else if (otp !== otpCode) {
-        setOtpError("Wrong OTP (123456)");
-    } else if (otp === otpCode && !isTermsAccepted) {
-        setTermsMessage('Please Accept The Terms');
-    } else if (otp === otpCode && isTermsAccepted) {
-        navigate('../' + routeNames.fillInfo);
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      setError("");
+      if(otp === ""){
+          setOtpError("Please enter the Code Sent")
+      } else if (otp !== otpCode) {
+          setOtpError("Wrong OTP (123456)");
+      } else if (otp === otpCode && !isTermsAccepted) {
+          setTermsMessage('Please Accept The Terms');
+      } else if (otp === otpCode && isTermsAccepted) {
+          navigate('../' + routeNames.fillInfo);
+      }
+    } catch (err) {
+      setError("An error occured:", err)
     }
+    
   };
 
   const validateChar = (value, index) => {

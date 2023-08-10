@@ -1,8 +1,8 @@
 import { ThemeProvider } from '@emotion/react';
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
-import { lightTheme } from './theme/theme';
-import { router } from "./routes"
+import { lightTheme } from './theme';
+import router from "./routes"
 
 function App() {
   return (

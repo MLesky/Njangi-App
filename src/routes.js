@@ -1,90 +1,95 @@
 import { createBrowserRouter } from "react-router-dom"
-
 import { ChatsPage, GroupsPage, ChatScreenForChat, ChatScreenForGroup } from './app/chat/index';
 import { HistoryPage, AccountsPage, SchedulePage } from './app/transact/index'
-import { FillInInfoForm, LoginPage, SignUpPage, SignUpWithEmailForm } from './app/authentication';
-import { HomePage, ErrorPage } from './pages/pages'
-import VerifyPinForm from './app/authentication/pages/signupForms/verifyEmail';
-import { NavBar } from './layouts/layouts';
+import { FillInInfoForm, LoginPage, SignUpWrapper, SignUpWithPhoneNumber } from './app/authentication';
+import { HomePage, ErrorPage, UserProfile } from './pages/pages';
+import VerifyPinForm from './app/authentication/pages/signupForms/verificationPin';
+import { NavBar } from './layouts';
+import { routeNames } from "./utils";
 
-export const router = createBrowserRouter([
-    {
-      path: "/",
-      element: < NavBar/>,
-      children: [
-        {
-          path: '',
-          element: <HomePage />
-        },
-  
-        {
-          path: 'groups',
-          element: <GroupsPage />,
-          children: [
-            {
-              path: ':ID',
-              element: <ChatScreenForGroup />
-            }
-          ]
-        },
-  
-        {
-          path: 'chats',
-          element: <ChatsPage />,
-          children: [
-            {
-              path: ':ID',
-              element: <ChatScreenForChat />
-            }
-          ]
-        },
-  
-        {
-          path: 'history',
-          element: <HistoryPage />
-        },
-  
-        {
-          path: 'accounts',
-          element: <AccountsPage />
-        },
-  
-        {
-          path: 'schedules',
-          element: <SchedulePage />
-        }
-      ]
-    },
-    
-    {
-      path: '/signin',
-      element: <LoginPage />
-    },
-    {
-      path: '/signup',
-      element: <SignUpPage />,
-      children: [
-        {
-          path: '',
-          element: <SignUpWithEmailForm />
-        },
-  
-         {
-          path: 'verify-email',
-          element: <VerifyPinForm />
-         },
-  
-         {
-          path: 'fill-info',
-          element: <FillInInfoForm />
-         }
-  
-      ]
-    },
-    {
-      path: '/*',
-      element: <ErrorPage />
-    }
-  ])
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: < NavBar />,
+    children: [
+      {
+        path: routeNames.home,
+        element: <HomePage />
+      },
 
-  export default { router }
+      {
+        path: routeNames.groups,
+        element: <GroupsPage />,
+        children: [
+          {
+            path: ':ID',
+            element: <ChatScreenForGroup />
+          }
+        ]
+      },
+
+      {
+        path: routeNames.chats,
+        element: <ChatsPage />,
+        children: [
+          {
+            path: ':ID',
+            element: <ChatScreenForChat />
+          }
+        ]
+      },
+
+      {
+        path: routeNames.history,
+        element: <HistoryPage />
+      },
+
+      {
+        path: routeNames.accounts,
+        element: <AccountsPage />
+      },
+
+      {
+        path: routeNames.schedules,
+        element: <SchedulePage />
+        },
+
+        {
+          path: routeNames.profile,
+          elements: <UserProfile />
+      }
+    ]
+  },
+
+  {
+    path: routeNames.login,
+    element: <LoginPage />
+  },
+  {
+    path: routeNames.signUp,
+    element: <SignUpWrapper />,
+    children: [
+      {
+        path: '',
+        element: <SignUpWithPhoneNumber />
+      },
+
+      {
+        path: routeNames.verifyCode,
+        element: <VerifyPinForm />
+      },
+
+      {
+        path: routeNames.fillInfo,
+        element: <FillInInfoForm />
+      }
+
+    ]
+  },
+  {
+    path: routeNames.errorPage,
+    element: <ErrorPage />
+  }
+])
+
+export default router;

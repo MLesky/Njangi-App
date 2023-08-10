@@ -17,7 +17,7 @@ const ChatScreenForChat = () => {
     data: chat,
     error,
     isPending,
-  } = useFetch("http://localhost:3000/chats/" + ID);
+  } = useFetch("http://localhost:8000/chats/" + ID);
   console.log("id is", ID);
   console.log("data is", chat);
   return (

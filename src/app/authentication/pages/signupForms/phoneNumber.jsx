@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from "react";
 import {
     FacebookOutlined,
@@ -10,26 +11,73 @@ import {
     TextField,
     Paper,
     Button,
+    MenuItem,
+    Select,
+    InputLabel,
+    FormControl,
+    Grid,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { logo } from "../../../../assets/index";
-import { appName } from "../../../../utils/constants";
+import { appName, routeNames } from "../../../../utils";
 import { useNavigate } from "react-router-dom";
 
-const SignUpWithEmailForm = () => {
-    const [email, setEmail] = useState('');
+const zipCodes = [
+    {
+      country: "Cameroon",
+      code: "237",
+    },
+    {
+      country: "USA",
+      code: "1",
+    },
+  ];
+
+const SignUpWithPhoneNumber = () => {
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [zipCode, setZipCode] = useState("");
+    const [numberError, setNumberError] = useState("");
+    const [zipCodeError, setZipCodeError] = useState("");
     const navigate = useNavigate();
 
-    // TODO: handle email submittion
-    // TODO: fix navigate to verify-email
+    const handleZipCodeChange = (event) => {
+        setZipCode(event.target.value);
+        console.log(zipCode)
+        if (zipCode !== "") {
+          setZipCodeError("");
+        }
+      };
+    
+      const handleNumberChange = (event) => {
+        setPhoneNumber(event.target.value);
+        if (phoneNumber !== "") {
+          setNumberError("");
+        }
+      };
+    
     const handleSubmit = e => {
-        // Email validation and verification
-        navigate('verify-email');
+
+        if (zipCode === "") {
+            setZipCodeError("Select code");
+          }
+          if (phoneNumber === "") {
+            setNumberError("Please enter Phone Number");
+          }
+    
+          if (zipCode !== "" && phoneNumber !== "") {
+            navigate(routeNames.verifyCode);
+          }
     }
 
     return (
-        <>
-            <Box width="50%"
+        <Grid 
+          container 
+          spacing={2}
+          justifyContent='center'
+          alignItems='center'
+          >
+          <Grid item xs={12} md={6}>
+          <Box
                 sx={{
                     display: "flex",
                     justifyContent: "center",
@@ -45,9 +93,10 @@ const SignUpWithEmailForm = () => {
                     </Typography>
                 </Stack>
             </Box>
+          </Grid>
 
+          <Grid item xs={12} md={6} sx={{ paddingBottom: {xs:5, md:0}}}>
             <Box
-                width="50%"
                 sx={{
                     display: "flex",
                     justifyContent: "center",
@@ -55,7 +104,6 @@ const SignUpWithEmailForm = () => {
                 }}
             >
                 <Paper className="form-card">
-                    <form>
                         <Stack spacing={2} className="form-card-content">
                             <Stack
                                 direction="row"
@@ -63,7 +111,7 @@ const SignUpWithEmailForm = () => {
                                 alignItems="center"
                                 justifyContent="center"
                             >
-                                <img src={logo} className="logo-s3" />
+                                <img src={logo} className="logo-s3" alt='Fund Savy logo' />
                                 <Typography
                                     className="title-text"
                                     variant="h5"
@@ -82,7 +130,7 @@ const SignUpWithEmailForm = () => {
                                 Create New Account
                             </Typography>
                             <Typography color="white" variant="h6">
-                                Already have an account? <Link to="../signin">Log In</Link>
+                                Already have an account? <Link to={routeNames.login}>Log In</Link>
                             </Typography>
                             <Typography variant='body1'
                                 color='white'
@@ -98,6 +146,45 @@ const SignUpWithEmailForm = () => {
                                     backgroundColor: "rgb(255, 255, 255, 0.7)",
                                 }}
                             />
+                            <Stack direction="row" width="100%">
+                  <FormControl
+                    helperText={zipCodeError}
+                    error={zipCodeError !== ""}
+                    required
+                    sx={{
+                      minWidth: 90,
+                      width: 130,
+                    }}
+                    className="light-input-field"
+                    variant="filled"
+                  >
+                    <InputLabel>Country Code</InputLabel>
+                    <Select
+                      label="Country"
+                      value={zipCode}
+                      onChange={handleZipCodeChange}
+                    >
+                      {zipCodes.map((zipCode) => (
+                        <MenuItem value={zipCode.code}>
+                          +{zipCode.code}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  <TextField
+                    sx={{ flexGrow: 1 }}
+                    id="phoneNumber"
+                    type="number"
+                    label="Enter Phone Number"
+                    variant="filled"
+                    className="light-input-field"
+                    value={phoneNumber}
+                    helperText={numberError}
+                    error={numberError !== ""}
+                    required
+                    onChange={handleNumberChange}
+                  />
+                </Stack>
                             <Button variant="contained" size="large" sx={{ padding: "10px" }} onClick={handleSubmit}>
                                 continue
                             </Button>
@@ -132,11 +219,12 @@ const SignUpWithEmailForm = () => {
                                 </Typography>
                             </Button>
                         </Stack>
-                    </form>
                 </Paper>
             </Box>
-        </>
+          </Grid>
+
+        </Grid>
     );
 }
 
-export default SignUpWithEmailForm;
+export default SignUpWithPhoneNumber;

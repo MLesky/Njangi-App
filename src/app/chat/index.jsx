@@ -1,7 +1,17 @@
 import GroupsPage from "./pages/groups";
 import ChatsPage from "./pages/chats";
-import SideListMenu from "./layouts/sideListMenu";
-import ChatScreenForChat from "./layouts/chatScreen";
-import ChatScreenForGroup from "./layouts/groupChatScreen";
+import ChatScreenForChat from "./pages/chatScreen";
+import ChatScreenForGroup from "./pages/groupChatScreen";
+import SideListMenu from "./components/sideListMenu";
+import RequestToJoinModal from "./components/requestToJoinModal";
+import CreateGroupModal from "./components/createGroupModal";
 
-export { GroupsPage, ChatsPage, SideListMenu, ChatScreenForChat, ChatScreenForGroup };
+export { 
+    GroupsPage, 
+    ChatsPage, 
+    SideListMenu, 
+    ChatScreenForChat, 
+    ChatScreenForGroup, 
+    RequestToJoinModal,
+    CreateGroupModal,
+};

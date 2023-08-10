@@ -1,2 +1,5 @@
-export const appName = 'Njangi App';
+const appName = 'Fund Savy';
 
+export {
+    appName
+}

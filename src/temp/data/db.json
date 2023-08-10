@@ -124,5 +124,36 @@
       "id": "chat3",
       "messages": []
     }
+  ],
+
+  "users": [
+    {
+      "id": 1,
+      "username": "MLespa",
+      "email": "mbahlesky2@gmail.com",
+      "phoneNumber": "237679682626",
+      "password": "1234567890"
+    },
+    {
+      "id": 2,
+      "username": "Jedi",
+      "email": "firstjedi@gmail.com",
+      "phoneNumber": "237679682626",
+      "password": "1234567890"
+    },
+    {
+      "id": 1,
+      "username": "dorafien",
+      "email": "fiendora@gmail.com",
+      "phoneNumber": "237679682626",
+      "password": "1234567890"
+    },
+    {
+      "id": 1,
+      "username": "marceline",
+      "email": "ngongmarcel@gmail.com",
+      "phoneNumber": "237679682626",
+      "password": "1234567890"
+    }
   ]
 }

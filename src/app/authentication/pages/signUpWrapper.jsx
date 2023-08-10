@@ -4,7 +4,7 @@ import { backgroundImageEngineers } from "../../../assets/index";
 
 // TODO: change styles for input fields
 
-const SignUpPage = () => {
+const SignUpWrapper = () => {
 
     return (
         <Box
@@ -15,6 +15,7 @@ const SignUpPage = () => {
                 backgroundImage: `url(${backgroundImageEngineers})`,
                 display: "flex",
                 justifyContent: "center",
+                overflowY: 'auto',
             }}
         >
             <Outlet />
@@ -22,4 +23,4 @@ const SignUpPage = () => {
     );
 };
 
-export default SignUpPage;
+export default SignUpWrapper;

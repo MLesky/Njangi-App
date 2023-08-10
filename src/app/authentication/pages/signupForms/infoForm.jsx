@@ -4,28 +4,80 @@ import {
   Stack,
   Typography,
   TextField,
-  Input,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Checkbox,
-  FormControlLabel,
   Button,
+  FormControl,
+  InputAdornment,
+  FilledInput,
+  IconButton,
+  InputLabel,
+  FormHelperText,
   Avatar,
 } from "@mui/material";
+import {
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
 import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { logo } from "../../../../assets";
-import { appName } from "../../../../utils/constants";
+import { appName, routeNames } from "../../../../utils";
+import { PicturePicker } from "../../../../components";
 
 // TODO: Stylize Input fields
 const FillInInfoForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [usernameError, setUsernameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [photoError, setPhotoError] = useState("");
+
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      navigate(routeNames.home);
+    }
+  };
+
+  const validateForm = () => {
+    let isValid = true;
+    if (username.trim().length === 0) {
+      setUsernameError("Username is required");
+      isValid = false;
+    } else {
+      setUsernameError('');
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError("Please enter valid email");
+      isValid = false;
+    } else {
+      setEmailError("");
+    }
+    if (password.trim().length < 8) {
+      setPasswordError("Password must be at least 8 characters long");
+      isValid = false;
+    } else {
+      setPasswordError("");
+    }
+    if (confirmPassword !== password) {
+      setConfirmPasswordError("Passwords do not match");
+      isValid = false;
+    } else {
+      setConfirmPasswordError("");
+    }
+    return isValid;
+  };
 
   return (
     <Box
       width="100%"
-      minWidth="400px"
+      minWidth="300px"
       sx={{
         display: "flex",
         justifyContent: "center",
@@ -35,9 +87,13 @@ const FillInInfoForm = () => {
       <Paper
         className="form-card"
         justifyContent="start"
-        sx={{ padding: "20px 60px" }}
+        sx={{
+          padding: "20px 60px",
+          width: {xs: '100%', sm: '400px'},
+          height: {xs: '100%', sm: 'fit-content',}
+        }}
       >
-        <form>
+        <form onSubmit={handleSubmit} noValidate>
           <Stack spacing={1}>
             <Stack
               direction="row"
@@ -56,162 +112,92 @@ const FillInInfoForm = () => {
               </Typography>
             </Stack>
 
-            <Box>
-              <label htmlFor="profile-image">
-                <Stack alignItems='center' spacing={1}>
-                <Avatar alt='profile-pic' sx={{width: 100, height: 100}}/>
-                <Typography sx={{color: 'white'}}>Upload Profile Picture</Typography>
-                </Stack>
-              </label>
-              <input type="file" id="profile-image" accept="image/*" hidden/>
-            </Box>
+            <PicturePicker selectedPhoto={selectedPhoto} setSelectedPhoto={setSelectedPhoto} photoError={photoError} setPhotoError={setPhotoError} />
 
-            <Stack direction="row" spacing={2} justifyContent="space-between">
-              <TextField
-                type="text"
-                id="first-name"
-                label="Filled"
-                variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
-              />
+            <TextField
+              type="text"
+              id="username"
+              label="Username"
+              variant="filled"
+              placeholder="Give yourself a username"
+              className="light-input-field"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              error={usernameError !== ''}
+              helperText={usernameError}
+            />
 
-              <TextField
-                type="text"
-                id="second-name"
-                label="Filled"
-                variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
-              />
-            </Stack>
+            <TextField
+              type="email"
+              id="user-email"
+              label="Enter Email"
+              placeholder="e.g. johndoe@email.com"
+              variant="filled"
+              className="light-input-field"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              error={emailError !== ''}
+              helperText={emailError}
+            />
 
-            <Stack direction="row" spacing={2} justifyContent="space-between">
-              <FormControl sx={{
-                width: '50%',
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}>
-                <InputLabel>Date Of Birth</InputLabel>
-              <Input
-                type="date"
-              />
-              </FormControl>
-
-              <FormControl
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                  width: "50%",
-                }}
-              >
-                <InputLabel id="userGender">Gender</InputLabel>
-                <Select labelId="userGender" label="Gender">
-                  <MenuItem value="male">Male</MenuItem>
-                  <MenuItem value="female">Female</MenuItem>
-                  <MenuItem value="other">Other</MenuItem>
-                </Select>
-              </FormControl>
-            </Stack>
-
-            <Stack direction="row" spacing={2} justifyContent="space-between">
-              <FormControl
-                variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                  width: "50%",
-                }}
-              >
-                <InputLabel>Country</InputLabel>
-                <Select label="Country">
-                  <MenuItem value="cameroon">Cameroon</MenuItem>
-                  <MenuItem value="USA">USA</MenuItem>
-                  <MenuItem value="other">Other</MenuItem>
-                </Select>
-              </FormControl>
-              <TextField
-                type="tel"
-                id="phoneNumber"
-                label="Telephone Number"
-                variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
-              />
-            </Stack>
-
-            <Stack direction="row" spacing={2} justifyContent="space-between">
-              <TextField
-                id="city"
-                label="City"
-                variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
-              />
-              <TextField
-                type="address"
-                id="Address"
-                label="Address"
-                variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
-              />
-            </Stack>
-
-            <Stack
-              direction="row"
-              spacing={2}
-              justifyContent="space-between"
-              marginTop={4}
+            <FormControl
+              variant="filled"
+              className="light-input-field"
+              helperText={passwordError}
+              error={passwordError !== ""}
+              required
             >
-              <TextField
+              <InputLabel htmlFor="loginPassword">Enter Password</InputLabel>
+              <FilledInput
+                id="loginPassword"
+                value={password}
+                error={passwordError !== ""}
+                onChange={(e) => setPassword(e.target.value)}
                 type={showPassword ? "text" : "password"}
-                id="password"
-                label="Password"
-                variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
-              />
-              <TextField
-                type={showPassword ? "text" : "password"}
-                id="password"
-                label="Confirm Password"
-                variant="filled"
-                sx={{
-                  backgroundColor: "rgb(255, 255, 255, 0.7)",
-                }}
-              />
-            </Stack>
-
-            <Box>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={showPassword}
-                    sx={{
-                      color: "white",
-                      "&.Mui-checked": {
-                        color: "white",
-                      },
-                    }}
-                    onChange={() => setShowPassword((show) => !show)}
-                  />
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => {
+                        setShowPassword(true)
+                        setTimeout(() => {
+                          setShowPassword(false)
+                        }, 1500);
+                      }}
+                      edge="end"
+                    >
+                      {showPassword ? (
+                        <VisibilityOff sx={{ color: "white" }} />
+                      ) : (
+                        <Visibility sx={{ color: "white" }} />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
                 }
-                label="Show Password"
-                sx={{
-                  color: "white",
-                }}
               />
-            </Box>
+              <FormHelperText id="component-error-text">
+                {passwordError}
+              </FormHelperText>
+            </FormControl>
+
+            <TextField
+              type={showPassword ? "text" : "password"}
+              id="confirm-password"
+              label="Confirm Password"
+              variant="filled"
+              className="light-input-field"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              error={confirmPasswordError !== ''}
+              helperText={confirmPasswordError}
+            />
 
             <Stack direction="row" justifyContent="space-between" marginTop={2}>
-              <Button variant="contained">Back</Button>
-              <Button variant="contained">Sign Up</Button>
+              <Link to="../verify-email">
+                <Button variant="contained">Back</Button>
+              </Link>
+              <Button type="submit" variant="contained">Sign Up</Button>
             </Stack>
-
           </Stack>
         </form>
       </Paper>

@@ -13,6 +13,19 @@
   box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+}
+
+*::-webkit-scrollbar-track {
+  margin-top: 20px;
+  background-color: #6830c356;
+}
 
 /* Color */
 .text-primary {
@@ -206,7 +219,8 @@ a button .nav-btn-icon {
 .fs-modal .modal-body {
   background-color: white;
   padding: 10px 17px;
-  width: 300px;
+  max-width: 350px;
+  width: 100vw;
   height: fit-content;
   position: fixed;
   transform: translate(-50%, -50%);

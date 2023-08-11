@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from "react";
+import { Form, Alert } from "react-bootstrap";
 import {
     FacebookOutlined,
     Google,
@@ -21,6 +22,9 @@ import { Link } from "react-router-dom";
 import { logo } from "../../../../assets/index";
 import { appName, routeNames } from "../../../../utils";
 import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "../../../../context/UserAuthContext";
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 const zipCodes = [
     {
@@ -38,6 +42,10 @@ const SignUpWithPhoneNumber = () => {
     const [zipCode, setZipCode] = useState("");
     const [numberError, setNumberError] = useState("");
     const [zipCodeError, setZipCodeError] = useState("");
+    const [flag, setFlag] = useState(false);
+    const [result, setResult] = useState("");
+    const {setUpRecaptcha, googleSignIn} = useUserAuth();
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     const handleZipCodeChange = (event) => {
@@ -55,19 +63,41 @@ const SignUpWithPhoneNumber = () => {
         }
       };
     
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      console.log(phoneNumber);
+      setError("");
 
-        if (zipCode === "") {
-            setZipCodeError("Select code");
-          }
-          if (phoneNumber === "") {
-            setNumberError("Please enter Phone Number");
-          }
-    
-          if (zipCode !== "" && phoneNumber !== "") {
-            navigate(routeNames.verifyCode);
-          }
+      if (zipCode === "") {
+          setZipCodeError("Select code");
+      }
+
+      if (phoneNumber === "" || zipCode === "") {
+        return setNumberError("Please enter valid Phone Number and zipcode");
+      }
+      if (zipCode !== "" && phoneNumber !== "") {
+        const fullPhoneNumber = `+${zipCode}${phoneNumber}`;
+        try {
+          const response = await setUpRecaptcha(fullPhoneNumber);
+          setResult(response);
+          setFlag(true);
+          navigate(routeNames.verifyCode);
+        } catch (err) {
+          console.log(err)
+          setError(err.message);
+        }
+      }
     }
+
+    const handleGoogleSignIn = async (e) => {
+      e.preventDefault();
+      try {
+        await googleSignIn();
+        navigate(routeNames.home);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
 
     return (
         <Grid 
@@ -147,6 +177,32 @@ const SignUpWithPhoneNumber = () => {
                                 }}
                             />
                             <Stack direction="row" width="100%">
+                              {/* <Form onSubmit={handleSubmit}>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <PhoneInput
+                                        defaultCountry="IN"
+                                        value={phoneNumber}
+                                        onChange={setPhoneNumber}
+                                        placeholder="Enter Phone Number"
+                                    />
+                                    <div id="recaptcha-container"></div>
+                                </Form.Group>
+                                <Button
+                                    variant="contained"
+                                    size="large"
+                                    sx={{
+                                        padding: "10px",
+                                        width: "100%", 
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        marginTop: "20px", 
+                                    }}
+                                    type="submit"
+                                >
+                                    continue
+                                </Button>
+                              </Form> */}
                   <FormControl
                     helperText={zipCodeError}
                     error={zipCodeError !== ""}
@@ -184,10 +240,12 @@ const SignUpWithPhoneNumber = () => {
                     required
                     onChange={handleNumberChange}
                   />
+                  
                 </Stack>
+                            <div id="recaptcha-container"></div>
                             <Button variant="contained" size="large" sx={{ padding: "10px" }} onClick={handleSubmit}>
                                 continue
-                            </Button>
+                            </Button> 
 
                             <Button
                                 variant="outlined"
@@ -198,6 +256,7 @@ const SignUpWithPhoneNumber = () => {
                                     padding: "10px",
                                 }}
                                 size="large"
+                                onClick={handleGoogleSignIn}
                             >
                                 <Google sx={{ color: "red" }} />
                                 <Typography sx={{ marginLeft: 1 }}>Continue with Google</Typography>
@@ -228,3 +287,7 @@ const SignUpWithPhoneNumber = () => {
 }
 
 export default SignUpWithPhoneNumber;
+
+
+
+

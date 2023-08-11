@@ -7,7 +7,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 const NavBar = () => {
   return (
     <Stack direction='column' height='100vh' width='100vw'>
-      <Paper square={true} sx={{overflowX: 'auto'}}>
+      <Paper square={true} sx={{minHeight: '50px', overflowX: 'auto'}}>
         <Stack height='50px' direction="row" justifyContent="space-between">
           <Box
             sx={{

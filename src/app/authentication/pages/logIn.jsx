@@ -22,20 +22,24 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { backgroundImageWoman, logo } from "../../../assets/index";
 import { appName, routeNames } from "../../../utils";
+import { useUserAuth } from "../../../context/UserAuthContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [password, setPassword] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { logIn, googleSignIn } = useUserAuth();
+  const [error, setError] = useState("");
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
-    if (email !== "") {
+    if (email === "") {
       setEmailError("");
     }
   };
@@ -47,23 +51,39 @@ const LoginPage = () => {
     }
   };
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
+  const handleFormSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      setError("");
 
-    // input validation
-    if (loginPassword === "") {
-      setPasswordError("Please enter password");
-    }
+      // input validation
+      if (loginPassword === "") {
+        setPasswordError("Please enter password");
+      }
 
-    if (email === "") {
-      setEmailError("Please enter email");
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setEmailError("Please enter valid email");
-    } else if (email !== "" && loginPassword !== "") {
-      //signin with email and password
-      navigate(routeNames.home);
-    }
+      if (email === "") {
+        setEmailError("Please enter email");
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setEmailError("Please enter valid email");
+      } else if (email !== "" && loginPassword !== "") {
+        //signin with email and password
+        await logIn(email, password);
+        navigate(routeNames.home);
+      }
+    }catch(err){
+      setError("An error occured:")
+    } 
   }
+  
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      await googleSignIn();
+      navigate(routeNames.home);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <Stack
@@ -181,6 +201,7 @@ const LoginPage = () => {
                   padding: "10px",
                 }}
                 size="large"
+                onClick={handleGoogleSignIn}
               >
                 <Google sx={{ color: "red" }} />
                 <Typography sx={{ marginLeft: 1 }}>

@@ -104,17 +104,31 @@ button, a, td {
 
 /* nav links */
 
-a.active button{
+.full-nav-links a.active button{
   border-bottom: 3px solid var(--color-primary);
   border-radius: 0;
 }
 
-a.active .nav-btn-icon {
+.full-nav-links a.active .nav-btn-icon {
   display: block;
 }
 
-a button .nav-btn-icon {
+.full-nav-links a button .nav-btn-icon {
   display: none;
+}
+
+.icon-nav-links a.active button {
+  background-color: var(--color-primary);
+  padding: 7px;
+  border-radius: 7px;
+}
+
+.icon-nav-links a.active .nav-icon {
+  color: white;
+}
+
+.icon-nav-links .nav-icon {
+  color: var(--color-primary);
 }
 
 .side-nav a.active li {

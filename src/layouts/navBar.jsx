@@ -8,20 +8,26 @@ const NavBar = () => {
   return (
     <Stack direction='column' height='100vh' width='100vw'>
       <Paper square={true} sx={{minHeight: '50px', overflowX: 'auto'}}>
-        <Stack height='50px' direction="row" justifyContent="space-between">
+        <Stack height='50px' direction="row" justifyContent="space-between" alignItems='center'>
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
+              paddingX: 1,
             }}
           >
             <img src={logo} alt="Logo" className="logo-s3" />
-            <Typography variant="h5" className="title-text" noWrap={true}>
+            <Typography variant="h5" className="title-text" noWrap={true} sx={{
+              display: {
+                xs: 'none',
+                md: 'block'
+              }
+            }}>
               {appName}
             </Typography>
           </Box>
 
-          <Stack direction="row" spacing='5px' alignItems='center'>
+          <Stack className='full-nav-links' direction="row" spacing='5px' alignItems='center' sx={{display: {xs: 'none !important', md: 'block !important'}}}>
             <NavLink to={routeNames.home}>
               <Button size="small" startIcon={<Home className="nav-btn-icon" />}>Home</Button>
             </NavLink>
@@ -32,7 +38,7 @@ const NavBar = () => {
               <Button size="small" startIcon={<Chat className="nav-btn-icon" />}>Chats</Button>
             </NavLink>
             <NavLink to={'/' + routeNames.history}>
-              <Button size="small" startIcon={<History className="nav-btn-icon" />}>History</Button>
+              <Button size="small" startIcon={<History className="nav-btn-icon" />}>Transactions</Button>
             </NavLink>
             <NavLink to={'/' + routeNames.schedules}>
               <Button size="small" startIcon={<Schedule className="nav-btn-icon" />}>Schedules</Button>
@@ -42,29 +48,28 @@ const NavBar = () => {
             </NavLink>
           </Stack>
 
+          <Stack className='icon-nav-links' direction="row" spacing={2} alignItems='center'sx={{display: {xs: 'block !important', md: 'none !important'}}}>
+            <NavLink to={routeNames.home}>
+              <IconButton size="small"><Home className="nav-icon" /></IconButton>
+            </NavLink>
+            <NavLink to={'/' + routeNames.groups}>
+              <IconButton size="small"><Group className="nav-icon" /></IconButton>
+            </NavLink>
+            <NavLink to={'/' + routeNames.chats}>
+              <IconButton size="small"><Chat className="nav-icon" /></IconButton>
+            </NavLink>
+            <NavLink to={'/' + routeNames.history}>
+              <IconButton size="small"><History className="nav-icon" /></IconButton>
+            </NavLink>
+            <NavLink to={'/' + routeNames.schedules}>
+              <IconButton size="small"><Schedule className="nav-icon" /></IconButton>
+            </NavLink>
+            <NavLink to={'/' + routeNames.accounts}>
+              <IconButton size="small"><Wallet className="nav-icon" /></IconButton>
+            </NavLink>
+          </Stack>
+
           <Stack direction='row' spacing={1} alignItems='center'>
-            <Paper
-              elevation={1}
-              variant='outlined'
-              component="form"
-              sx={{
-                mr: 1,
-                p: "0 4px",
-                display: "flex",
-                alignItems: "center",
-                width: 200,
-                height: '35px'
-              }}
-            >
-              <InputBase
-                className="body-text text-primary"
-                sx={{ ml: 1, flex: 1 }}
-                placeholder="Search..."
-              />
-              <IconButton type="button" color='primary'>
-                <Search />
-              </IconButton>
-            </Paper>
             <IconButton>
               <Badge badgeContent={1} color='error'>
                 <Call />

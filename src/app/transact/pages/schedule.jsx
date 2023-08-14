@@ -1,4 +1,4 @@
-import { Add, Close, Delete, Edit, TitleRounded } from "@mui/icons-material";
+import { Add, Close, Delete, Edit, Search, TitleRounded } from "@mui/icons-material";
 import {
   Card,
   Grid,
@@ -10,7 +10,10 @@ import {
   Button,
   Fab,
   Avatar,
-  Stack
+  Stack,
+  InputBase,
+  IconButton,
+  Paper,
 } from "@mui/material";
 import { useState } from "react";
 import ScheduleModal from "../components/scheduleModal";
@@ -94,6 +97,32 @@ const SchedulePage = () => {
         justifyContent={{ xs: "start", sm: "center", md: "start" }}
         padding={2}
       >
+        {" "}
+        <Grid item xs={12}>
+          <Paper
+            elevation={1}
+            variant="outlined"
+            component="form"
+            sx={{
+              mr: 1,
+              p: "0 4px",
+              display: "flex",
+              alignItems: "center",
+              width: 200,
+              height: "35px",
+            }}
+          >
+            <InputBase
+              className="body-text text-primary"
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search..."
+              type="search"
+            />
+            <IconButton type="button" color="primary">
+              <Search />
+            </IconButton>
+          </Paper>
+        </Grid>
         {schedules.map((schedule) => (
           <Grid item xs={12} sm={9} md={6}>
             <TableContainer component={Card} backgroundColor="primary">
@@ -111,11 +140,11 @@ const SchedulePage = () => {
                         );
                         if (acc) {
                           return (
-                            <Stack direction='row' alignItems='center'>
+                            <Stack direction="row" alignItems="center">
                               <Avatar
                                 src={acc.type === "mtn" ? mtnLogo : orangeLogo}
                                 alt={acc.type}
-                                sx={{width: '20px', height: '20px'}}
+                                sx={{ width: "20px", height: "20px" }}
                               />
                               {acc.name} ({schedule.accNumber})
                             </Stack>

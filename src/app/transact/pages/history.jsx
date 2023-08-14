@@ -1,11 +1,9 @@
 import {
   Add,
   Close,
-  Delete,
-  Edit,
+  Search,
   Send,
   SimCardDownload,
-  TitleRounded,
 } from "@mui/icons-material";
 import {
   Card,
@@ -15,10 +13,12 @@ import {
   TableContainer,
   TableRow,
   TableCell,
-  Button,
   Fab,
   Avatar,
   Stack,
+  IconButton,
+  InputBase,
+  Paper,
 } from "@mui/material";
 import { useState } from "react";
 import { mtnLogo, orangeLogo } from "../../../assets";
@@ -84,13 +84,13 @@ const HistoryPage = () => {
     },
   ]);
 
-//   document.querySelectorAll('.fab-btn').forEach(btn => {
-//     btn.addEventListener('hover', () => {
-//         console.log('btn => ', btn);
-//         btn.setAttribute('variant', 'extended');
-//         btn.setAttribute('color', 'secondary');
-//     });
-//   });
+  //   document.querySelectorAll('.fab-btn').forEach(btn => {
+  //     btn.addEventListener('hover', () => {
+  //         console.log('btn => ', btn);
+  //         btn.setAttribute('variant', 'extended');
+  //         btn.setAttribute('color', 'secondary');
+  //     });
+  //   });
 
   return (
     <div>
@@ -101,6 +101,31 @@ const HistoryPage = () => {
         justifyContent={{ xs: "start", sm: "center", md: "start" }}
         padding={2}
       >
+        <Grid item xs={12}>
+          <Paper
+            elevation={1}
+            variant="outlined"
+            component="form"
+            sx={{
+              mr: 1,
+              p: "0 4px",
+              display: "flex",
+              alignItems: "center",
+              width: 200,
+              height: "35px",
+            }}
+          >
+            <InputBase
+              className="body-text text-primary"
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search..."
+              type="search"
+            />
+            <IconButton type="button" color="primary">
+              <Search />
+            </IconButton>
+          </Paper>
+        </Grid>
         {transactions.map((transaction) => (
           <Grid item xs={12} sm={9} md={6}>
             <TableContainer component={Card} backgroundColor="primary">
@@ -189,7 +214,7 @@ const HistoryPage = () => {
       </Grid>
 
       <div
-        className='fab-btn'
+        className="fab-btn"
         style={{
           transition: "0.2s",
           position: "fixed",
@@ -207,7 +232,7 @@ const HistoryPage = () => {
       </div>
 
       <div
-        className='fab-btn'
+        className="fab-btn"
         style={{
           transition: "0.2s",
           position: "fixed",

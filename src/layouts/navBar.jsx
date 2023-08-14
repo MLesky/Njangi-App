@@ -16,7 +16,7 @@ const NavBar = () => {
               paddingX: 1,
             }}
           >
-            <img src={logo} alt="Logo" className="logo-s3" />
+            <img src={logo} alt="Logo" className="logo-s3 navbar-logo"/>
             <Typography variant="h5" className="title-text" noWrap={true} sx={{
               display: {
                 xs: 'none',
@@ -48,7 +48,7 @@ const NavBar = () => {
             </NavLink>
           </Stack>
 
-          <Stack className='icon-nav-links' direction="row" spacing={2} alignItems='center'sx={{display: {xs: 'block !important', md: 'none !important'}}}>
+          <Stack className='icon-nav-links' direction="row" spacing={1} alignItems='center'sx={{display: {xs: 'block !important', md: 'none !important'}}}>
             <NavLink to={routeNames.home}>
               <IconButton size="small"><Home className="nav-icon" /></IconButton>
             </NavLink>
@@ -69,7 +69,7 @@ const NavBar = () => {
             </NavLink>
           </Stack>
 
-          <Stack direction='row' spacing={1} alignItems='center'>
+          <Stack className='action-icons' direction='row' spacing={1} alignItems='center'>
             <IconButton>
               <Badge badgeContent={1} color='error'>
                 <Call />

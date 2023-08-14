@@ -169,7 +169,7 @@ const SchedulePage = () => {
                     <TableCell>
                       <Button
                         type="button"
-                        variant="contained"
+                        variant="outlined"
                         size="small"
                         color="error"
                         startIcon={<Delete />}
@@ -185,7 +185,7 @@ const SchedulePage = () => {
         ))}
       </Grid>
 
-      <div style={{ position: "absolute", bottom: "50px", right: "50px" }}>
+      <div style={{ position: "fixed", bottom: "50px", right: "50px" }}>
         <Fab
           color="primary"
           aria-label="add"

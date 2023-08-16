@@ -16,60 +16,60 @@ import {
   ListItemText,
   Divider,
   FormHelperText,
+  CircularProgress,
 } from "@mui/material";
-import { useState } from "react";
-import { AlertPopper, AutoCompleteInput } from "../../../components";
+import { useState, useEffect } from "react";
 import { mtnLogo, orangeLogo } from "../../../assets";
-import { CheckBox } from "@mui/icons-material";
 
-const AddAccountModal = ({ isOpen, handleClose, title }) => {
-  const [accountNumber, setAccountNumber] = useState("");
-  const [accountName, setAccountName] = useState("");
-  // const [toDefault, setToDefault] = useState(false);
-  const [accountNetwork, setAccountNetwork] = useState("");
-
+const AddAccountModal = ({
+  isOpen,
+  handleClose,
+  title,
+  accountObject = null,
+}) => {
+  const [account, setAccount] = useState({ number: "", name: "", type: "" });
   const [accountNumberError, setAccountNumberError] = useState("");
   const [accountNameError, setAccountNameError] = useState("");
   const [accountNetworkError, setAccountNetworkError] = useState("");
 
   const [showAlert, setShowAlert] = useState(false);
 
+  useEffect(() => {
+    if (accountObject) {
+      setAccount(accountObject);
+    } else {
+      setAccount({ number: "", name: "", type: "" });
+    }
+  }, [accountObject, title]);
+
   const handleSubmit = (e) => {
     var isOk = true;
 
+    console.log('account', account);
+    if (account.number === "") {
+      setAccountNumberError("Please enter or select an account");
+      isOk = false;
+    } else {
+      setAccountNumberError("");
+    }
+
+    if (account.name === "") {
+      setAccountNameError("Please enter a name");
+      isOk = false;
+    } else {
+      setAccountNameError("");
+    }
+
+    if (account.type === "") {
+      setAccountNetworkError("Please select network");
+      isOk = false;
+    } else {
+      setAccountNetworkError("");
+    }
+
     if (isOk) {
-      if (accountNumber === "") {
-        setAccountNumberError("Please enter or select an account");
-        isOk = false;
-      } else {
-        setAccountNumberError("");
-      }
-
-      if (accountName === "") {
-        setAccountNameError("Please enter a name");
-        isOk = false;
-      } else {
-        setAccountNameError("");
-      }
-
-      if (accountNetwork === "") {
-        setAccountNetworkError("Please select network");
-        isOk = false;
-      } else {
-        setAccountNetworkError("");
-      }
-
-      if (accountNumber === "") {
-        setAccountNumberError("Please select network");
-        isOk = false;
-      } else {
-        setAccountNumberError("");
-      }
-
-      if (isOk) {
-        handleClose();
-        setShowAlert(true);
-      }
+      handleClose();
+      setShowAlert(true);
     }
   };
 
@@ -82,7 +82,8 @@ const AddAccountModal = ({ isOpen, handleClose, title }) => {
         aria-describedby="modal-modal-description"
         className="fs-modal"
       >
-        <Box variant="form" noValidate className="modal-body">
+        {/* {!account && <CircularProgress />} */}
+        {account && <Box variant="form" noValidate className="modal-body">
           <Stack spacing={2}>
             <Typography
               color="primary"
@@ -95,29 +96,29 @@ const AddAccountModal = ({ isOpen, handleClose, title }) => {
 
             <TextField
               required
-              id="number"
-              label="Account Number"
+              id="name"
+              label="Account Name"
               variant="filled"
-              value={accountName}
-              onChange={(e) => setAccountName(e.target.value)}
-              placeholder="Enter number"
+              value={account.name}
+              onChange={(e) => setAccount({ ...account, name: e.target.value })}
+              placeholder="Enter account name"
               error={accountNameError !== ""}
               helperText={accountNameError}
-            />  
-        
+            />
+
             <FormControl error={accountNetworkError !== ""}>
-              <InputLabel id="group-account-label">
-                Select Network
-              </InputLabel>
+              <InputLabel id="group-account-label">Select Network</InputLabel>
               <Select
                 labelId="group-account-label"
                 id="group-account"
                 label="Select an account"
                 variant="filled"
-                value={accountNetwork}
-                onChange={(e) => setAccountNetwork(e.target.value)}
+                value={account.type}
+                onChange={(e) =>
+                  setAccount({ ...account, type: e.target.value })
+                }
               >
-                <MenuItem value="mtn momo">
+                <MenuItem value="mtn" selected>
                   <List>
                     <ListItem>
                       <ListItemAvatar>
@@ -128,7 +129,7 @@ const AddAccountModal = ({ isOpen, handleClose, title }) => {
                   </List>
                   <Divider variant="horizontal" />
                 </MenuItem>
-                <MenuItem value="orange money">
+                <MenuItem value="orange" selected={account.type === 'orange'}>
                   <List>
                     <ListItem>
                       <ListItemAvatar>
@@ -142,19 +143,21 @@ const AddAccountModal = ({ isOpen, handleClose, title }) => {
               </Select>
               <FormHelperText>{accountNetworkError}</FormHelperText>
             </FormControl>
- 
+
             <TextField
               required
               id="account-number"
               label="Account Number"
               variant="filled"
-              value={accountNumber}
-              onChange={(e) => setAccountNumber(e.target.value)}
+              value={account.number}
+              onChange={(e) =>
+                setAccount({ ...account, number: e.target.value })
+              }
               placeholder="Enter account number"
               error={accountNumberError !== ""}
               helperText={accountNumberError}
             />
-            
+
             {/* <FormControlLabel control={<CheckBox checked={toDefault} onChange={() => setToDefault(!toDefault)}/>} label='Set as default account'/> */}
 
             <Stack direction="row" spacing={2} justifyContent="space-between">
@@ -173,11 +176,11 @@ const AddAccountModal = ({ isOpen, handleClose, title }) => {
                 color="primary"
                 sx={{ flexGrow: 1 }}
               >
-                Send
+                Save
               </Button>
             </Stack>
           </Stack>
-        </Box>
+        </Box>}
       </Modal>
 
       {/* <AlertPopper alertType='success' showAlert={showAlert} handleClose={() => setShowAlert(false)}>Dial #126 to Confirm</AlertPopper> */}

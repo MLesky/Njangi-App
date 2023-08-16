@@ -91,7 +91,11 @@ button, a, td {
   }
 }
 
-
+@media screen and (max-width: 500px) {
+  .navbar-logo {
+    display: none !important;
+  }
+}
 .form-card {
   width: fit-content;
   padding: 20px 40px;
@@ -104,23 +108,52 @@ button, a, td {
 
 /* nav links */
 
-a.active button{
+.full-nav-links a.active button{
   border-bottom: 3px solid var(--color-primary);
   border-radius: 0;
 }
 
-a.active .nav-btn-icon {
+.full-nav-links a.active .nav-btn-icon {
   display: block;
 }
 
-a button .nav-btn-icon {
+.full-nav-links a button .nav-btn-icon {
   display: none;
+}
+
+.icon-nav-links {
+  flex-wrap: nowrap !important;
+  overflow: auto;
+}
+
+.icon-nav-links a.active button {
+  background-color: var(--color-primary);
+  padding: 7px;
+  border-radius: 7px;
+}
+
+.icon-nav-links a.active .nav-icon {
+  color: white;
+}
+
+.icon-nav-links .nav-icon {
+  color: var(--color-primary);
+  font-size: 1.2em;
 }
 
 .side-nav a.active li {
   background-color: var(--color-secondary);
 }
 
+
+@media screen and (max-width: 400px) {
+  .action-icons button {
+    display: none !important;
+  }
+  .icon-nav-links .nav-icon {
+    font-size: 1.5em;
+  }
+}
 /* message-cards */
 
 .messages .sent-message {
@@ -228,4 +261,13 @@ a button .nav-btn-icon {
   left: 50%;
   outline: none;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 400px) {
+  .fs-modal .modal-body {
+    height: 100vh;
+    max-width: 100vw;
+    border-radius: 0;
+    padding-top: 100px;
+  }
 }

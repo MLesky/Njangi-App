@@ -26,35 +26,36 @@ import { useUserAuth } from "../../../../context/UserAuthContext";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 
-const zipCodes = [
-    {
-      country: "Cameroon",
-      code: "237",
-    },
-    {
-      country: "USA",
-      code: "1",
-    },
-  ];
+// const zipCodes = [
+//     {
+//       country: "Cameroon",
+//       code: "237",
+//     },
+//     {
+//       country: "USA",
+//       code: "1",
+//     },
+//   ];
 
 const SignUpWithPhoneNumber = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [zipCode, setZipCode] = useState("");
     const [numberError, setNumberError] = useState("");
     const [zipCodeError, setZipCodeError] = useState("");
-    const [flag, setFlag] = useState(false);
     const [result, setResult] = useState("");
+    const [verificationCode, setVerificationCode] = useState("");
     const {setUpRecaptcha, googleSignIn} = useUserAuth();
+    const [recaptchaVisible, setRecaptchaVisible] = useState(true);
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleZipCodeChange = (event) => {
-        setZipCode(event.target.value);
-        console.log(zipCode)
-        if (zipCode !== "") {
-          setZipCodeError("");
-        }
-      };
+    // const handleZipCodeChange = (event) => {
+    //     setZipCode(event.target.value);
+    //     console.log(zipCode)
+    //     if (zipCode !== "") {
+    //       setZipCodeError("");
+    //     }
+    //   };
     
       const handleNumberChange = (event) => {
         setPhoneNumber(event.target.value);
@@ -63,31 +64,61 @@ const SignUpWithPhoneNumber = () => {
         }
       };
     
+    // const handleSubmit = async (e) => {
+    //   e.preventDefault();
+    //   console.log(phoneNumber);
+    //   setError("");
+
+    //   // if (zipCode === "") {
+    //   //     setZipCodeError("Select code");
+    //   // }
+
+    //   // if (phoneNumber === "" || zipCode === "") {
+    //   //   return setNumberError("Please enter valid Phone Number and zipcode");
+    //   // }
+
+    //   // zipCode !== "" &&
+
+    //   if ( phoneNumber !== "") {
+    //     // const fullPhoneNumber = `+${zipCode}${phoneNumber}`;
+    //     try {
+    //       const response = await setUpRecaptcha(phoneNumber);
+    //       setVerificationCode(response);
+    //       navigate(routeNames.verifyCode);
+    //     } catch (err) {
+    //       console.log(err)
+    //       setError(err.message);
+    //     }
+    //   }
+    // }
+
+
     const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log(phoneNumber);
       setError("");
-
-      if (zipCode === "") {
-          setZipCodeError("Select code");
+      
+      if (phoneNumber === "") {
+        return setNumberError("Please enter Phone Number");
       }
-
-      if (phoneNumber === "" || zipCode === "") {
-        return setNumberError("Please enter valid Phone Number and zipcode");
-      }
-      if (zipCode !== "" && phoneNumber !== "") {
-        const fullPhoneNumber = `+${zipCode}${phoneNumber}`;
-        try {
-          const response = await setUpRecaptcha(fullPhoneNumber);
-          setResult(response);
-          setFlag(true);
-          navigate(routeNames.verifyCode);
-        } catch (err) {
-          console.log(err)
-          setError(err.message);
+  
+      try {
+        const response = await setUpRecaptcha(phoneNumber);
+        if (response) {
+          setRecaptchaVisible(false);
+          console.log("reCAPTCHA setup completed");
+          alert("Verification code has been sent to your phone number.");
+          setVerificationCode(response);
+          navigate(routeNames.verifyCode, { state: { verificationCode: response } });
+        } else {
+          console.error("reCAPTCHA verification failed");
         }
+      } catch (err) {
+        console.log(err);
+        setError(err.message);
       }
-    }
+    };
+
+
 
     const handleGoogleSignIn = async (e) => {
       e.preventDefault();
@@ -166,33 +197,17 @@ const SignUpWithPhoneNumber = () => {
                                 color='white'
                             >Please enter the following information</Typography>
                             <Stack direction="row" width="100%">
-                              {/* <Form onSubmit={handleSubmit}>
+                              <Form onSubmit={handleSubmit}>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <PhoneInput
-                                        defaultCountry="IN"
+                                        defaultCountry="CM"
                                         value={phoneNumber}
                                         onChange={setPhoneNumber}
                                         placeholder="Enter Phone Number"
                                     />
-                                    <div id="recaptcha-container"></div>
                                 </Form.Group>
-                                <Button
-                                    variant="contained"
-                                    size="large"
-                                    sx={{
-                                        padding: "10px",
-                                        width: "100%", 
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        marginTop: "20px", 
-                                    }}
-                                    type="submit"
-                                >
-                                    continue
-                                </Button>
-                              </Form> */}
-                  <FormControl
+                              </Form>
+                  {/* <FormControl
                     helperText={zipCodeError}
                     error={zipCodeError !== ""}
                     required
@@ -228,7 +243,7 @@ const SignUpWithPhoneNumber = () => {
                     error={numberError !== ""}
                     required
                     onChange={handleNumberChange}
-                  />
+                  /> */}
                   
                 </Stack>
                             <div id="recaptcha-container"></div>
@@ -276,7 +291,4 @@ const SignUpWithPhoneNumber = () => {
 }
 
 export default SignUpWithPhoneNumber;
-
-
-
 

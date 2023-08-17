@@ -1,25 +1,34 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Stack, Typography, Paper, Button, Checkbox } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { routeNames } from "../../../../utils";
 import { useUserAuth } from "../../../../context/UserAuthContext"
+import { PhoneAuthProvider } from "firebase/auth";
 
 // TODO : remove otp code hint
-const VerifyPinForm = () => {
-  const otpCode = '123456';
+const VerifyPinForm = (props) => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] = useState("");
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
   const [termsMessage, setTermsMessage] = useState('');
   const [error, setError] = useState("");
+  
+  const location = useLocation();
+  const verificationCode = location.state.verificationCode;
+
+  useEffect(() => {
+    if (verificationCode) {
+      setOtp(verificationCode);
+    }
+  }, [verificationCode]);
 
   const handleOtpChange = (newValue) => {
     setOtp(newValue);
     setOtpError('');
-    if (newValue === otpCode && isTermsAccepted) {
+    if (newValue === verificationCode && isTermsAccepted) {
         navigate('../' + routeNames.fillInfo);
       }
   };
@@ -30,15 +39,15 @@ const VerifyPinForm = () => {
       setError("");
       if(otp === ""){
           setOtpError("Please enter the Code Sent")
-      } else if (otp !== otpCode) {
+      } else if (otp !== verificationCode) {
           setOtpError("Wrong OTP (123456)");
-      } else if (otp === otpCode && !isTermsAccepted) {
+      } else if (otp === verificationCode && !isTermsAccepted) {
           setTermsMessage('Please Accept The Terms');
-      } else if (otp === otpCode && isTermsAccepted) {
+      } else if (otp === verificationCode && isTermsAccepted) {
           navigate('../' + routeNames.fillInfo);
       }
     } catch (err) {
-      setError("An error occured:", err)
+      setError("An error occured:", + err.message );
     }
     
   };

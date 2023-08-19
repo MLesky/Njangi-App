@@ -22,6 +22,11 @@ import { useNavigate, Link } from "react-router-dom";
 import { logo } from "../../../../assets";
 import { appName, routeNames } from "../../../../utils";
 import { PicturePicker } from "../../../../components";
+import { useUserAuth } from "../../../../context/UserAuthContext";
+import { database } from "../../../../firebase";
+import { collection, doc, setDoc, updateDoc, Timestamp } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"; 
+
 
 // TODO: Stylize Input fields
 const FillInInfoForm = () => {
@@ -37,13 +42,44 @@ const FillInInfoForm = () => {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [photoError, setPhotoError] = useState("");
 
+  const { signUp } = useUserAuth();
+
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      navigate(routeNames.home);
+      try {
+        const userCredential = await signUp(email, password);
+        console.log("Sign-up successful", userCredential);
+        const user = userCredential.user;
+
+        if (user) {
+          const userDocRef = doc(database, "users", user.uid);
+          await setDoc(userDocRef, {
+            username,
+            email,
+          });
+
+          if (selectedPhoto) {
+            const storageRef = ref(getStorage(), `userPhotos/${user.uid}`);
+            await uploadBytes(storageRef, selectedPhoto);
+            const photoURL = await getDownloadURL(storageRef);
+
+            await updateDoc( userDocRef, {
+              photoURL, 
+              username, 
+            });
+          }
+
+          navigate(routeNames.home);
+        }
+      } catch (error) {
+        console.error("Sign up error:", error);
+      }
     }
+
   };
+
 
   const validateForm = () => {
     let isValid = true;

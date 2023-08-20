@@ -1,10 +1,45 @@
+import React, { useState, useEffect } from "react";
 import { Box, Button, Stack, Typography, Paper, IconButton, InputBase, Badge, Avatar } from "@mui/material";
 import { appName, routeNames } from "../utils";
 import { logo } from "../assets";
 import { Call, Notifications, Chat, Group, History, Home, Schedule, Search, Wallet } from "@mui/icons-material";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import { database } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { useUserAuth } from "../context/UserAuthContext";
+
 
 const NavBar = () => {
+  const { user } = useUserAuth();
+  const [userPhotoURL, setUserPhotoURL] = useState(""); 
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (user) {
+        try {
+          const userDocRef = doc(database, "users", user.uid);
+          const docSnapshot = await getDoc(userDocRef);
+          
+          if (docSnapshot.exists()) {
+            const userData = docSnapshot.data();
+            setUserPhotoURL(userData.photoURL || "");
+            console.log("Fetched user data:", userData);
+          } else {
+            setUserPhotoURL(""); 
+            console.log("No user data found.");
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [user]);
+
+  console.log("Rendering with userPhotoURL:", userPhotoURL);
+
+
   return (
     <Stack direction='column' height='100vh' width='100vw'>
       <Paper square={true} sx={{minHeight: '50px', overflowX: 'auto'}}>
@@ -82,7 +117,7 @@ const NavBar = () => {
             </IconButton>
             <Link to={'/' + routeNames.profile}>
               <IconButton type="button" color="primary">
-                <Avatar sx={{ height: 30, width: 30 }} />
+                <Avatar src={userPhotoURL} sx={{ height: 30, width: 30 }} />
               </IconButton>
             </Link>
           </Stack>

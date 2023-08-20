@@ -36,6 +36,7 @@ const FillInInfoForm = () => {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [photoError, setPhotoError] = useState("");
+  
 
   const navigate = useNavigate();
   const handleSubmit = (e) => {

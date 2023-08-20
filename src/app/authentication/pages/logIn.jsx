@@ -28,7 +28,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [password, setPassword] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -36,6 +35,7 @@ const LoginPage = () => {
   const [error, setError] = useState("");
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -55,6 +55,7 @@ const LoginPage = () => {
     try {
       e.preventDefault();
       setError("");
+      setPasswordError("");
 
       // input validation
       if (loginPassword === "") {
@@ -67,13 +68,14 @@ const LoginPage = () => {
         setEmailError("Please enter valid email");
       } else if (email !== "" && loginPassword !== "") {
         //signin with email and password
-        await logIn(email, password);
+        await logIn(email, loginPassword);
         navigate(routeNames.home);
       }
     }catch(err){
-      setError("An error occured:")
+      setError("An error occured: " + err.message);
+      console.error("Authentication error:", err);
     } 
-  }
+  };
   
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
@@ -182,7 +184,11 @@ const LoginPage = () => {
                   {passwordError}
                 </FormHelperText>
               </FormControl>
-              <Link to="">Forgot password?</Link>
+              <Link
+                to={routeNames.forgotPassword}
+              >
+                Forgot password?
+              </Link>
               <Button
                 type="submit"
                 variant="contained"

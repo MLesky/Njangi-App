@@ -70,6 +70,16 @@ export function UserAuthContextProvider({ children }) {
     }
   }
 
+  async function sendPasswordResetEmail(email) {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      console.log("Password reset email sent to:", email);
+    } catch (error) {
+      console.error("Password reset email error:", error);
+      throw error;
+    }
+  }
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
@@ -91,6 +101,7 @@ export function UserAuthContextProvider({ children }) {
         logOut,
         googleSignIn,
         setUpRecaptcha,
+        sendPasswordResetEmail,
       }}
     >
       {children}

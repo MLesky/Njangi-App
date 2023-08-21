@@ -3,6 +3,7 @@ const routeNames = {
     signUp: '/signUp',
     verifyCode: 'verify-code',
     fillInfo: 'fill-info',
+    forgotPassword: '/forgotPassword',
     home: '/',
     groups: 'groups',
     chats: 'chats',

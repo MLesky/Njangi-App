@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
 import { ChatsPage, GroupsPage, ChatScreenForChat, ChatScreenForGroup } from './app/chat/index';
 import { HistoryPage, AccountsPage, SchedulePage } from './app/transact/index'
-import { FillInInfoForm, LoginPage, SignUpWrapper, SignUpWithPhoneNumber } from './app/authentication';
+import { FillInInfoForm, LoginPage, SignUpWrapper, ForgotPassword, SignUpWithPhoneNumber } from './app/authentication';
 import { HomePage, ErrorPage, UserProfile } from './pages/pages';
 import VerifyPinForm from './app/authentication/pages/signupForms/verificationPin';
 import { NavBar } from './layouts';
@@ -64,6 +64,10 @@ const router = createBrowserRouter([
   {
     path: routeNames.login,
     element: <LoginPage />
+  },
+  {
+    path: routeNames.forgotPassword,
+    element: <ForgotPassword />
   },
   {
     path: routeNames.signUp,

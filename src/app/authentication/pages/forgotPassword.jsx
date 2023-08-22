@@ -10,16 +10,17 @@ import {
   InputLabel,
   FormHelperText,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { backgroundImageWoman, logo } from "../../../assets/index";
 import { appName, routeNames } from "../../../utils";
 import { useUserAuth } from "../../../context/UserAuthContext";
 
 const ForgotPassword = () => {
+  const navigate = useNavigate();
   const [resetEmailSent, setResetEmailSent] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
   const [error, setError] = useState("");
-  const { sendPasswordResetEmail } = useUserAuth();
+  const { setUpSendPasswordResetEmail } = useUserAuth();
 
   const handleResetEmailChange = (event) => {
     setResetEmail(event.target.value);
@@ -30,8 +31,9 @@ const ForgotPassword = () => {
     setError("");
 
     try {
-      await sendPasswordResetEmail(resetEmail);
+      await setUpSendPasswordResetEmail(resetEmail);
       setResetEmailSent(true);
+      navigate(routeNames.changePassword);
     } catch (err) {
       setError("An error occurred: " + err.message);
     }
@@ -52,24 +54,6 @@ const ForgotPassword = () => {
         overflowY: 'auto'
       }}
     >
-
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "25px",
-        }}
-      >
-        <Stack alignItems="center" sx={{ maxWidth: 500 }}>
-          <img src={logo} alt="logo" className="logo-s1" width={100} />
-          <Typography variant="h6" align="center" color="white">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis
-            quidem temporibus magnam est voluptate obcaecati iure nihil earum
-            qui enim.
-          </Typography>
-        </Stack>
-      </Box>
 
       <Box
         sx={{
@@ -132,6 +116,10 @@ const ForgotPassword = () => {
 
               <Typography color="white" variant="h6">
                 <Link to={routeNames.login}>Back to Login</Link>
+              </Typography>
+
+              <Typography color="white" variant="h6">
+                <Link to={routeNames.changePassword}>Go to change password</Link>
               </Typography>
 
             </Stack>

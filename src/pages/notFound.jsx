@@ -1,4 +1,5 @@
 import { Box, Stack, Typography, Link, Button } from "@mui/material";
+import { page404 } from "../assets";
 
 
 const ErrorPage = () => {
@@ -14,9 +15,7 @@ const ErrorPage = () => {
                 <Typography variant='h4' className='title-text'>
                     Oops!
                 </Typography>
-                <Typography variant='h1' class="dark-grey-text">
-                    Page Not Found
-                </Typography>
+                <img src={page404} alt='page not found' height='400px'/>
                 <a href='/' style={{
                     padding: '10px',
                     cursor: 'pointer',

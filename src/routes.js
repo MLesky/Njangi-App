@@ -52,11 +52,11 @@ const router = createBrowserRouter([
       {
         path: routeNames.schedules,
         element: <SchedulePage />
-        },
+      },
 
-        {
-          path: routeNames.profile,
-          elements: <UserProfile />
+      {
+        path: routeNames.profile,
+        element: <UserProfile />
       }
     ]
   },

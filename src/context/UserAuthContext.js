@@ -9,15 +9,15 @@ import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
   PhoneAuthProvider,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../firebase";
-
-// auth().settings.appVerificationDisabledForTesting = true;
 
 const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState({});
+  const [verificationCode, setVerificationCode] = useState("");
 
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
@@ -41,37 +41,46 @@ export function UserAuthContextProvider({ children }) {
         console.error("Google sign-in error:", error);
       });
   }
-  
 
-  function setUpRecaptcha(fullPhoneNumber) {
-    console.log("Setting up reCAPTCHA for phone verification...");
-    const recaptchaVerifier = new RecaptchaVerifier(
-      "recaptcha-container",
-      {
-        size: 'normal'
-      },
-      auth
-    );
-  
-    console.log("reCAPTCHA verifier created. Rendering...");
-  
-    return recaptchaVerifier.render().then(() => {
+
+  async function setUpRecaptcha(phoneNumber) {
+    try {
+      const recaptchaVerifier = new RecaptchaVerifier(
+        "recaptcha-container",
+        {
+          size: 'normal'
+        },
+        auth
+      );
+
+      console.log("reCAPTCHA verifier created. Rendering...");
+
+      await recaptchaVerifier.render();
       console.log("reCAPTCHA rendered. Starting phone verification...");
-  
+
       const phoneAuthProvider = new PhoneAuthProvider(auth);
-      return signInWithPhoneNumber(phoneAuthProvider, fullPhoneNumber, recaptchaVerifier)
-        .then((confirmationResult) => {
-          console.log("Phone verification initiated:", confirmationResult);
-          return confirmationResult;
-        })
-        .catch((error) => {
-          console.error("Phone verification error:", error);
-          throw error;
-        });
-    });
+      const verificationId = await phoneAuthProvider.verifyPhoneNumber(phoneNumber, recaptchaVerifier);
+
+      setVerificationCode(verificationId);
+      console.log("Verification code has been sent to your phone number.");
+
+      return verificationId;
+    } catch (error) {
+      console.error("Phone verification setup error:", error);
+      throw error;
+    }
   }
-  
-  
+
+  async function setUpSendPasswordResetEmail(email) {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      console.log("Password reset email sent to:", email);
+    } catch (error) {
+      console.error("Password reset email error:", error);
+      throw error;
+    }
+  }
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
@@ -93,6 +102,7 @@ export function UserAuthContextProvider({ children }) {
         logOut,
         googleSignIn,
         setUpRecaptcha,
+        setUpSendPasswordResetEmail,
       }}
     >
       {children}

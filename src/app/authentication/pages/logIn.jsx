@@ -61,13 +61,14 @@ const LoginPage = () => {
         setPasswordError("Please enter password");
       }
 
-      if (email === "") {
+      const cleanedEmail = email.trim();
+      if (cleanedEmail === "") {
         setEmailError("Please enter email");
-      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanedEmail)) {
         setEmailError("Please enter valid email");
-      } else if (email !== "" && loginPassword !== "") {
+      } else if (cleanedEmail !== "" && loginPassword !== "") {
         //signin with email and password
-        await logIn(email, password);
+        await logIn(cleanedEmail, loginPassword);
         navigate(routeNames.home);
       }
     }catch(err){
@@ -182,7 +183,7 @@ const LoginPage = () => {
                   {passwordError}
                 </FormHelperText>
               </FormControl>
-              <Link to="">Forgot password?</Link>
+              <Link to={routeNames.forgotPassword}>Forgot password?</Link>
               <Button
                 type="submit"
                 variant="contained"

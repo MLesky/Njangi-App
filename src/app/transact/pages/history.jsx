@@ -83,14 +83,7 @@ const HistoryPage = () => {
       date: new Date(),
     },
   ]);
-
-  //   document.querySelectorAll('.fab-btn').forEach(btn => {
-  //     btn.addEventListener('hover', () => {
-  //         console.log('btn => ', btn);
-  //         btn.setAttribute('variant', 'extended');
-  //         btn.setAttribute('color', 'secondary');
-  //     });
-  //   });
+  const [isHovered,setIsHovered] = useState({sendFab: false, buyFab: false});
 
   return (
     <div>
@@ -224,10 +217,14 @@ const HistoryPage = () => {
       >
         <Fab
           color="primary"
+          variant={isHovered.sendFab ? 'extended' : 'default'}
           aria-label="add"
           onClick={() => setOpenTransferModal(true)}
+          onMouseEnter={() => setIsHovered({sendFab: true, buyFab: false})}
+          onMouseLeave={() => setIsHovered({sendFab: false, buyFab: false})}
         >
           <Send />
+          {isHovered.sendFab && 'Send Money'}
         </Fab>
       </div>
 
@@ -243,9 +240,13 @@ const HistoryPage = () => {
         <Fab
           color="primary"
           aria-label="add"
+          variant={isHovered.buyFab ? 'extended' : 'default'}
           onClick={() => setOpenAirtimeModal(true)}
+          onMouseEnter={() => setIsHovered({buyFab: true, sendFab: false})}
+          onMouseLeave={() => setIsHovered({buyFab: false, sendFab: false})}
         >
           <SimCardDownload />
+          {isHovered.buyFab && 'Buy Airtime'}
         </Fab>
       </div>
 

@@ -1,11 +1,24 @@
 import { Call, Menu, VideoCall } from "@mui/icons-material";
-import { Stack, Card, Avatar, IconButton, Typography, CircularProgress } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { Stack, Card, Avatar, IconButton, Typography, CircularProgress, useTheme } from "@mui/material";
+import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../../../temp/hooks/useFetch";
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { routeNames } from "../../../utils";
+import { useEffect } from "react";
 
 const ChatScreenForGroup = () => {
     const { ID } = useParams();
+    const navigate = useNavigate();
+    const theme = useTheme();
+    const isExtraSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     const { data: group, error, isPending } = useFetch('http://localhost:8000/groups/' + ID);
+    useEffect(() => {
+        if(isExtraSmallScreen){
+            navigate(routeNames.ngGroups + `/${ID}`, { replace: true });
+        } else {
+            navigate('/' + routeNames.groups + `/${ID}`, { replace: true });
+        }
+    }, [isExtraSmallScreen]);
     return ( 
         <Stack  flexGrow={1}>
         <Stack direction='row' alignItems='center' sx={{backgroundColor: 'primary.main', height: 60}}>

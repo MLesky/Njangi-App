@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
 import { ChatsPage, GroupsPage, ChatScreenForChat, ChatScreenForGroup } from './app/chat/index';
 import { HistoryPage, AccountsPage, SchedulePage } from './app/transact/index'
-import { FillInInfoForm, LoginPage, SignUpWrapper, ForgotPassword, SignUpWithPhoneNumber } from './app/authentication';
+import { FillInInfoForm, LoginPage, SignUpWrapper, ForgotPassword, SignUpWithPhoneNumber, ChangePassword } from './app/authentication';
 import { HomePage, ErrorPage, UserProfile } from './pages/pages';
 import VerifyPinForm from './app/authentication/pages/signupForms/verificationPin';
 import { NavBar } from './layouts';
@@ -52,13 +52,33 @@ const router = createBrowserRouter([
       {
         path: routeNames.schedules,
         element: <SchedulePage />
-        },
+      },
 
-        {
-          path: routeNames.profile,
-          elements: <UserProfile />
+      {
+        path: routeNames.profile,
+        element: <UserProfile />
       }
     ]
+  },
+
+  {
+    path: routeNames.ngGroups,
+    element: <GroupsPage />,
+  },
+
+  {
+    path: routeNames.fundGroups,
+    element: <ChatsPage />,
+  },
+
+  {
+    path: routeNames.ngGroups + '/:ID',
+    element: <ChatScreenForGroup />
+  },
+
+  {
+    path: routeNames.fundGroups + '/:ID',
+    element: <ChatScreenForChat />
   },
 
   {
@@ -68,6 +88,10 @@ const router = createBrowserRouter([
   {
     path: routeNames.forgotPassword,
     element: <ForgotPassword />
+  },
+  {
+    path: routeNames.changePassword,
+    element: <ChangePassword />
   },
   {
     path: routeNames.signUp,

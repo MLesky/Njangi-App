@@ -4,6 +4,7 @@ const routeNames = {
     verifyCode: 'verify-code',
     fillInfo: 'fill-info',
     forgotPassword: '/forgotPassword',
+    changePassword: '/changePassword',
     home: '/',
     groups: 'groups',
     chats: 'chats',
@@ -12,6 +13,8 @@ const routeNames = {
     schedules: 'schedules',
     profile: 'profile',
     errorPage: '/*',
+    ngGroups: '/ng-groups',
+    fundGroups: '/fund-groups',
 }
 
 export default routeNames;

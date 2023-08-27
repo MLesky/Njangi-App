@@ -1,10 +1,11 @@
-import { AccountBalanceWallet, AccountCircle, AddCard, Diversity2, ForwardToInbox, GroupAdd, Groups2, History, Mail,  ScheduleSend, ScheduleSharp, Send, Settings, SimCardDownload, TransitEnterexit, } from "@mui/icons-material";
+import { AccountBalanceWallet, AccountCircle, AddCard, Call, Diversity2, ForwardToInbox, GroupAdd, Groups2, History, Mail,  Notifications,  ScheduleSend, ScheduleSharp, Send, Settings, SimCardDownload, TransitEnterexit, } from "@mui/icons-material";
 import { Badge, Typography, Stack, Grid, Card, Box, Divider } from "@mui/material";
 import { useState } from "react";
 import { CreateGroupModal, RequestToJoinModal } from "../app/chat";
-import { routeNames } from "../utils";
+import { appName, routeNames } from "../utils";
 import { Link } from "react-router-dom";
 import { AddAccountModal, BuyAirTimeModal, ScheduleModal, TransferMoneyModal } from "../app/transact";
+import { logo } from "../assets";
 
 const HomePage = () => {
     const [createNewNjangi, setCreateNewNjangi] = useState(false);
@@ -27,6 +28,32 @@ const HomePage = () => {
             padding: '20px',
         }}>
             <Grid container spacing={2} direction='row' justifyContent='center' alignItems='center'>
+            <Grid item xs={12} md={10} lg={8}>
+                    <Stack direction='row' alignItems='center' justifyContent='center' mb={2}>
+                        <img alt='logo' src={logo}/>
+                        <Typography variant='h4' fontWeight='bold' color='primary'>{appName}</Typography>
+                    </Stack>
+                    <Box>
+                        <Stack direction='row' flexWrap='wrap' justifyContent='center' alignItems='center' width='100%' useFlexGap spacing={{ xs: 2, md: 3 }}>
+                            <Link to=''>
+                                <Card className='button-card'>
+                                    <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
+                                        <Badge badgeContent={7} color="primary">
+                                            <Notifications className='button-card-icon' /> </Badge>
+                                        <Typography className='button-card-text'>Notifications</Typography>
+                                    </Stack>
+                                </Card>
+                            </Link>
+                            <Card className='button-card'>
+                                <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
+                                    <Badge badgeContent={2} color="warning">
+                                        <Call className='button-card-icon' /> </Badge>
+                                    <Typography className='button-card-text'>Calls</Typography>
+                                </Stack>
+                            </Card>
+                        </Stack>
+                    </Box>
+                </Grid>
                 <Grid item xs={12} md={10} lg={8}>
                     <Box>
                         <Stack direction='row' mb={2} alignItems='center'>

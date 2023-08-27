@@ -7,9 +7,14 @@ import {
   Typography,
   CircularProgress,
   Box,
+  useTheme
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import useFetch from "../../../temp/hooks/useFetch";
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { routeNames } from "../../../utils";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ChatScreenForChat = () => {
   const { ID } = useParams();
@@ -18,8 +23,19 @@ const ChatScreenForChat = () => {
     error,
     isPending,
   } = useFetch("http://localhost:8000/chats/" + ID);
+  const navigate = useNavigate();
+    const theme = useTheme();
+    const isExtraSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   console.log("id is", ID);
   console.log("data is", chat);
+  useEffect(() => {
+    if(isExtraSmallScreen){
+        navigate(routeNames.fundGroups + `/${ID}`, { replace: true });
+    } else {
+        navigate('/' + routeNames.chats + `/${ID}`, { replace: true });
+    }
+}, [isExtraSmallScreen]);
   return (
     <Stack flexGrow={1}>
       <Stack

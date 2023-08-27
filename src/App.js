@@ -4,7 +4,9 @@ import { RouterProvider } from 'react-router-dom';
 import './App.css';
 import { lightTheme } from './theme';
 import router from "./routes"
-import { UserAuthContextProvider } from "./context/UserAuthContext"; // Import the UserAuthContextProvider
+import { UserAuthContextProvider } from "./context/UserAuthContext"; 
+// import { Provider } from 'react-redux'; 
+// import store from './app/store'; 
 
 function App() {
   return (

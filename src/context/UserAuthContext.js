@@ -9,6 +9,7 @@ import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
   PhoneAuthProvider,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -70,7 +71,7 @@ export function UserAuthContextProvider({ children }) {
     }
   }
 
-  async function sendPasswordResetEmail(email) {
+  async function setUpSendPasswordResetEmail(email) {
     try {
       await sendPasswordResetEmail(auth, email);
       console.log("Password reset email sent to:", email);
@@ -101,7 +102,7 @@ export function UserAuthContextProvider({ children }) {
         logOut,
         googleSignIn,
         setUpRecaptcha,
-        sendPasswordResetEmail,
+        setUpSendPasswordResetEmail,
       }}
     >
       {children}

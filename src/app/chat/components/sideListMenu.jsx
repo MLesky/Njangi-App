@@ -32,7 +32,7 @@ const SideListMenu = ({
 
   return (
     <Stack sx={{ backgroundColor: "primary.light" }}>
-      <Stack sx={{ height: "100%" }}>
+      <Stack sx={{ height: "100%", overflow: 'auto' }}>
         <Stack
           direction="row"
           spacing={2}

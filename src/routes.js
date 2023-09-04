@@ -40,6 +40,26 @@ const router = createBrowserRouter([
       },
 
       {
+        path: routeNames.ngGroups,
+        element: <GroupsPage />,
+      },
+    
+      {
+        path: routeNames.fundGroups,
+        element: <ChatsPage />,
+      },
+    
+      {
+        path: routeNames.ngGroups + '/:ID',
+        element: <ChatScreenForGroup />
+      },
+    
+      {
+        path: routeNames.fundGroups + '/:ID',
+        element: <ChatScreenForChat />
+      },    
+
+      {
         path: routeNames.history,
         element: <HistoryPage />
       },
@@ -59,26 +79,6 @@ const router = createBrowserRouter([
         element: <UserProfile />
       }
     ]
-  },
-
-  {
-    path: routeNames.ngGroups,
-    element: <GroupsPage />,
-  },
-
-  {
-    path: routeNames.fundGroups,
-    element: <ChatsPage />,
-  },
-
-  {
-    path: routeNames.ngGroups + '/:ID',
-    element: <ChatScreenForGroup />
-  },
-
-  {
-    path: routeNames.fundGroups + '/:ID',
-    element: <ChatScreenForChat />
   },
 
   {

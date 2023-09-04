@@ -130,7 +130,7 @@ const NavBar = () => {
         width: '100%',
         maxHeight: '700px',
         flexGrow: 1,
-        overflow: 'auto',
+        overflow: 'hidden',
       }}>
         <Outlet />
       </Paper>

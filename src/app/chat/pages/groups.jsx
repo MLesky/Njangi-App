@@ -20,7 +20,7 @@ const GroupsPage = () => {
       }}
     >
       <Grid container direction='row'>
-        <Grid item xs={12} sm={5} lg={4}>
+        <Grid item xs={12} sm={5} lg={4} sx={{height: '100%'}}>
           <SideListMenu
             isLoading={isPending}
             error={error}
@@ -30,7 +30,7 @@ const GroupsPage = () => {
             isGroup={true}
           />
         </Grid>
-        <Grid item xs={12} sm={7} lg={8} sx={{display: {xs: 'none', sm: 'block'}}}>
+        <Grid item xs={12} sm={7} lg={8} sx={{display: {xs: 'none', sm: 'block'}, height: '100%'}}>
         <Outlet />
         </Grid>
       </Grid>

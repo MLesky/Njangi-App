@@ -5,6 +5,8 @@ import TransferMoneyModal from "./components/transferMoneyModal";
 import BuyAirTimeModal from "./components/buyAirTimeModal";
 import ScheduleModal from "./components/scheduleModal";
 import AddAccountModal from "./components/addAccountModal";
+import SendMoneyToGroup from "./components/sendMoneyToGroup";
+import MessagingInputField from "./components/messagingField";
 
 export { 
     HistoryPage, 
@@ -14,4 +16,6 @@ export {
     BuyAirTimeModal,
     ScheduleModal,
     AddAccountModal,
+    SendMoneyToGroup,
+    MessagingInputField,
 };

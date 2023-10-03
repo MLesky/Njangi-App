@@ -39,6 +39,7 @@ import PhoneInput from 'react-phone-number-input'
 
 const SignUpWithPhoneNumber = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [ email, setEmail ] = useState("");
     const [zipCode, setZipCode] = useState("");
     const [numberError, setNumberError] = useState("");
     const [zipCodeError, setZipCodeError] = useState("");

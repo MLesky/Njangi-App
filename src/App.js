@@ -1,18 +1,30 @@
 import React from 'react';
-import { ThemeProvider } from '@emotion/react';
+import { ThemeProvider, createTheme } from '@mui/material';
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
-import { lightTheme } from './theme';
+// import { lightTheme } from './theme';
 import router from "./routes"
 import { UserAuthContextProvider } from "./context/UserAuthContext"; 
-// import { Provider } from 'react-redux'; 
-// import store from './app/store'; 
+import { useSelector } from 'react-redux';
+
+const lightTheme = createTheme({
+  // light theme configuration
+});
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 function App() {
+
+  const darkMode = useSelector((state) => state.theme.darkMode);
+
   return (
     <div className="App">
       <UserAuthContextProvider>
-        <ThemeProvider theme={lightTheme}>
+        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
           <RouterProvider router={router} />
         </ThemeProvider>
       </UserAuthContextProvider>

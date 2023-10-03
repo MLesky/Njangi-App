@@ -15,9 +15,36 @@ import {
   Divider,
 } from "@mui/material";
 import { mtnLogo } from "../assets";
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, updateDisplayName, updateUsername, updatePhotoURL } from "../features/user";
+import { useUserAuth } from "../context/UserAuthContext";
+import { toggleDarkMode } from '../features/theme';
+import Switch from '@mui/material/Switch';
+import { useNavigate } from "react-router-dom";
+import { routeNames } from "../utils";
+import { Navigate } from "react-router-dom";
 
 const UserProfile = () => {
-  console.log("profile");
+  const user = useSelector ((state) => state.user.value );
+  const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.theme.darkMode);
+  const { logOut } = useUserAuth();
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logOut().then(() => {
+      dispatch(logout());
+      navigate(routeNames.login);
+    }).catch((error) => {
+      console.error("Logout error: ", error)
+    });
+  }
+
+  const handleToggleTheme = () => {
+    dispatch(toggleDarkMode());
+  };
+
   return (
     <Box padding={2}>
       <Grid container spacing={2} rowSpacing={2} direction="row" justifyContent='center'>
@@ -26,6 +53,7 @@ const UserProfile = () => {
             <Stack direction="column" alignItems="center" spacing={2}>
               <Avatar
                 alt="photo"
+                src={user.photoURL}
                 sx={{
                   height: {
                     xs: 100,
@@ -37,24 +65,31 @@ const UserProfile = () => {
                   },
                 }}
               />
+              {console.log("User's photo URL:", user.photoURL)}
               <Stack alignItems="center">
                 <Typography variant="h5" fontWeight="bold">
-                  Marco Marcelvin
+                  {/* Marco Marcelvin */}
+                  { user.displayName }
                 </Typography>
                 <Typography variant="h6" fontWeight="bold">
-                  @mmacelvin
+                  {/* @mmacelvin */}
+                  {user.username}
                 </Typography>
                 <Typography variant="body1" fontWeight="bold">
                   +237-679-348-983
+                  {/* {user.phoneNumber} */}
                 </Typography>
-                <Typography fontWeight="bold">useremail@email.com</Typography>
+                <Typography fontWeight="bold">
+                  {/* useremail@email.com */}
+                  {user.email}
+                </Typography>
               </Stack>
               <Stack
                 direction="column-reverse"
                 justifyContent="space-around"
                 spacing={1}
               >
-                <Button variant="outlined">Log Out</Button>
+                <Button variant="outlined" onClick={handleLogout}>Log Out</Button>
                 <Button variant="contained">Edit Info</Button>
               </Stack>
             </Stack>
@@ -64,14 +99,20 @@ const UserProfile = () => {
         <Grid item xs={12} md={8}>
           <Card variant="outlined" sx={{ padding: 2 }}>
             <List>
-              <ListItem secondaryAction={<Typography>Light</Typography>}>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <Palette />
-                  </ListItemIcon>
-                  <ListItemText primary="Appearance" />
-                </ListItemButton>
-              </ListItem>
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon>
+                  <Palette />
+                </ListItemIcon>
+                <ListItemText primary="Appearance" />
+                <Switch
+                  checked={darkMode}
+                  onChange={handleToggleTheme}
+                  name="themeToggle"
+                  color="primary"
+                />
+              </ListItemButton>
+            </ListItem>
               <Divider />
               <ListItem secondaryAction={
                 <Stack direction='row' alignItems='center'>

@@ -12,12 +12,16 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../firebase";
+import { logout } from "../features/user";
+import { useDispatch } from 'react-redux';
+
 
 const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState({});
   const [verificationCode, setVerificationCode] = useState("");
+  const dispatch = useDispatch();
 
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
@@ -25,9 +29,18 @@ export function UserAuthContextProvider({ children }) {
   function signUp(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
   }
+  // function logOut() {
+  //   return signOut(auth);
+  // }
+
   function logOut() {
-    return signOut(auth);
+    return signOut(auth).then(() => {
+      dispatch(logout());
+    }).catch((error) => {
+      console.error("Logout error:", error);
+    });
   }
+  
 
   function googleSignIn() {
     const googleAuthProvider = new GoogleAuthProvider();

@@ -44,7 +44,7 @@ const VerifyPinForm = (props) => {
       } else if (otp === verificationCode && !isTermsAccepted) {
           setTermsMessage('Please Accept The Terms');
       } else if (otp === verificationCode && isTermsAccepted) {
-          navigate('../' + routeNames.fillInfo);
+          navigate('../' + routeNames.home);
       }
     } catch (err) {
       setError("An error occured:", + err.message );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FacebookOutlined,
   Google,
@@ -23,10 +23,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { backgroundImageWoman, logo } from "../../../assets/index";
 import { appName, routeNames } from "../../../utils";
 import { useUserAuth } from "../../../context/UserAuthContext";
+import { useDispatch } from 'react-redux';
+import { login } from '../../../features/user';
+import { auth } from '../../../firebase';
+import { collection, doc, setDoc, updateDoc, Timestamp, getDoc } from "firebase/firestore";
+import { database } from "../../../firebase";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -34,6 +40,8 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { logIn, googleSignIn } = useUserAuth();
   const [error, setError] = useState("");
+
+  const dispatch = useDispatch();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -51,6 +59,47 @@ const LoginPage = () => {
     }
   };
 
+  // const handleFormSubmit = async (e) => {
+    
+  //   try {
+  //     e.preventDefault();
+  //     setError("");
+
+  //     // input validation
+  //     if (loginPassword === "") {
+  //       setPasswordError("Please enter password");
+  //     }
+
+  //     const cleanedEmail = email.trim();
+  //     if (cleanedEmail === "") {
+  //       setEmailError("Please enter email");
+  //     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanedEmail)) {
+  //       setEmailError("Please enter valid email");
+  //     } else if (cleanedEmail !== "" && loginPassword !== "") {
+  //       //signin with email and password
+  //       await logIn(cleanedEmail, loginPassword);
+
+  //       const user = ;
+
+  //       dispatch(login(user));
+  //       navigate(routeNames.home);
+  //     }
+  //   }catch(err){
+  //     setError("An error occured:")
+  //   } 
+  // }
+  
+  // const handleGoogleSignIn = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await googleSignIn();
+  //     navigate(routeNames.home);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+
+  
   const handleFormSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -67,15 +116,13 @@ const LoginPage = () => {
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanedEmail)) {
         setEmailError("Please enter valid email");
       } else if (cleanedEmail !== "" && loginPassword !== "") {
-        //signin with email and password
         await logIn(cleanedEmail, loginPassword);
-        navigate(routeNames.home);
       }
-    }catch(err){
-      setError("An error occured:")
-    } 
-  }
-  
+    } catch (err) {
+      setError("An error occurred:");
+    }
+  };
+
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
     try {
@@ -85,6 +132,41 @@ const LoginPage = () => {
       console.log(error.message);
     }
   };
+
+  // Use useEffect to listen for changes in authentication state
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const userData = {
+          uid: user.uid,
+          email: user.email,
+          username: user.username,
+          photoURL: user.photoURL,
+        };
+
+
+        console.log("User data:", userData);
+
+        // If you want to fetch additional data after registration, you can do so here
+        // For example, if you want to fetch the username and photoURL, you can do it like this:
+        const userDocRef = doc(database, "users", user.uid);
+        const userDocSnapshot = await getDoc(userDocRef);
+        if (userDocSnapshot.exists()) {
+          const userDataFromFirestore = userDocSnapshot.data();
+          // Dispatch the login action to update the Redux store with additional data
+          dispatch(login(userDataFromFirestore));
+        }
+
+        navigate(routeNames.home);
+      } else {
+        // User is signed out
+        // Handle the sign-out state if needed
+      }
+    });
+
+    // Clean up the listener when the component is unmounted
+    return () => unsubscribe();
+  }, [dispatch, navigate]);
 
   return (
     <Stack
@@ -190,7 +272,7 @@ const LoginPage = () => {
                 size="large"
                 sx={{ padding: "10px" }}
               >
-                sign in
+                log in
               </Button>
 
               <Button

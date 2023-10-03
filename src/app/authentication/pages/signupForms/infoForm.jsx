@@ -17,16 +17,34 @@ import {
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { logo } from "../../../../assets";
 import { appName, routeNames } from "../../../../utils";
 import { PicturePicker } from "../../../../components";
 import { useUserAuth } from "../../../../context/UserAuthContext";
 import { database } from "../../../../firebase";
-import { collection, doc, setDoc, updateDoc, Timestamp } from "firebase/firestore";
+import { collection, doc, setDoc, updateDoc, Timestamp, getDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"; 
+import { registerAccount } from '../../../../features/user';
+import { auth } from '../../../../firebase';
+import { useDispatch } from "react-redux";
 
+// Function to upload an image to Firebase Storage
+const uploadImageToStorage = async (uid, selectedPhoto) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `userPhotos/${uid}`);
+
+  try {
+    await uploadBytes(storageRef, selectedPhoto);
+
+    const photoURL = await getDownloadURL(storageRef);
+    return photoURL;
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    return null;
+  }
+};
 
 // TODO: Stylize Input fields
 const FillInInfoForm = () => {
@@ -42,10 +60,12 @@ const FillInInfoForm = () => {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [photoError, setPhotoError] = useState("");
   
+  const dispatch = useDispatch();
 
   const { signUp } = useUserAuth();
 
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -56,21 +76,17 @@ const FillInInfoForm = () => {
 
         if (user) {
           const userDocRef = doc(database, "users", user.uid);
+
+          let photoURL = null;
+          if (selectedPhoto) {
+            photoURL = await uploadImageToStorage(user.uid, selectedPhoto);
+          }
+
           await setDoc(userDocRef, {
             username,
             email,
+            photoURL, 
           });
-
-          if (selectedPhoto) {
-            const storageRef = ref(getStorage(), `userPhotos/${user.uid}`);
-            await uploadBytes(storageRef, selectedPhoto);
-            const photoURL = await getDownloadURL(storageRef);
-
-            await updateDoc( userDocRef, {
-              photoURL, 
-              username, 
-            });
-          }
 
           navigate(routeNames.home);
         }
@@ -78,9 +94,7 @@ const FillInInfoForm = () => {
         console.error("Sign up error:", error);
       }
     }
-
   };
-
 
   const validateForm = () => {
     let isValid = true;
@@ -110,6 +124,36 @@ const FillInInfoForm = () => {
     }
     return isValid;
   };
+
+  // listen for changes in authentication state
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const userData = {
+          uid: user.uid,
+          email: user.email,
+          username: user.username,
+          photoURL: user.photoURL
+        };
+
+        console.log("User data:", userData);
+
+        const userDocRef = doc(database, "users", user.uid);
+        const userDocSnapshot = await getDoc(userDocRef);
+        if (userDocSnapshot.exists()) {
+          const userDataFromFirestore = userDocSnapshot.data();
+          dispatch(registerAccount(userDataFromFirestore));
+        }
+
+        navigate(routeNames.home);
+      } else {
+        navigate(routeNames.signUp);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [dispatch, navigate]);
+
 
   return (
     <Box

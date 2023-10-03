@@ -39,7 +39,6 @@ const NavBar = () => {
 
   console.log("Rendering with userPhotoURL:", userPhotoURL);
 
-
   return (
     <Stack direction='column' height='100vh' width='100vw'>
       <Paper square={true} sx={{minHeight: '50px', overflowX: 'auto'}}>
@@ -117,7 +116,7 @@ const NavBar = () => {
             </IconButton>
             <Link to={'/' + routeNames.profile}>
               <IconButton type="button" color="primary">
-                <Avatar src={userPhotoURL} sx={{ height: 30, width: 30 }} />
+                <Avatar sx={{ height: 30, width: 30 }} />
               </IconButton>
             </Link>
           </Stack>

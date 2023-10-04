@@ -7,35 +7,53 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import { database } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useUserAuth } from "../context/UserAuthContext";
+import i18n from '../i18n';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLanguage } from '../features/language';
 
 
 const NavBar = () => {
+  const { t } = useTranslation();
   const { user } = useUserAuth();
   const [userPhotoURL, setUserPhotoURL] = useState(""); 
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      if (user) {
-        try {
-          const userDocRef = doc(database, "users", user.uid);
-          const docSnapshot = await getDoc(userDocRef);
-          
-          if (docSnapshot.exists()) {
-            const userData = docSnapshot.data();
-            setUserPhotoURL(userData.photoURL || "");
-            console.log("Fetched user data:", userData);
-          } else {
-            setUserPhotoURL(""); 
-            console.log("No user data found.");
-          }
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
-      }
-    };
+  const selectedLanguage = useSelector((state) => state.language.selectedLanguage);
 
-    fetchUserData();
-  }, [user]);
+  const dispatch = useDispatch();
+
+  const handleLanguageChange = (newLanguage) => {
+    dispatch(setLanguage(newLanguage));
+  };
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     if (user) {
+  //       try {
+  //         const userDocRef = doc(database, "users", user.uid);
+  //         const docSnapshot = await getDoc(userDocRef);
+          
+  //         if (docSnapshot.exists()) {
+  //           const userData = docSnapshot.data();
+  //           setUserPhotoURL(userData.photoURL || "");
+  //           console.log("Fetched user data:", userData);
+  //         } else {
+  //           setUserPhotoURL(""); 
+  //           console.log("No user data found.");
+  //         }
+  //       } catch (error) {
+  //         console.error("Error fetching user data:", error);
+  //       }
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, [user]);
+
+  // NavBar.jsx
+
+  useEffect(() => {
+    i18n.changeLanguage(selectedLanguage); 
+  }, [selectedLanguage])
 
   console.log("Rendering with userPhotoURL:", userPhotoURL);
 
@@ -63,22 +81,22 @@ const NavBar = () => {
 
           <Stack className='full-nav-links' direction="row" spacing='5px' alignItems='center' sx={{display: {xs: 'none !important', md: 'block !important'}}}>
             <NavLink to={routeNames.home}>
-              <Button size="small" startIcon={<Home className="nav-btn-icon" />}>Home</Button>
+              <Button size="small" startIcon={<Home className="nav-btn-icon" />} >{t('Home')}:</Button>
             </NavLink>
             <NavLink to={'/' + routeNames.groups}>
-              <Button size="small" startIcon={<Group className="nav-btn-icon" />}>Groups</Button>
+              <Button size="small" startIcon={<Group className="nav-btn-icon" />} >{t('Groups')}:</Button> 
             </NavLink>
             <NavLink to={'/' + routeNames.chats}>
-              <Button size="small" startIcon={<Chat className="nav-btn-icon" />}>Chats</Button>
+              <Button size="small" startIcon={<Chat className="nav-btn-icon" />} >{t('Chats')}:</Button> 
             </NavLink>
             <NavLink to={'/' + routeNames.history}>
-              <Button size="small" startIcon={<History className="nav-btn-icon" />}>Transactions</Button>
+              <Button size="small" startIcon={<History className="nav-btn-icon" />}>{t('Transactions')}:</Button> 
             </NavLink>
             <NavLink to={'/' + routeNames.schedules}>
-              <Button size="small" startIcon={<Schedule className="nav-btn-icon" />}>Schedules</Button>
+              <Button size="small" startIcon={<Schedule className="nav-btn-icon" />}>{t('Schedules')}:</Button> 
             </NavLink>
             <NavLink to={'/' + routeNames.accounts}>
-              <Button size="small" startIcon={<Wallet className="nav-btn-icon" />}>Accounts</Button>
+              <Button size="small" startIcon={<Wallet className="nav-btn-icon" />}>{t('Accounts')}:</Button> 
             </NavLink>
           </Stack>
 

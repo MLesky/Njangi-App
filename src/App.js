@@ -6,6 +6,9 @@ import './App.css';
 import router from "./routes"
 import { UserAuthContextProvider } from "./context/UserAuthContext"; 
 import { useSelector } from 'react-redux';
+import { I18nextProvider } from 'react-i18next';
+import i18n from '../src/i18n'; 
+// import NavBar from '../src/layouts/navBar'
 
 const lightTheme = createTheme({
   // light theme configuration
@@ -23,11 +26,13 @@ function App() {
 
   return (
     <div className="App">
-      <UserAuthContextProvider>
-        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-          <RouterProvider router={router} />
-        </ThemeProvider>
-      </UserAuthContextProvider>
+      <I18nextProvider i18n={i18n}>
+        <UserAuthContextProvider>
+          <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+            <RouterProvider router={router} />
+          </ThemeProvider>
+        </UserAuthContextProvider>
+      </I18nextProvider>
     </div>
   );
 }

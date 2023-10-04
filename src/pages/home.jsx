@@ -6,6 +6,7 @@ import { appName, routeNames } from "../utils";
 import { Link } from "react-router-dom";
 import { AddAccountModal, BuyAirTimeModal, ScheduleModal, TransferMoneyModal } from "../app/transact";
 import { logo } from "../assets";
+import { useTranslation } from 'react-i18next';
 
 const HomePage = () => {
     const [createNewNjangi, setCreateNewNjangi] = useState(false);
@@ -19,6 +20,8 @@ const HomePage = () => {
     const [buyAirtime, setBuyAirtime] = useState(false);
     
     const [addAccount, setAddAccount] = useState(false);
+
+    const { t } = useTranslation();
     
     return (
         <div style={{
@@ -40,7 +43,7 @@ const HomePage = () => {
                                     <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                         <Badge badgeContent={7} color="primary">
                                             <Notifications className='button-card-icon' /> </Badge>
-                                        <Typography className='button-card-text'>Notifications</Typography>
+                                        <Typography className='button-card-text'>{t('Notifications')}</Typography>
                                     </Stack>
                                 </Card>
                             </Link>
@@ -48,7 +51,7 @@ const HomePage = () => {
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <Badge badgeContent={2} color="warning">
                                         <Call className='button-card-icon' /> </Badge>
-                                    <Typography className='button-card-text'>Calls</Typography>
+                                    <Typography className='button-card-text'>{t('Calls')}</Typography>
                                 </Stack>
                             </Card>
                         </Stack>
@@ -58,7 +61,7 @@ const HomePage = () => {
                     <Box>
                         <Stack direction='row' mb={2} alignItems='center'>
                             <Divider variant='horizontal' sx={{ flexGrow: 1 }} />
-                            <Typography px={2}>Njangi Groups</Typography>
+                            <Typography px={2}>{t('Njangi Groups')}</Typography>
                             <Divider variant='horizontal' sx={{ flexGrow: 1 }} />
                         </Stack>
                         <Stack direction='row' flexWrap='wrap' justifyContent='center' alignItems='center' width='100%' useFlexGap spacing={{ xs: 2, md: 3 }}>
@@ -67,27 +70,27 @@ const HomePage = () => {
                                     <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                         <Badge badgeContent={4} color="primary">
                                             <Groups2 className='button-card-icon' /> </Badge>
-                                        <Typography className='button-card-text'>All Groups</Typography>
+                                        <Typography className='button-card-text'>{t('All Groups')}</Typography>
                                     </Stack>
                                 </Card>
                             </Link>
                             <Card className='button-card' onClick={() => setCreateNewNjangi(true)}>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <GroupAdd className='button-card-icon' />
-                                    <Typography className='button-card-text'>Create New Njangi Group</Typography>
+                                    <Typography className='button-card-text'>{t('Create New Njangi Group')}</Typography>
                                 </Stack>
                             </Card>
                             <Card className='button-card' onClick={() => setRequestToJoinNjangi(true)}>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <TransitEnterexit className='button-card-icon' />
-                                    <Typography className='button-card-text'>Join A Njangi Group</Typography>
+                                    <Typography className='button-card-text'>{t('Join A Njangi Group')}</Typography>
                                 </Stack>
                             </Card>
                             <Card className='button-card'>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <Badge badgeContent={2} color="warning">
                                         <Mail className='button-card-icon' /> </Badge>
-                                    <Typography className='button-card-text'>Njangi Group Invites</Typography>
+                                    <Typography className='button-card-text'>{t('Njangi Group Invites')}</Typography>
                                 </Stack>
                             </Card>
                         </Stack>
@@ -98,27 +101,27 @@ const HomePage = () => {
                     <Box>
                         <Stack direction='row' mb={2} alignItems='center'>
                             <Divider variant='horizontal' sx={{ flexGrow: 1 }} />
-                            <Typography px={2}>Fund Groups</Typography>
+                            <Typography px={2}>{t('Fund Groups')}</Typography>
                             <Divider variant='horizontal' sx={{ flexGrow: 1 }} />
                         </Stack>
                         <Stack direction='row' flexWrap='wrap' justifyContent='center' alignItems='center' width='100%' useFlexGap spacing={{ xs: 2, md: 3 }}>
                             <Card className='button-card' onClick={() => setCreateNewFund(true)}>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <Diversity2 className='button-card-icon' />
-                                    <Typography className='button-card-text'>Create New Fund Group</Typography>
+                                    <Typography className='button-card-text'>{t('Create New Fund Group')}</Typography>
                                 </Stack>
                             </Card>
                             <Card className='button-card' onClick={() => setRequestToJoinFund(true)}>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <TransitEnterexit className='button-card-icon' />
-                                    <Typography className='button-card-text'>Join A Fund Group</Typography>
+                                    <Typography className='button-card-text'>{t('Join A Fund Group')}</Typography>
                                 </Stack>
                             </Card>
                             <Card className='button-card'>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <Badge badgeContent={2} color="warning">
                                         <ForwardToInbox className='button-card-icon' /> </Badge>
-                                    <Typography className='button-card-text'>Fund Group Invites</Typography>
+                                    <Typography className='button-card-text'>{t('Fund Group Invites')}</Typography>
                                 </Stack>
                             </Card>
                         </Stack>
@@ -129,26 +132,26 @@ const HomePage = () => {
                     <Box>
                         <Stack direction='row' mb={2} alignItems='center'>
                             <Divider variant='horizontal' sx={{ flexGrow: 1 }} />
-                            <Typography px={2}>Transactions & Schedules</Typography>
+                            <Typography px={2}>{t('Transactions & Schedules')}</Typography>
                             <Divider variant='horizontal' sx={{ flexGrow: 1 }} />
                         </Stack>
                         <Stack direction='row' flexWrap='wrap' justifyContent='center' alignItems='center' width='100%' useFlexGap spacing={{ xs: 2, md: 3 }}>
                             <Card className='button-card' onClick={() => setTransferMoney(true)}>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <Send className='button-card-icon' />
-                                    <Typography className='button-card-text'>Transfer Money</Typography>
+                                    <Typography className='button-card-text'>{t('Transfer Money')}</Typography>
                                 </Stack>
                             </Card>
                             <Card className='button-card' onClick={() => setRequestScheduleTransfer(true)}>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <ScheduleSend className='button-card-icon' />
-                                    <Typography className='button-card-text'>Schedule Transfer</Typography>
+                                    <Typography className='button-card-text'>{t('Schedule Transfer')}</Typography>
                                 </Stack>
                             </Card>
                             <Card className='button-card'  onClick={() => setBuyAirtime(true)}>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <SimCardDownload className='button-card-icon' />
-                                    <Typography className='button-card-text'>Buy Airtime</Typography>
+                                    <Typography className='button-card-text'>{t('Buy Airtime')}</Typography>
                                 </Stack>
                             </Card>
                             <Link to={routeNames.schedules}>
@@ -156,7 +159,7 @@ const HomePage = () => {
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <Badge badgeContent={9} color="success">
                                         <ScheduleSharp className='button-card-icon' /> </Badge>
-                                    <Typography className='button-card-text'>All Schedules</Typography>
+                                    <Typography className='button-card-text'>{t('All Schedules')}</Typography>
                                 </Stack>
                             </Card>
                             </Link>
@@ -164,7 +167,7 @@ const HomePage = () => {
                             <Card className='button-card'>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <History className='button-card-icon' />
-                                    <Typography className='button-card-text'>Transfer History</Typography>
+                                    <Typography className='button-card-text'>{t('Transfer History')}</Typography>
                                 </Stack>
                             </Card>
                             </Link>
@@ -185,21 +188,21 @@ const HomePage = () => {
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <Badge badgeContent={3} color="success">
                                         <AccountBalanceWallet className='button-card-icon' /> </Badge>
-                                    <Typography className='button-card-text'>Money Accounts</Typography>
+                                    <Typography className='button-card-text'>{t('Money Accounts')}</Typography>
                                 </Stack>
                             </Card>
                             </Link>
                             <Card className='button-card' onClick={() => setAddAccount(true)}>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <AddCard className='button-card-icon' />
-                                    <Typography className='button-card-text'>Add Account</Typography>
+                                    <Typography className='button-card-text'>{t('Add Account')}</Typography>
                                 </Stack>
                             </Card>
                            <Link to={routeNames.profile}>
                            <Card className='button-card'>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <AccountCircle className='button-card-icon' />
-                                    <Typography className='button-card-text'>My Profile</Typography>
+                                    <Typography className='button-card-text'>{t('My Profile')}</Typography>
                                 </Stack>
                             </Card>
                            </Link>
@@ -207,7 +210,7 @@ const HomePage = () => {
                             <Card className='button-card'>
                                 <Stack width='100%' direction='column' justifyContent='center' alignItems='center'>
                                     <Settings className='button-card-icon' />
-                                    <Typography className='button-card-text'>Settings</Typography>
+                                    <Typography className='button-card-text'>{t('Settings')}</Typography>
                                 </Stack>
                             </Card>
                             </Link>

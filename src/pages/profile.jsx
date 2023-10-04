@@ -22,16 +22,30 @@ import { toggleDarkMode } from '../features/theme';
 import Switch from '@mui/material/Switch';
 import { useNavigate } from "react-router-dom";
 import { routeNames } from "../utils";
+import { useTranslation } from 'react-i18next';
 import { Navigate } from "react-router-dom";
+import { Select, MenuItem } from "@mui/material";
+import { setLanguage } from '../features/language'; 
 
 const UserProfile = () => {
+  const { t, i18n } = useTranslation();
+
   const user = useSelector ((state) => state.user.value );
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.theme.darkMode);
+  const selectedLanguage = useSelector((state) => state.language.language);
+
   const { logOut } = useUserAuth();
 
   const navigate = useNavigate();
 
+  const changeLanguage = (lng) => {
+    console.log("Changing language to:", lng);
+    dispatch(setLanguage(lng));
+    i18n.changeLanguage(lng);
+  };
+
+  
   const handleLogout = () => {
     logOut().then(() => {
       dispatch(logout());
@@ -89,8 +103,8 @@ const UserProfile = () => {
                 justifyContent="space-around"
                 spacing={1}
               >
-                <Button variant="outlined" onClick={handleLogout}>Log Out</Button>
-                <Button variant="contained">Edit Info</Button>
+                <Button variant="outlined" onClick={handleLogout}>{t('Log Out')}</Button>
+                <Button variant="contained">{t('Edit Info')}</Button>
               </Stack>
             </Stack>
           </Card>
@@ -104,7 +118,7 @@ const UserProfile = () => {
                 <ListItemIcon>
                   <Palette />
                 </ListItemIcon>
-                <ListItemText primary="Appearance" />
+                <ListItemText primary= {t("Appearance")} />
                 <Switch
                   checked={darkMode}
                   onChange={handleToggleTheme}
@@ -117,14 +131,14 @@ const UserProfile = () => {
               <ListItem secondaryAction={
                 <Stack direction='row' alignItems='center'>
                   <Avatar src={mtnLogo} alt='account'/>
-                  <Typography>Main Momo Account</Typography>
+                  <Typography>{t('Main Momo Account')}</Typography>
                 </Stack>
               }>
                 <ListItemButton>
                   <ListItemIcon>
                     <Wallet />
                   </ListItemIcon>
-                  <ListItemText primary="Default Account" />
+                  <ListItemText primary={t("Default Account" )}/>
                 </ListItemButton>
               </ListItem>
               <Divider />
@@ -133,7 +147,7 @@ const UserProfile = () => {
                   <ListItemIcon>
                     <Verified />
                   </ListItemIcon>
-                  <ListItemText primary="Verify Account" />
+                  <ListItemText primary={t("Verify Account" )}/>
                 </ListItemButton>
               </ListItem>
               <Divider />
@@ -142,18 +156,23 @@ const UserProfile = () => {
                   <ListItemIcon>
                     <Password />
                   </ListItemIcon>
-                  <ListItemText primary="Change Password" />
+                  <ListItemText primary={t("Change Password")} />
                 </ListItemButton>
               </ListItem>
               <Divider />
-              <ListItem secondaryAction={
-                  <Typography>English</Typography>
-              }>
+              <ListItem>
                 <ListItemButton>
                   <ListItemIcon>
                     <Language />
                   </ListItemIcon>
-                  <ListItemText primary="Language" />
+                  <ListItemText primary={t('Language')} />
+                  <Select
+                    value={selectedLanguage} 
+                    onChange={(event) => changeLanguage(event.target.value)}
+                  >
+                    <MenuItem value="en">English</MenuItem>
+                    <MenuItem value="fr">French</MenuItem>
+                  </Select>
                 </ListItemButton>
               </ListItem>
               <Divider />
@@ -162,13 +181,13 @@ const UserProfile = () => {
                 <ListItemIcon>
                     <Help />
                   </ListItemIcon>
-                  <ListItemText primary="Help" />
+                  <ListItemText primary= {t("Help")} />
                 </ListItemButton>
               </ListItem>
               <Divider />
               <ListItem>
                 <ListItemButton>
-                  <ListItemText primary="Invite a Friend" />
+                  <ListItemText primary={t("Invite a Friend")} />
                 </ListItemButton>
               </ListItem>
             </List>
